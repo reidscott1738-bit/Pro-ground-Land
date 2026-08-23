@@ -1,0 +1,73 @@
+<!-- @dsCard group="Website" viewport="1280x760" name="ProGround marketing site" subtitle="Homepage → service → drainage diagnostic → estimate form" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ext-resource-dependency" content="../../assets/logo-wordmark.png" data-resource-id="logo-wordmark">
+<meta name="ext-resource-dependency" content="img/hero-home.jpg" data-resource-id="hero-home">
+<meta name="ext-resource-dependency" content="img/house-curb.jpg" data-resource-id="house-curb">
+<meta name="ext-resource-dependency" content="img/sod-install.jpg" data-resource-id="sod-install">
+<meta name="ext-resource-dependency" content="img/yard-aerial.jpg" data-resource-id="yard-aerial">
+<meta name="ext-resource-dependency" content="img/crew-trimming.jpg" data-resource-id="crew-trimming">
+<meta name="ext-resource-dependency" content="img/lawn-golden.jpg" data-resource-id="lawn-golden">
+<meta name="ext-resource-dependency" content="img/lawn-backyard.jpg" data-resource-id="lawn-backyard">
+<meta name="ext-resource-dependency" content="img/reno-before.jpg" data-resource-id="reno-before">
+<meta name="ext-resource-dependency" content="img/reno-after.jpg" data-resource-id="reno-after">
+<meta name="ext-resource-dependency" content="img/ba-reno-before.jpg" data-resource-id="ba-reno-before">
+<meta name="ext-resource-dependency" content="img/ba-reno-after.jpg" data-resource-id="ba-reno-after">
+<meta name="ext-resource-dependency" content="img/ba-install-before.jpg" data-resource-id="ba-install-before">
+<meta name="ext-resource-dependency" content="img/ba-install-after.jpg" data-resource-id="ba-install-after">
+<meta name="ext-resource-dependency" content="img/ba-grading-before.jpg" data-resource-id="ba-grading-before">
+<meta name="ext-resource-dependency" content="img/ba-grading-after.jpg" data-resource-id="ba-grading-after">
+<meta name="ext-resource-dependency" content="img/ba-maint-before.jpg" data-resource-id="ba-maint-before">
+<meta name="ext-resource-dependency" content="img/ba-mulch-before.jpg" data-resource-id="ba-mulch-before">
+<meta name="ext-resource-dependency" content="img/ba-comm-before.jpg" data-resource-id="ba-comm-before">
+<meta name="ext-resource-dependency" content="img/drainage-before.jpg" data-resource-id="drainage-before">
+<meta name="ext-resource-dependency" content="img/drainage-after.jpg" data-resource-id="drainage-after">
+<title>ProGround Land Management — website UI kit</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  html,body{margin:0;height:100%}
+  #pg-scroll{height:100vh;overflow-y:auto;background:var(--pg-bone)}
+  .pg-gallery figure{grid-column:auto !important;grid-row:auto !important}
+  @media (min-width: 861px){
+    .pg-gallery figure:nth-child(1){grid-column:span 2 !important;grid-row:span 2 !important}
+    .pg-gallery figure:nth-child(4),.pg-gallery figure:nth-child(5),.pg-gallery figure:nth-child(6){grid-column:span 2 !important}
+  }
+  @media (max-width: 1080px){ .pg-phone{display:none !important} }
+  @media (max-width: 860px){
+    .pg-hero-grid{grid-template-columns:1fr !important}
+    .pg-footer-grid{grid-template-columns:1fr 1fr !important}
+    .pg-f2{grid-template-columns:1fr !important}
+    .pg-desktop-nav{display:none !important}
+    .pg-mobile-bar{display:grid !important}
+    #pg-scroll{padding-bottom:60px}
+    .pg-gallery{grid-template-columns:1fr 1fr !important;grid-auto-rows:170px !important}
+    .pg-collage{min-height:400px !important}
+    .pg-hero-loc{display:none !important}
+  }
+  @media (max-width: 560px){
+    .pg-footer-grid{grid-template-columns:1fr !important}
+    .pg-checks{grid-template-columns:1fr !important}
+    .pg-gallery{grid-template-columns:1fr !important}
+    .pg-herotrust{grid-template-columns:repeat(2, max-content) !important;row-gap:26px !important}
+  }
+</style>
+</head>
+<body>
+<div id="pg-scroll"><div id="pg-root"></div></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script>window.__PGReady=1;window.__pgImg=function(id,fallback){return (window.__resources&&window.__resources[id])||fallback;};</script>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" data-bg-color="#0b1220" width="400" height="300"><rect width="400" height="300" fill="#0b1220"/><path d="M120 190c20-40 45-58 80-58s60 18 80 58" fill="none" stroke="#4ea36b" stroke-width="10" stroke-linecap="round"/><path d="M200 132V96m0 36c-14 0-26-10-26-24m26 24c14 0 26-10 26-24" fill="none" stroke="#7bc98f" stroke-width="8" stroke-linecap="round"/></svg></template>
+<script type="text/babel" src="Shared.js"></script>
+<script type="text/babel" src="Home.js"></script>
+<script type="text/babel" src="Screens.js"></script>
+<script type="text/babel" src="Pages.js"></script>
+<script type="text/babel" src="Estimate.js"></script>
+<script type="text/babel" src="App.js"></script>
+</body>
+</html>

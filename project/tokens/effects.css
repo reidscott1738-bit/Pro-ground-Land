@@ -1,0 +1,29 @@
+/* ProGround — Radii, borders, shadows, motion.
+   Restraint by design: no gradients, no glassmorphism, small radii, hairline borders,
+   shadows used sparingly (cards lift off bone with a soft shadow; on dark, rely on tone). */
+:root {
+  /* Corner radii — kept small; nothing above 4px on cards/buttons per brand guide */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;      /* cards, buttons, inputs */
+  --radius-pill: 999px;  /* tags / small chips only */
+
+  /* Border widths */
+  --bw-hairline: 1px;
+  --bw-emphasis: 2px;
+
+  /* Shadows — soft, low, warm. Never neon glows. */
+  --shadow-none: none;
+  --shadow-card: 0 1px 2px rgba(11,14,21,0.04), 0 8px 24px rgba(11,14,21,0.06);
+  --shadow-raised: 0 4px 12px rgba(11,14,21,0.08), 0 18px 40px rgba(11,14,21,0.10);
+  --shadow-focus: 0 0 0 3px rgba(24,99,184,0.35);
+
+  /* Motion — subtle. Scroll reveals 12px / 240ms; hover = color only. */
+  --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1); /* @kind other */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --dur-fast: 120ms; /* @kind other */
+  --dur-base: 240ms; /* @kind other */
+  --dur-reveal: 240ms; /* @kind other */
+  --dur-hero-wipe: 880ms;   /* @kind other */
+  --reveal-travel: 12px;
+}

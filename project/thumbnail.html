@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="styles.css">
+<style>
+  html,body{margin:0}
+  .tile{width:1280px;height:854px;display:flex;overflow:hidden;font-family:var(--font-display)}
+  .main{flex:1;background:var(--pg-deep-field);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;position:relative}
+  /* faint contour lines in the backdrop */
+  .main::before{content:"";position:absolute;inset:0;opacity:.10;
+    background-image:repeating-radial-gradient(circle at 30% 120%, transparent 0 46px, #fff 46px 48px);}
+  .mark{width:150px;height:150px;position:relative;z-index:1}
+  .leaf{width:150px;height:150px}
+  .name{z-index:1;text-align:center;line-height:1}
+  .name .p{display:block;font-size:104px;font-weight:800;letter-spacing:-3px;color:#F4F1E9}
+  .name .lm{display:block;margin-top:14px;font-size:33px;font-weight:700;letter-spacing:10px;color:var(--pg-growth)}
+  .bar{width:34px;height:150px;background:var(--pg-survey);z-index:1;border-radius:2px}
+  .row{display:flex;align-items:center;gap:40px;z-index:1}
+  .strip{width:150px;display:flex;flex-direction:column}
+  .strip>div{flex:1}
+</style>
+</head>
+<body>
+<div class="tile">
+  <div class="main">
+    <div class="row">
+      <div class="bar"></div>
+      <div class="name">
+        <span class="p">ProGround</span>
+        <span class="lm">LAND MANAGEMENT</span>
+      </div>
+    </div>
+  </div>
+  <div class="strip">
+    <div style="background:#10E016"></div>
+    <div style="background:#1863B8"></div>
+    <div style="background:#0D5B2B"></div>
+    <div style="background:#073E1D"></div>
+  </div>
+</div>
+</body>
+</html>

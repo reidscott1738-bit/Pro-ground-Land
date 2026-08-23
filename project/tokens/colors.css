@@ -1,0 +1,87 @@
+/* ProGround — Color tokens
+   Base palette sampled from the ProGround logo + brand imagery.
+   Brand thesis: light editorial base (Bone), dark bands (Deep Field) as
+   punctuation, Growth Green as a small accent on dark, Survey Blue reserved
+   strictly for water / drainage content. */
+:root {
+  /* --- Brand core (sampled from logo) --- */
+  --pg-growth: #10E016;        /* logo bright green. Dark surfaces + small accents only. Never body text on light. */
+  --pg-growth-bright: #00E800; /* the purest logo green, for the slider handle / active dot */
+  --pg-survey: #1863B8;        /* logo survey line. WATER + DRAINAGE content only. */
+  --pg-deep-field: #0B0E15;    /* near-black dark bands. sampled #080810 */
+
+  /* --- Light base --- */
+  --pg-bone: #F4F1E9;          /* warm off-white page background. never pure white at large scale */
+  --pg-bone-deep: #ECE7DC;     /* slightly deeper bone for alternating sections */
+  --pg-white: #FFFFFF;         /* cards lift off the bone */
+
+  /* --- Dark surfaces --- */
+  --pg-deep-field-2: #141A24;  /* elevated surface on a dark band (cards on dark) */
+  --pg-deep-field-3: #1E2530;  /* hover / raised on dark */
+
+  /* --- Greens for text on light (accessible) --- */
+  --pg-turf: #0D5B2B;          /* deep green — passes 4.5:1 on bone for body-size green text/links */
+  --pg-turf-deep: #0A4A22;     /* deeper green */
+  --pg-turf-strong: #073E1D;   /* darkest green — large headings / eyebrows on light */
+
+  /* --- Water blue for text on light --- */
+  --pg-survey-ink: #14538F;    /* darker survey blue that passes contrast on light for drainage copy */
+
+  /* --- Warm neutral ramp (bone -> deep field) --- */
+  --pg-ink: #12151C;           /* primary text on light */
+  --pg-slate-800: #23282F;
+  --pg-slate-700: #333941;
+  --pg-slate-600: #4B525A;
+  --pg-slate-500: #6A7178;     /* secondary text on light (AA on bone) */
+  --pg-slate-400: #949AA0;
+  --pg-slate-300: #C1BEB4;     /* muted text on dark / disabled */
+  --pg-line: #DBD7CC;          /* hairline borders on bone */
+  --pg-line-strong: #C6C2B6;   /* stronger 1px border / card outline */
+  --pg-line-dark: #2A313B;     /* hairline borders on dark bands */
+
+  /* --- Semantic status (used sparingly; kept in-family) --- */
+  --pg-success: #0D5B2B;
+  --pg-warning: #B26A00;
+  --pg-danger: #A32B1E;
+
+  /* ============ SEMANTIC ALIASES ============ */
+  /* Surfaces */
+  --surface-page: var(--pg-bone);
+  --surface-alt: var(--pg-bone-deep);
+  --surface-card: var(--pg-white);
+  --surface-dark: var(--pg-deep-field);
+  --surface-dark-raised: var(--pg-deep-field-2);
+
+  /* Text */
+  --text-body: var(--pg-ink);
+  --text-muted: var(--pg-slate-500);
+  --text-lead: var(--pg-slate-700);
+  --text-on-dark: #F4F1E9;
+  --text-on-dark-muted: #A9AEB4;
+  --text-eyebrow-light: var(--pg-turf-strong);
+  --text-eyebrow-dark: var(--pg-growth);
+
+  /* Accents */
+  --accent-green-on-dark: var(--pg-growth);
+  --accent-green-text: var(--pg-turf);      /* green text on light */
+  --accent-water: var(--pg-survey);         /* water on dark */
+  --accent-water-text: var(--pg-survey-ink);/* water text on light */
+
+  /* Lines + borders */
+  --border-hairline: var(--pg-line);
+  --border-card: var(--pg-line-strong);
+  --border-dark: var(--pg-line-dark);
+
+  /* Buttons */
+  --btn-primary-bg: var(--pg-deep-field);
+  --btn-primary-fg: #FFFFFF;
+  --btn-primary-bg-dark: var(--pg-growth); /* on dark bands */
+  --btn-primary-fg-dark: var(--pg-deep-field);
+
+  /* Focus */
+  --focus-ring: var(--pg-survey);
+
+  /* Contour motif defaults (overridden by [data-contour="dark"]) */
+  --pg-contour-color: color-mix(in srgb, var(--pg-slate-500) 40%, transparent);
+  --pg-contour-accent: var(--accent-green-text);
+}

@@ -1,0 +1,12 @@
+/* ProGround — Webfonts
+   Archivo        — display / headings (variable grotesque, echoes the wordmark)
+   IBM Plex Sans  — body
+   IBM Plex Mono  — prices, measurements, contour labels, captions (survey-drawing reference)
+
+   PRODUCTION NOTE (Build Manual §12): the live site must SELF-HOST these as
+   variable woff2 with the critical face preloaded. Here they load from Google
+   Fonts so the design-system cards render. Archivo's true width axis (wdth 88–90
+   in the brand guide) is not exposed on the Google build — heading compression is
+   approximated with weight + negative tracking. Swap in the self-hosted variable
+   files before launch. */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');

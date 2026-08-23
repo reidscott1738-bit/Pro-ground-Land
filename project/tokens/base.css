@@ -1,0 +1,72 @@
+/* ProGround base layer — element defaults, links, the contour motif utility.
+   Imported by styles.css after tokens. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-body);
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+h1 { font-size: var(--fs-h1); font-weight: var(--fw-black); line-height: var(--lh-heading); letter-spacing: var(--ls-heading); }
+h2 { font-size: var(--fs-h2); font-weight: var(--fw-bold); line-height: var(--lh-heading); letter-spacing: var(--ls-heading); }
+h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold); line-height: var(--lh-snug); }
+h4 { font-size: var(--fs-h4); font-weight: var(--fw-semibold); line-height: var(--lh-snug); }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+/* Links — deep green on light, growth green on dark. Never browser blue. */
+a { color: var(--accent-green-text); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent-green-text) 35%, transparent); transition: color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard); }
+a:hover { color: var(--pg-turf-strong); border-bottom-color: var(--pg-turf-strong); }
+.on-dark a, a.on-dark { color: var(--accent-green-on-dark); border-bottom-color: color-mix(in srgb, var(--accent-green-on-dark) 40%, transparent); }
+.on-dark a:hover, a.on-dark:hover { color: #FFFFFF; border-bottom-color: #FFFFFF; }
+
+/* Typographic helpers */
+.pg-eyebrow { font-family: var(--font-display); font-size: var(--fs-eyebrow); font-weight: var(--fw-semibold); text-transform: uppercase; letter-spacing: var(--ls-eyebrow); color: var(--text-eyebrow-light); }
+.on-dark .pg-eyebrow, .pg-eyebrow.on-dark { color: var(--text-eyebrow-dark); }
+.pg-display { font-family: var(--font-display); font-size: var(--fs-display); font-weight: var(--fw-black); line-height: var(--lh-tight); letter-spacing: var(--ls-display); }
+.pg-lead { font-size: var(--fs-lead); line-height: var(--lh-snug); color: var(--text-lead); }
+.pg-data { font-family: var(--font-mono); font-size: var(--fs-data); letter-spacing: var(--ls-mono); }
+.pg-price { font-family: var(--font-mono); font-size: var(--fs-price); font-weight: var(--fw-medium); color: var(--text-body); }
+
+/* Focus — visible ring on every interactive element */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* THE SIGNATURE MOTIF: thin contour lines (survey / grading drawings).
+   Purely decorative -> aria-hidden, empty alt. Density shifts between sections. */
+.pg-contour {
+  height: 64px;
+  width: 100%;
+  background-repeat: repeat-x;
+  background-position: center;
+  /* stacked hairline "contour intervals" */
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 6px,
+    color-mix(in srgb, var(--pg-slate-400) 55%, transparent) 6px 7px
+  );
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 50%, #000 55%, transparent 100%);
+          mask-image: radial-gradient(120% 100% at 50% 50%, #000 55%, transparent 100%);
+}
+/* the real contour look: nested concentric "elevation" lines */
+.pg-contour-lines { --contour-color: var(--pg-contour-color); --contour-accent: var(--pg-contour-accent); }
+[data-contour="dark"] { --contour-color: color-mix(in srgb, #FFFFFF 16%, transparent); --contour-accent: var(--pg-growth); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}

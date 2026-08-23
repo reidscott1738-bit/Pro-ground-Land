@@ -1,0 +1,14 @@
+<!-- @dsCard group="Spacing" viewport="700x170" name="Radii & borders" subtitle="Small radii (≤4px), hairline borders, soft warm shadow" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;background:var(--pg-bone);padding:24px;display:flex;gap:20px;align-items:center}
+.box{width:120px;height:80px;background:#fff}.n{font-family:var(--font-mono);font-size:11px;color:var(--pg-slate-600);margin-top:8px;text-align:center}
+.b1{border:1px solid var(--pg-line-strong);border-radius:2px}
+.b2{border:1px solid var(--pg-line-strong);border-radius:4px}
+.b3{border:1px solid var(--pg-line-strong);border-radius:4px;box-shadow:0 1px 2px rgba(11,14,21,.04),0 8px 24px rgba(11,14,21,.06)}
+.item{text-align:center}</style>
+</head><body>
+<div class="item"><div class="box b1"></div><div class="n">radius 2px</div></div>
+<div class="item"><div class="box b2"></div><div class="n">radius 4px · card</div></div>
+<div class="item"><div class="box b3"></div><div class="n">4px + shadow-card</div></div>
+<div class="item"><div class="box" style="border-radius:999px;background:var(--pg-turf);width:120px;height:34px"></div><div class="n">pill · tags only</div></div>
+</body></html>
