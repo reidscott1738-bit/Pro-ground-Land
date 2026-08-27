@@ -1,0 +1,25 @@
+/* ProGround — Spacing & layout tokens. 8px base unit. */
+:root {
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --sp-10: 128px;   /* desktop section padding */
+
+  /* Section rhythm */
+  --section-pad-y: 128px;      /* desktop */
+  --section-pad-y-mobile: 72px;
+
+  /* Layout */
+  --content-max: 1280px;       /* max content width */
+  --gutter: 72px;              /* desktop gutter */
+  --gutter-mobile: 24px;
+
+  /* Grid */
+  --grid-cols: 12; /* @kind other */
+}

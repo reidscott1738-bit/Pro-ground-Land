@@ -1,0 +1,23 @@
+# Netlify deploy config for the ProGround static site.
+# The site is pre-built into website/dist (committed to the repo), so there is
+# no build command to run — Netlify just publishes that folder.
+# Netlify auto-detects the estimate form (data-netlify="true") and serves 404.html.
+
+[build]
+  publish = "website/dist"
+  command = ""
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
