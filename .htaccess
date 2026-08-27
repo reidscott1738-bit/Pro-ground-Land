@@ -1,0 +1,51 @@
+# ProGround site — served from the domain root even though the built files
+# live in website/dist/. This lets the GitHub->Hostinger deploy (which clones
+# the whole repo into the web root) serve the site without a 403.
+# If you can instead set the domain's document root to .../website/dist in
+# hPanel, you can delete this file — but this works without that.
+
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Never rewrite requests that already point inside the deploy folder.
+  # 1) Add a trailing slash to extension-less URLs (keeps clean URLs canonical).
+  RewriteCond %{REQUEST_URI} !^/website/dist/
+  RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]{2,6}$
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.*)$ /$1/ [R=301,L]
+
+  # 2) Serve the request from website/dist when a matching file or folder exists.
+  RewriteCond %{REQUEST_URI} !^/website/dist/
+  RewriteCond %{DOCUMENT_ROOT}/website/dist/$1 -f [OR]
+  RewriteCond %{DOCUMENT_ROOT}/website/dist/$1 -d
+  RewriteRule ^(.*)$ website/dist/$1 [L]
+</IfModule>
+
+# Real 404 page (not a redirect to the homepage).
+ErrorDocument 404 /404.html
+
+# --- Performance: compression + caching (helps Core Web Vitals) ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# --- Force HTTPS: uncomment once your SSL certificate is active in Hostinger ---
+# <IfModule mod_rewrite.c>
+#   RewriteCond %{HTTPS} off
+#   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+# </IfModule>
