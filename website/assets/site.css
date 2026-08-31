@@ -83,6 +83,25 @@
 .hero p.hero-sub { font-size: 20px; line-height: 1.55; color: var(--pg-slate-300); max-width: 48ch; margin: 26px 0 0; }
 .hero .btn-row { margin-top: 32px; }
 
+/* Homepage hero — centered composition (headline, sub, CTAs and trust row all
+   centered on the axis). Scoped to .hero-inner so only the homepage hero is
+   affected, not the inner-page photo heroes. */
+.hero-inner { align-items: center; text-align: center; }
+.hero-inner .hero-eyebrow-chip { align-self: center; }
+.hero-inner h1 { margin-left: auto; margin-right: auto; }
+.hero-inner p.hero-sub { margin-left: auto; margin-right: auto; }
+.hero-inner .btn-row { justify-content: center; }
+.hero-inner .hero-trust { justify-content: center; margin-left: auto; margin-right: auto; }
+/* The default hero scrim darkens the left (built for left-aligned copy). For the
+   centered composition, swap in a symmetric vertical + centered radial scrim so
+   the headline reads evenly across the frame and the CTAs sit on a darker base.
+   Scoped with :has() so only the homepage hero (the one with .hero-inner) is hit. */
+.hero:has(.hero-inner) .hero-bg::after {
+  background:
+    linear-gradient(180deg, rgba(9,11,17,0.52) 0%, rgba(9,11,17,0.30) 34%, rgba(9,11,17,0.46) 70%, rgba(9,11,17,0.80) 100%),
+    radial-gradient(115% 80% at 50% 44%, rgba(9,11,17,0.06) 0%, rgba(9,11,17,0.58) 100%);
+}
+
 /* photo page hero (inner pages) */
 .page-hero { position: relative; background: var(--pg-deep-field); overflow: hidden; color: #fff; }
 .page-hero .hero-bg::after { background: linear-gradient(90deg, rgba(9,11,17,0.95) 0%, rgba(9,11,17,0.86) 45%, rgba(9,11,17,0.55) 100%); }
@@ -317,9 +336,9 @@ a, button, .btn, summary, .nav-toggle { -webkit-tap-highlight-color: rgba(16,224
   .nav-toggle { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
   .mobile-bar { display: grid; }
   body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
-  /* Trust row becomes a tidy two-up, left-aligned list. */
+  /* Trust row becomes a tidy two-up, centered under the hero. */
   .hero-trust { grid-template-columns: repeat(2, 1fr); gap: 22px 18px; max-width: 440px; }
-  .hero-trust .item { flex-direction: row; align-items: center; text-align: left; gap: 10px; }
+  .hero-trust .item { flex-direction: row; align-items: center; justify-content: center; text-align: left; gap: 10px; }
   .hero-trust span { max-width: none; }
   /* Estimate: form full width, "prefer to talk" card unpins and flows below. */
   .est-grid { grid-template-columns: 1fr; }
