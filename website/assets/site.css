@@ -255,9 +255,11 @@ ul.trustbar { padding: 0; margin: 0; }
 .footer-legal .links { display: flex; gap: 18px; }
 
 /* ---------- Mobile bottom bar ---------- */
-.mobile-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; display: none; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--pg-line-dark); border-top: 1px solid var(--pg-line-dark); }
-.mobile-bar a { text-align: center; padding: 16px; font-family: var(--font-display); font-weight: 700; border-bottom: none; }
-.mobile-bar .call { background: var(--pg-deep-field); color: #fff; }
+.mobile-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; display: none; grid-template-columns: 1fr 1.3fr; gap: 1px; background: var(--pg-line-dark); border-top: 1px solid var(--pg-line-dark); box-shadow: 0 -10px 30px -18px rgba(0,0,0,0.7); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.mobile-bar a { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 54px; text-align: center; padding: 13px 12px; font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: -0.01em; white-space: nowrap; border-bottom: none; }
+.mobile-bar a:active { filter: brightness(0.92); }
+.mobile-bar svg { flex-shrink: 0; }
+.mobile-bar .call { background: var(--pg-deep-field-2); color: #fff; }
 .mobile-bar .est { background: var(--pg-growth); color: var(--pg-deep-field); }
 
 /* ---------- Scroll reveal ---------- */
@@ -282,27 +284,118 @@ ul.trustbar { padding: 0; margin: 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { font-family: var(--font-mono); font-size: 12.5px; color: var(--pg-ink); background: var(--pg-bone-deep); border: 1px solid var(--pg-line-strong); border-radius: 999px; padding: 5px 12px; }
 
+/* ---------- Global mobile foundation ---------- */
+html { -webkit-text-size-adjust: 100%; }
+/* The multi-step estimate form and the service branches toggle visibility via
+   the [hidden] attribute, but layout classes like .form-stack (display:flex)
+   out-specify the UA [hidden] rule and leak every step onto the page. Force it
+   so the JS-driven step flow works on every screen. */
+[hidden] { display: none !important; }
+/* Guard against any single element pushing a horizontal scrollbar on phones.
+   `clip` (not `hidden`) so the sticky header keeps working. */
+html, body { overflow-x: clip; }
+img, svg, video, iframe { max-width: 100%; }
+a, button, .btn, summary, .nav-toggle { -webkit-tap-highlight-color: rgba(16,224,22,0.16); }
+/* In-page anchors clear the sticky header instead of hiding under it. */
+:target { scroll-margin-top: 96px; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1080px) { .header-phone { display: none; } }
+
+/* Tablet */
+@media (max-width: 960px) {
+  .footer-grid { grid-template-columns: 1.3fr 1fr 1fr; gap: 36px; }
+  .conversion .grid { padding: 60px 0 68px; gap: 40px; }
+}
+
+/* Enter mobile: hamburger nav + fixed bottom bar take over */
 @media (max-width: 860px) {
   .grid-2 { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px 40px; }
   .form-grid-2 { grid-template-columns: 1fr; }
   .desktop-nav { display: none; }
-  .nav-toggle { display: block; }
+  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
   .mobile-bar { display: grid; }
-  body { padding-bottom: 60px; }
-  .hero-trust { grid-template-columns: repeat(2, max-content); row-gap: 26px; }
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+  /* Trust row becomes a tidy two-up, left-aligned list. */
+  .hero-trust { grid-template-columns: repeat(2, 1fr); gap: 22px 18px; max-width: 440px; }
+  .hero-trust .item { flex-direction: row; align-items: center; text-align: left; gap: 10px; }
+  .hero-trust span { max-width: none; }
+  /* Estimate: form full width, "prefer to talk" card unpins and flows below. */
+  .est-grid { grid-template-columns: 1fr; }
+  .est-sidebar { position: static; top: auto; }
+  /* Process steps stack the big numeral above the copy. */
+  .process-row { grid-template-columns: 1fr; gap: 6px; padding: 24px 0; }
+  /* Tighten the vertical rhythm so sections aren't a mile of scrolling. */
+  .section { padding: clamp(52px, 8vw, 72px) 0; }
+  .section-sm { padding: clamp(40px, 6vw, 60px) 0; }
+  .section-head { margin-bottom: 32px; }
 }
-@media (max-width: 560px) {
-  .footer-grid { grid-template-columns: 1fr; }
+
+/* Phones */
+@media (max-width: 640px) {
+  /* Everything to a single column: no tile ever exceeds the viewport, and each
+     card / photo / step gets the full width for a bigger, cleaner read. */
+  .cards-grid,
+  .cards-grid-3,
+  .ba-grid,
+  .gallery,
+  .gallery-ba,
+  .gallery-ba .ba-pair,
+  .steps,
+  .conversion .grid,
+  .diag-cols { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
   .checks { grid-template-columns: 1fr; }
-  .stats { grid-template-columns: 1fr 1fr; }
+  .stats { grid-template-columns: 1fr 1fr; gap: 20px 12px; padding: 24px 0; }
   .stat + .stat { border-left: none; }
-  /* On small phones the logo + estimate button + hamburger overflow the bar.
-     The fixed bottom mobile-bar already carries Call / Estimate, so drop the
-     header button here and keep just the logo and the menu toggle. */
+
+  /* Full-width, thumb-friendly CTAs stacked vertically. */
+  .btn-row { flex-direction: column; align-items: stretch; gap: 12px; }
+  .btn-row .btn { width: 100%; }
+  .btn-lg { padding: 16px 24px; font-size: 16px; }
+
+  /* Header trims down; the estimate button folds into the bottom bar so the
+     logo + hamburger never crowd. */
+  .site-header .pg-container { height: 64px; }
+  .site-header.scrolled .pg-container { height: 56px; }
+  .site-header .logo img { height: 40px; }
+  .site-header.scrolled .logo img { height: 36px; }
+  .header-cta { gap: 8px; }
   .header-cta .btn { display: none; }
+
+  /* Hero, dialed in for small screens. */
+  .hero-inner { min-height: 0; padding: 40px 0 46px; }
+  .hero h1 { font-size: clamp(2.3rem, 10.5vw, 3.1rem); max-width: 100%; line-height: 0.98; }
+  .hero p.hero-sub { font-size: 18px; margin-top: 18px; }
+  .hero .btn-row { margin-top: 26px; }
+  .hero-eyebrow-chip { margin-bottom: 18px; }
+  .hero-trust { margin-top: 30px; }
+  .page-hero .pg-container { padding: 44px 0; }
+  .page-hero h1 { max-width: 100%; }
+
+  /* Section heads a touch tighter on the page. */
+  .section-head h2 { font-size: clamp(1.7rem, 7vw, 2.1rem); }
+  .section-head p { font-size: 17px; }
+
+  /* Cards & media get a bit more presence at full width. */
+  .card-link .thumb { height: 210px; }
+  .rounded-img img { height: 280px; }
+
+  /* Reading comfort. */
+  .faq summary { font-size: 17px; padding-right: 34px; }
+  .faq .answer, .faq summary { padding-left: 0; }
+  .price-row { padding: 16px 18px; }
+  .conversion .grid { padding: 52px 0 60px; }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
+  .pg-container { padding: 0 20px; }
+  .stats { grid-template-columns: 1fr; gap: 14px; }
+  .stat + .stat { padding-top: 14px; border-top: 1px solid var(--pg-line-dark); }
+  .hero h1 { font-size: clamp(2.1rem, 11vw, 2.7rem); }
+  .hero-trust { grid-template-columns: 1fr 1fr; gap: 18px 14px; }
 }
 
 /* ---------- Drainage diagnostic ---------- */
