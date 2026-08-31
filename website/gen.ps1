@@ -82,7 +82,7 @@ $SERVICES = @(
      desc='Mowing, bed care and seasonal work on a set schedule, billed automatically each month. One crew, one agreement, serving Greater Baton Rouge and surrounding areas.';
      eyebrow='Recurring care'; headline='Annual property maintenance you never have to chase';
      sub='Mowing, bed care and seasonal work on a set schedule, billed automatically each month. One crew, one agreement, done.';
-     price='From $145/mo'; img='/img/crew-trimming.jpg'; baB='/img/ba-maint-before.jpg'; baA='/img/crew-trimming.jpg'; baCap='Overgrown hedge, trimmed &amp; cleaned &middot; Greater Baton Rouge and surrounding areas';
+     price='From $145/mo'; img='/img/crew-trimming.jpg'; baB='/img/ba-maint-before.jpg'; baA='/img/ba-maint-after.jpg'; baCap='Overgrown hedge, trimmed &amp; cleaned &middot; Greater Baton Rouge and surrounding areas';
      problemH='Chasing a lawn crew every few weeks gets old.';
      problemP=@('Most homeowners are tired of calling around every time the grass gets tall. A recurring agreement means set service days, a defined scope and automatic billing - the work just happens.','Because we also renovate and install, the same crew that maintains your property is the one that can rebuild it when it is time.');
      included=@('Mowing, edging and blowing on a set schedule','Bed weeding and seasonal cleanups','Shrub and hedge trimming','Mulch and pine straw refreshes','Priority scheduling for extra work','Automatic monthly billing');
@@ -97,7 +97,7 @@ $SERVICES = @(
      desc='Fresh mulch, pine straw or decorative rock over properly prepped and edged beds. Sharp, finished beds in an afternoon, across Greater Baton Rouge and surrounding areas.';
      eyebrow='Bed finish'; headline='Mulch, pine straw and decorative rock';
      sub='Sharp, finished beds in an afternoon &mdash; fresh mulch, pine straw or rock installed over properly prepped and edged ground.';
-     price='From $350'; img='/img/mulch.jpg'; baB='/img/ba-mulch-before.jpg'; baA='/img/mulch.jpg'; baCap='Fresh mulch &amp; edging &middot; Greater Baton Rouge and surrounding areas';
+     price='From $350'; img='/img/mulch.jpg'; baB='/img/ba-mulch-before.jpg'; baA='/img/ba-mulch-after.jpg'; baCap='Fresh mulch &amp; edging &middot; Greater Baton Rouge and surrounding areas';
      problemH='Faded mulch makes the whole yard look neglected.';
      problemP=@('Mulch breaks down and washes out; beds fade and lose their edge. A fresh install of mulch, pine straw or rock instantly resets curb appeal - especially with clean, reshaped edges.','We prep and edge first so the finish looks intentional and holds up, rather than just piling new material on top.');
      included=@('Bed cleanup and light weeding','Edging and bed-line reshaping','Fresh mulch, pine straw or decorative rock','Even, consistent depth','Cleanup of hard surfaces','Optional weed-barrier under rock');
@@ -111,7 +111,7 @@ $SERVICES = @(
      desc='Dependable grounds care and landscape improvements for offices, retail, HOAs and multi-property portfolios across Greater Baton Rouge and surrounding areas. One point of contact.';
      eyebrow='For businesses'; headline='Commercial grounds maintenance and improvements';
      sub='Dependable grounds care and landscape improvements for offices, retail, HOAs and multi-property portfolios across Greater Baton Rouge and surrounding areas.';
-     price='Custom quote'; img='/img/commercial-grounds.jpg'; baB='/img/ba-comm-before.jpg'; baA='/img/lawn-backyard.jpg'; baCap='Frontage bed renovation &middot; Greater Baton Rouge and surrounding areas';
+     price='Custom quote'; img='/img/commercial-grounds.jpg'; baB='/img/ba-comm-before.jpg'; baA='/img/ba-comm-after.jpg'; baCap='Frontage bed renovation &middot; Greater Baton Rouge and surrounding areas';
      problemH='Your property is the first thing customers judge.';
      problemP=@('Overgrown entrances and tired islands cost businesses first impressions. Commercial grounds need a reliable crew on a predictable schedule with a single point of contact - not a rotating cast of subcontractors.','We build a scope and schedule around your property, invoice cleanly, and keep the grounds looking open-for-business year-round.');
      included=@('Scheduled mowing, edging and cleanup','Bed, island and entrance maintenance','Seasonal color and mulch refreshes','Drainage and grading improvements','Single point of contact','Clean, consolidated invoicing');
