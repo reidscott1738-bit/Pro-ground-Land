@@ -74,7 +74,9 @@
 .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,11,17,0.82) 0%, rgba(9,11,17,0.6) 34%, rgba(9,11,17,0.2) 62%, rgba(9,11,17,0) 100%), linear-gradient(0deg, rgba(9,11,17,0.45) 0%, rgba(9,11,17,0) 40%); }
 .hero .pg-container { position: relative; z-index: 1; }
 .hero-inner { padding: clamp(52px,6vw,84px) 0 clamp(48px,5vw,72px); min-height: min(64vh, 560px); display: flex; flex-direction: column; justify-content: center; }
-.hero-eyebrow-chip { display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(16,224,22,0.4); border-radius: 999px; padding: 7px 16px; margin-bottom: 26px; font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.08em; color: #F4F1E9; }
+/* align-self:flex-start stops the pill from stretching full-width: it is a
+   child of the column flex .hero-inner, which would otherwise stretch it. */
+.hero-eyebrow-chip { display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; border: 1px solid rgba(16,224,22,0.4); border-radius: 999px; padding: 7px 16px; margin-bottom: 26px; font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.08em; color: #F4F1E9; }
 .hero-eyebrow-chip .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--pg-growth); box-shadow: 0 0 10px var(--pg-growth); }
 .hero h1 { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; line-height: 0.94; letter-spacing: -0.02em; font-size: clamp(2.7rem,6.2vw,5.1rem); color: #fff; margin: 0; max-width: 16ch; }
 .hero h1 .accent { color: var(--pg-growth); }
@@ -154,18 +156,25 @@
 .faq .answer { padding: 0 40px 22px 0; font-size: 16.5px; line-height: 1.65; color: var(--pg-slate-700); }
 
 /* ---------- Before / after slider ---------- */
-.ba-slider { position: relative; width: 100%; border-radius: var(--radius-sm); overflow: hidden; user-select: none; touch-action: none; box-shadow: 0 24px 60px -30px rgba(11,14,21,0.55); }
+.ba-slider { position: relative; width: 100%; border-radius: var(--radius-sm); overflow: hidden; user-select: none; touch-action: none; cursor: ew-resize; box-shadow: 0 24px 60px -30px rgba(11,14,21,0.55); }
 .ba-slider img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .ba-slider .ba-after { position: absolute; inset: 0; }
-.ba-slider .ba-before-wrap { position: absolute; inset: 0; overflow: hidden; width: 50%; }
+/* Before layer keeps the full slider width and is revealed with clip-path, so
+   the image is clipped (never squished) as the handle moves. JS updates clip. */
+.ba-slider .ba-before-wrap { position: absolute; inset: 0; clip-path: inset(0 50% 0 0); }
 .ba-slider .ba-before-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; }
-.ba-slider .ba-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--pg-growth-bright); transform: translateX(-1px); }
-.ba-slider .ba-handle .grip { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 40px; height: 40px; border-radius: 999px; background: var(--pg-growth-bright); color: var(--pg-deep-field); display: grid; place-items: center; font-size: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+.ba-slider .ba-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--pg-growth-bright); transform: translateX(-1px); z-index: 2; }
+.ba-slider .ba-handle .grip { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 44px; height: 44px; border-radius: 999px; background: var(--pg-growth-bright); color: var(--pg-deep-field); border: 3px solid #fff; display: grid; place-items: center; font-size: 16px; box-shadow: 0 2px 10px rgba(11,14,21,0.35); }
 .ba-slider .ba-label { position: absolute; top: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: rgba(9,11,17,0.7); padding: 4px 8px; border-radius: 2px; }
 .ba-slider .ba-label.before { left: 12px; }
 .ba-slider .ba-label.after { right: 12px; }
-.ba-slider input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+/* Range stays for keyboard/AT only; pointer dragging is handled on .ba-slider.
+   pointer-events:none avoids the native range thumb fighting the drag. */
+.ba-slider input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; z-index: 3; pointer-events: none; }
 .ba-caption { font-family: var(--font-mono); font-size: 12.5px; color: var(--pg-slate-600); margin-top: 10px; text-align: center; }
+/* Grid of before/after sliders (gallery). Each slider sets its own aspect-ratio
+   inline, so no fixed height is needed. */
+.ba-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
 
 /* ---------- Gallery ---------- */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
@@ -278,6 +287,10 @@ ul.trustbar { padding: 0; margin: 0; }
   .checks { grid-template-columns: 1fr; }
   .stats { grid-template-columns: 1fr 1fr; }
   .stat + .stat { border-left: none; }
+  /* On small phones the logo + estimate button + hamburger overflow the bar.
+     The fixed bottom mobile-bar already carries Call / Estimate, so drop the
+     header button here and keep just the logo and the menu toggle. */
+  .header-cta .btn { display: none; }
 }
 
 /* ---------- Drainage diagnostic ---------- */

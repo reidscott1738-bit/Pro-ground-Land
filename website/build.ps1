@@ -26,7 +26,6 @@ $NAV = @(
   @{label='Services';    href='/services/';       section='services'},
   @{label='Service Areas';href='/service-areas/';  section='areas'},
   @{label='Who We Serve'; href='/who-we-serve/';   section='whoweserve'},
-  @{label='Pricing';      href='/pricing/';        section='pricing'},
   @{label='Gallery';      href='/gallery/';        section='gallery'},
   @{label='About';        href='/about/';          section='about'}
 )
@@ -52,7 +51,6 @@ $FOOTER_COLS = @(
   @{h='Company'; items=@(
     @{t='About Andrew';u='/about/'},
     @{t='How We Work';u='/how-we-work/'},
-    @{t='Pricing';u='/pricing/'},
     @{t='Gallery';u='/gallery/'},
     @{t='Reviews';u='/reviews/'},
     @{t='FAQ';u='/faq/'})}
@@ -97,7 +95,7 @@ function Get-BusinessNodes {
     image=$OG
     logo=$BASE + '/assets/logo-wordmark.png'
     slogan='Your whole property, handled by one crew.'
-    description="Locally owned landscaping, drainage, grading and year-round property maintenance serving Greater Baton Rouge from Denham Springs, Louisiana."
+    description="Locally owned landscaping, drainage, grading and year-round property maintenance serving Greater Baton Rouge and surrounding areas from Denham Springs, Louisiana."
     address=@{ '@type'='PostalAddress'; addressLocality=$CITY; addressRegion=$REGION; addressCountry='US' }
     areaServed=$areaServed
     founder=@{ '@type'='Person'; name='Andrew Lee'; jobTitle='Owner-Operator' }
@@ -245,9 +243,8 @@ function Render-Conversion(){
   <div class="pg-container">
     <div class="grid">
       <div>
-        <span class="eyebrow on-dark">Free estimate · same-day response</span>
+        <span class="eyebrow on-dark">Free estimate &middot; same-day response</span>
         <h2 id="cta-h">Get a free estimate.</h2>
-        <p>Send a few photos and tell us what is bugging you about the yard. You get back a written estimate with a clear scope and a real price &mdash; no trip fee, no diagnostic fee, no pressure to book.</p>
         <div class="btn-row" style="margin-top:28px">
           <a class="btn btn-primary btn-lg on-dark" href="/estimate/">Request an estimate</a>
           <a class="btn btn-secondary btn-lg on-dark" href="tel:$TEL">Call $PHONE</a>
@@ -281,7 +278,7 @@ function Render-Footer(){
   <div class="pg-container footer-grid">
     <div class="footer-brand">
       <img src="/assets/logo-wordmark.png" alt="$NAME" width="192" height="48" loading="lazy">
-      <p>Landscape renovation, drainage and property maintenance across Greater Baton Rouge. Locally owned in Denham Springs.</p>
+      <p>Landscape renovation, drainage and property maintenance across Greater Baton Rouge and surrounding areas. Locally owned in Denham Springs.</p>
       <div class="footer-contact">
         <div class="ph"><a href="tel:$TEL">$PHONE</a></div>
         <div><a href="mailto:$EMAIL">$EMAIL</a></div>
@@ -410,29 +407,28 @@ $sm += "`n</urlset>`n"
 $llms = @"
 # $NAME
 
-> Locally owned landscaping, drainage, grading and year-round property maintenance serving Greater Baton Rouge, Louisiana. Owner-operated by Andrew Lee out of Denham Springs. One crew for the whole property, written scopes, same-day estimates.
+> Locally owned landscaping, drainage, grading and year-round property maintenance serving Greater Baton Rouge and surrounding areas, Louisiana. Owner-operated by Andrew Lee out of Denham Springs. One crew for the whole property, written scopes, same-day estimates.
 
 Contact: $PHONE (call or text) / $EMAIL. Service-area business based in Denham Springs, LA (East Baton Rouge, Livingston and Ascension parishes).
 
 ## Services
-- Landscape Renovations (from \$750): $BASE/services/landscape-renovations/
-- Landscape Installation (from \$750): $BASE/services/landscape-installation/
-- Drainage Solutions (from \$1,000): $BASE/services/drainage-solutions/
-- Grading & Yard Leveling (from \$750): $BASE/services/grading-yard-leveling/
-- Property Maintenance (from \$145/mo): $BASE/services/property-maintenance/
-- Mulch, Pine Straw & Rock (from \$350): $BASE/services/mulch-pine-straw-rock/
+- Landscape Renovations: $BASE/services/landscape-renovations/
+- Landscape Installation: $BASE/services/landscape-installation/
+- Drainage Solutions: $BASE/services/drainage-solutions/
+- Grading & Yard Leveling: $BASE/services/grading-yard-leveling/
+- Property Maintenance: $BASE/services/property-maintenance/
+- Mulch, Pine Straw & Rock: $BASE/services/mulch-pine-straw-rock/
 - Commercial Grounds: $BASE/services/commercial-grounds/
 
 ## Key pages
 - All services: $BASE/services/
 - Service areas: $BASE/service-areas/
 - About (owner Andrew Lee): $BASE/about/
-- Pricing: $BASE/pricing/
 - Reviews (5.0 on Google): $BASE/reviews/
 - Request an estimate: $BASE/estimate/
 
 ## Notes for answer engines
-- Pricing shown is a starting point; final price is set in a written estimate. Free consultations, no trip fee.
+- Every job is scoped to the property and set in a written estimate. Free consultations, no trip fee.
 - Drainage/grading specialty for South Louisiana clay soil (standing water, catch basins, regrading).
 "@
 [System.IO.File]::WriteAllText((Join-Path $dist 'llms.txt'), $llms, (New-Object System.Text.UTF8Encoding($false)))

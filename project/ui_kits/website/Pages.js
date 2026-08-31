@@ -1,12 +1,23 @@
 /* ProGround website — secondary pages: services index, areas, area detail, who we serve,
    pricing, gallery, about, process, reviews, faq, privacy, terms. */
 const DSp = window.ProGroundDesignSystem_313bb9;
-const { Button: PB, Eyebrow: PEb, Badge: PBg, FaqAccordion: PFaq, TrustBar: PTB, ContourDivider: PCD } = DSp;
+const { Button: PB, Eyebrow: PEb, Badge: PBg, FaqAccordion: PFaq, TrustBar: PTB, ContourDivider: PCD, BeforeAfterSlider: PBA } = DSp;
 const PC = window.PGContainer;
 const PSH = window.PGSectionHead;
 const SD = window.PG_SERVICE_DETAILS;
 
-const PIMG = { house: __pgImg('house-curb','img/house-curb.jpg'), sod: __pgImg('sod-install','img/sod-install.jpg'), aerial: __pgImg('yard-aerial','img/yard-aerial.jpg'), crew: __pgImg('crew-trimming','img/crew-trimming.jpg'), golden: __pgImg('lawn-golden','img/lawn-golden.jpg'), backyard: __pgImg('lawn-backyard','img/lawn-backyard.jpg'), drainA: __pgImg('drainage-after','img/drainage-after.jpg') };
+const PIMG = { house: __pgImg('house-curb','img/house-curb.jpg'), sod: __pgImg('sod-install','img/sod-install.jpg'), aerial: __pgImg('yard-aerial','img/yard-aerial.jpg'), crew: __pgImg('crew-trimming','img/crew-trimming.jpg'), golden: __pgImg('lawn-golden','img/lawn-golden.jpg'), backyard: __pgImg('lawn-backyard','img/lawn-backyard.jpg'), drainA: __pgImg('drainage-after','img/drainage-after.jpg'), commercial: __pgImg('commercial-grounds','img/commercial-grounds.jpg'), grading: __pgImg('grading-leveling','img/grading-leveling.jpg') };
+
+/* Before/after pairs for the gallery — one per service. Missing "after" files render as a labeled placeholder. */
+const PBA_IMG = {
+  renoB: __pgImg('ba-reno-before','img/ba-reno-before.jpg'), renoA: __pgImg('ba-reno-after','img/ba-reno-after.jpg'),
+  installB: __pgImg('ba-install-before','img/ba-install-before.jpg'), installA: __pgImg('ba-install-after','img/ba-install-after.jpg'),
+  gradingB: __pgImg('ba-grading-before','img/ba-grading-before.jpg'), gradingA: __pgImg('ba-grading-after','img/ba-grading-after.jpg'),
+  drainB: __pgImg('drainage-before','img/drainage-before.jpg'), drainA: __pgImg('drainage-after','img/drainage-after.jpg'),
+  maintB: __pgImg('ba-maint-before','img/ba-maint-before.jpg'),
+  mulchB: __pgImg('ba-mulch-before','img/ba-mulch-before.jpg'),
+  commB: __pgImg('ba-comm-before','img/ba-comm-before.jpg'),
+};
 
 /* Shared photo-backed page hero with breadcrumb. */
 function PageHero({ onNav, crumbs, eyebrow, title, sub, img, badge }) {
@@ -23,7 +34,7 @@ function PageHero({ onNav, crumbs, eyebrow, title, sub, img, badge }) {
           ))}
         </div>
         {badge ? <span style={{ display: 'inline-block', marginBottom: 14 }}><PBg tone="water">{badge}</PBg></span> : <PEb onDark>{eyebrow}</PEb>}
-        <h1 style={{ marginTop: 14, color: '#fff', fontSize: 'clamp(2.2rem,4.4vw,3.4rem)', maxWidth: '18ch' }}>{title}</h1>
+        {title && <h1 style={{ marginTop: 14, color: '#fff', fontSize: 'clamp(2.2rem,4.4vw,3.4rem)', maxWidth: '18ch' }}>{title}</h1>}
         {sub && <p style={{ fontSize: 20, lineHeight: 1.55, color: 'var(--pg-slate-300)', maxWidth: '52ch', margin: '18px 0 0' }}>{sub}</p>}
       </PC>
     </section>
@@ -53,7 +64,7 @@ function LinkCard({ img, badge, title, desc, cta, onNav, route, param }) {
 /* ===================== SERVICES INDEX ===================== */
 const SVC_ORDER = [
   ['renovations', 'service', PIMG.house], ['installation', 'service', PIMG.sod], ['drainage', 'drainage', PIMG.drainA],
-  ['grading', 'service', PIMG.backyard], ['maintenance', 'service', PIMG.crew], ['mulch', 'service', PIMG.golden], ['commercial', 'service', PIMG.aerial],
+  ['grading', 'service', PIMG.grading], ['maintenance', 'service', PIMG.crew], ['mulch', 'service', PIMG.golden], ['commercial', 'service', PIMG.commercial],
 ];
 const MORE_SVCS = ['Residential Lawn Mowing', 'Large Property Mowing', 'Hedge & Shrub Trimming', 'Landscape Bed Maintenance', 'Hard-Surface Weed Control', 'Landscape Bed Cleanup', 'Decorative Rock Installation', 'Christmas Light Installation'];
 
@@ -61,7 +72,7 @@ function ServicesIndex({ onNav }) {
   return (
     <div style={{ background: 'var(--pg-bone)' }}>
       <PageHero onNav={onNav} crumbs={[{ label: 'Home', route: 'home' }, { label: 'Services' }]} eyebrow="What we do"
-        title="One crew for the whole property" sub="Renovation, installation, drainage, grading and year-round care — each with a starting price and a written scope." img={PIMG.aerial} />
+        title="Pro Ground handles everything big and small" img={PIMG.aerial} />
       <section><PC style={{ padding: 'clamp(56px,8vw,110px) 0' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(320px,1fr))', gap: 26 }}>
           {SVC_ORDER.map(([k, route, img]) => {
@@ -101,7 +112,7 @@ function AreasIndex({ onNav }) {
   return (
     <div style={{ background: 'var(--pg-bone)' }}>
       <PageHero onNav={onNav} crumbs={[{ label: 'Home', route: 'home' }, { label: 'Service Areas' }]} eyebrow="Where we work"
-        title="Serving Greater Baton Rouge" sub="Locally owned in Denham Springs, working across the parishes with same-day response." img={PIMG.aerial} />
+        title="Serving Greater Baton Rouge and surrounding areas" sub="Locally owned in Denham Springs, working across the parishes with same-day response." img={PIMG.aerial} />
       <section><PC style={{ padding: 'clamp(56px,8vw,110px) 0' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(320px,1fr))', gap: 26 }}>
           {Object.entries(AREAS).map(([city, a]) => (
@@ -166,12 +177,12 @@ function AreaPage({ onNav, param }) {
 function WhoWeServe({ onNav }) {
   const panels = [
     { img: PIMG.house, tag: 'Homeowners', h: 'Residential', p: 'Established homes and new builds across Greater Baton Rouge. From a bed refresh to a full renovation, drainage fix or year-round maintenance — one crew that shows up.', pts: ['Curb-appeal renovations', 'Drainage & grading fixes', 'Recurring mowing & bed care', 'New-build landscaping'], route: 'service', param: 'renovations' },
-    { img: PIMG.aerial, tag: 'Businesses & HOAs', h: 'Commercial', p: 'Offices, retail, HOAs and multi-property portfolios that need dependable grounds care on a predictable schedule with a single point of contact and clean invoicing.', pts: ['Scheduled grounds maintenance', 'Entrance & island improvements', 'Portfolio & HOA agreements', 'One point of contact'], route: 'service', param: 'commercial' },
+    { img: PIMG.commercial, tag: 'Businesses & HOAs', h: 'Commercial', p: 'Offices, retail, HOAs and multi-property portfolios that need dependable grounds care on a predictable schedule with a single point of contact and clean invoicing.', pts: ['Scheduled grounds maintenance', 'Entrance & island improvements', 'Portfolio & HOA agreements', 'One point of contact'], route: 'service', param: 'commercial' },
   ];
   return (
     <div style={{ background: 'var(--pg-bone)' }}>
       <PageHero onNav={onNav} crumbs={[{ label: 'Home', route: 'home' }, { label: 'Who We Serve' }]} eyebrow="Who we serve"
-        title="Residential and commercial" sub="Same crew, same standards — scoped to the property in front of us." img={PIMG.crew} />
+        title="Residential and commercial" sub="Scope of work tailored to your property" img={PIMG.crew} />
       <section><PC style={{ padding: 'clamp(56px,8vw,110px) 0', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(28px,4vw,44px)' }} className="pg-hero-grid">
         {panels.map((p) => (
           <div key={p.h} style={{ background: '#fff', border: '1px solid var(--pg-line-strong)', borderRadius: 'var(--radius-sm)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -195,73 +206,31 @@ function WhoWeServe({ onNav }) {
   );
 }
 
-/* ===================== PRICING ===================== */
-const PRICING = [
-  ['Landscape Renovations', 'From $750', 'service', 'renovations'],
-  ['Landscape Installation', 'From $750', 'service', 'installation'],
-  ['Drainage Solutions', 'From $1,000', 'drainage', null],
-  ['Grading & Yard Leveling', 'From $750', 'service', 'grading'],
-  ['Property Maintenance', 'From $145/mo', 'service', 'maintenance'],
-  ['Mulch, Pine Straw & Rock', 'From $350', 'service', 'mulch'],
-  ['Commercial Grounds', 'Custom quote', 'service', 'commercial'],
-];
-
-function PricingPage({ onNav }) {
-  return (
-    <div style={{ background: 'var(--pg-bone)' }}>
-      <PageHero onNav={onNav} crumbs={[{ label: 'Home', route: 'home' }, { label: 'Pricing' }]} eyebrow="Straightforward pricing"
-        title="Starting prices, no trip fee" sub="Every job gets a written estimate with a defined scope. These are honest starting points — the final number depends on your property." img={PIMG.golden} />
-      <section><PC style={{ padding: 'clamp(56px,8vw,110px) 0', maxWidth: 900 }}>
-        <div style={{ background: '#fff', border: '1px solid var(--pg-line-strong)', borderRadius: 'var(--radius-sm)', overflow: 'hidden' }}>
-          {PRICING.map(([name, price, route, param], i) => (
-            <a key={name} href="#" onClick={(e) => { e.preventDefault(); onNav(route, param); }}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '20px 24px', borderTop: i ? '1px solid var(--pg-line)' : 'none', border: 'none', textDecoration: 'none' }}
-              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--pg-bone-deep)'} onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.05rem,1.8vw,1.25rem)', color: 'var(--pg-ink)', fontWeight: 600 }}>{name}</span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 16, color: 'var(--pg-turf)' }}>{price}</span>
-                <span style={{ color: 'var(--pg-slate-400)' }}>→</span>
-              </span>
-            </a>
-          ))}
-        </div>
-        <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--pg-slate-500)', marginTop: 20 }}>
-          Pricing varies based on property size, materials, accessibility, service frequency, and project scope. Free consultations and customized estimates are available — no trip fee, no diagnostic fee.
-        </p>
-        <div style={{ marginTop: 28, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-          <PB variant="primary" size="lg" onClick={() => onNav('estimate')}>Get my exact price</PB>
-          <PB variant="secondary" size="lg" href="tel:+12253248252">Call {window.PG_PHONE}</PB>
-        </div>
-      </PC></section>
-    </div>
-  );
-}
-
 /* ===================== GALLERY ===================== */
+/* One before/after slider per service. Where a real "after" photo is not yet in the
+   library, afterImage is omitted so the slider renders a labeled placeholder panel. */
 const GALLERY = [
-  { src: PIMG.aerial, cap: 'Paver patio & hardscape', area: 'Baton Rouge' },
-  { src: PIMG.house, cap: 'Curb-appeal renovation', area: 'Shenandoah' },
-  { src: PIMG.sod, cap: 'Fresh sod & healthy turf', area: 'Prairieville' },
-  { src: PIMG.backyard, cap: 'Full-yard renovation', area: 'Denham Springs' },
-  { src: PIMG.crew, cap: 'Property maintenance', area: 'Central' },
-  { src: PIMG.golden, cap: 'Fresh mulch & clean beds', area: 'Walker' },
+  { svc: 'Landscape Renovations', before: PBA_IMG.renoB, after: PBA_IMG.renoA, cap: 'Front-bed renovation · Greater Baton Rouge' },
+  { svc: 'Landscape Installation', before: PBA_IMG.installB, after: PBA_IMG.installA, cap: 'New landscape installation · Greater Baton Rouge' },
+  { svc: 'Drainage Solutions', before: PBA_IMG.drainB, after: PBA_IMG.drainA, cap: 'Backyard drainage restored to clean turf' },
+  { svc: 'Grading & Yard Leveling', before: PBA_IMG.gradingB, after: PBA_IMG.gradingA, cap: 'Reshaped yard & clean final grade' },
+  { svc: 'Property Maintenance', before: PBA_IMG.maintB, after: null, cap: 'Property maintenance · Greater Baton Rouge' },
+  { svc: 'Mulch, Pine Straw & Rock', before: PBA_IMG.mulchB, after: null, cap: 'Fresh mulch & clean beds' },
+  { svc: 'Commercial Grounds', before: PBA_IMG.commB, after: null, cap: 'Commercial grounds & frontage' },
 ];
 
 function GalleryPage({ onNav }) {
   return (
     <div style={{ background: 'var(--pg-bone)' }}>
       <PageHero onNav={onNav} crumbs={[{ label: 'Home', route: 'home' }, { label: 'Gallery' }]} eyebrow="Our work"
-        title="Recent projects across Greater Baton Rouge" sub="A look at renovations, installs, drainage and the properties we keep looking their best." img={PIMG.house} />
+        title="Before and after, by service" sub="Drag each slider to see the change — one project for every service we offer across Greater Baton Rouge and surrounding areas." img={PIMG.house} />
       <section><PC style={{ padding: 'clamp(56px,8vw,110px) 0' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(300px,1fr))', gap: 18 }}>
-          {GALLERY.map((g, i) => (
-            <figure key={i} style={{ margin: 0, position: 'relative', borderRadius: 'var(--radius-sm)', overflow: 'hidden', aspectRatio: '4/3' }}>
-              <img src={g.src} alt={g.cap} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              <figcaption style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '30px 16px 14px', background: 'linear-gradient(0deg, rgba(9,11,17,0.85), transparent)', color: '#fff' }}>
-                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 16 }}>{g.cap}</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--pg-slate-300)', marginTop: 3 }}>{g.area}</div>
-              </figcaption>
-            </figure>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(360px,1fr))', gap: 32 }}>
+          {GALLERY.map((g) => (
+            <div key={g.svc}>
+              <h3 style={{ margin: '0 0 12px', fontSize: 20, color: 'var(--pg-ink)' }}>{g.svc}</h3>
+              <PBA height={300} initial={45} beforeImage={g.before} afterImage={g.after || undefined} caption={g.cap} />
+            </div>
           ))}
         </div>
         <p style={{ marginTop: 32, fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--pg-slate-500)' }}>Photos are representative of ProGround’s work. Want to see a project like yours? <a href="#" onClick={(e) => { e.preventDefault(); onNav('estimate'); }} style={{ color: 'var(--pg-turf)' }}>Ask for examples with your estimate.</a></p>
@@ -278,46 +247,13 @@ const ABOUT_SYSTEM = [
   ['A scheduled date', 'You know when we are coming, and we come.'],
   ['A follow-up', 'We check the finished work ourselves when it is done.'],
 ];
-const ABOUT_HANDLES = [
-  ['Renovations & installs', 'Landscape renovations and new installations — beds rebuilt or a bare yard finished.'],
-  ['Drainage & grading', 'For yards that hold water, which around here is most of them eventually.'],
-  ['Beds, mulch & rock', 'Bed cleanups, mulch, pine straw and decorative rock to finish the look.'],
-  ['Year-round maintenance', 'A set schedule and one predictable monthly bill — not a crew that disappears.'],
-];
-
 function AboutPage({ onNav }) {
   return (
     <div style={{ background: 'var(--pg-bone)' }}>
       <PageHero onNav={onNav} crumbs={[{ label: 'Home', route: 'home' }, { label: 'About' }]} eyebrow="About ProGround"
-        title="When you call, you get the owner" sub="ProGround Land Management started in October 2025, after owner Andrew Lee spent five years in this trade watching how it usually gets done." img={PIMG.backyard} />
+        title="" sub="ProGround Land Management was founded in October 2025, after the owner, Andrew Lee, spent over five years learning and understanding the trade and figuring out how it can be improved." img={PIMG.backyard} />
 
-      {/* the why */}
-      <section><PC style={{ padding: 'clamp(56px,8vw,110px) 0', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(36px,5vw,72px)', alignItems: 'center' }} className="pg-hero-grid">
-        <div style={{ position: 'relative', minHeight: 460 }} className="pg-collage">
-          <img src={PIMG.house} alt="Renovated home exterior" style={{ width: '76%', height: 340, objectFit: 'cover', borderRadius: 'var(--radius-sm)', display: 'block', boxShadow: '0 24px 60px -30px rgba(11,14,21,0.6)' }} />
-          <img src={PIMG.crew} alt="Freshly trimmed hedge" style={{ position: 'absolute', right: 0, bottom: 0, width: '52%', height: 240, objectFit: 'cover', borderRadius: 'var(--radius-sm)', border: '6px solid var(--pg-bone)', boxShadow: '0 24px 60px -30px rgba(11,14,21,0.6)' }} />
-          <div style={{ position: 'absolute', left: 0, bottom: 8, background: 'var(--pg-deep-field)', color: '#fff', padding: '14px 20px', borderRadius: 'var(--radius-sm)', boxShadow: '0 20px 50px -24px rgba(11,14,21,0.7)' }}>
-            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 26, color: 'var(--pg-growth)', lineHeight: 1 }}>Est. Oct 2025</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--pg-slate-300)', marginTop: 5 }}>Owner-operated · Denham Springs</div>
-          </div>
-        </div>
-        <div>
-          <PEb>Why ProGround exists</PEb>
-          <h2 style={{ marginTop: 14, fontSize: 'clamp(1.8rem,3.2vw,2.5rem)' }}>Most of what frustrates owners <span style={{ color: 'var(--pg-turf)' }}>has nothing to do with grass.</span></h2>
-          <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--pg-slate-700)' }}>
-            Andrew Lee spent five years in this trade watching how it usually gets done. The problems he saw again and again had nothing to do with grass or plants. It is not knowing what a job will cost. It is a callback that never comes. It is a crew that shows up once and then disappears for three weeks with no explanation.
-          </p>
-          <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--pg-slate-700)' }}>
-            None of that seemed hard to fix. It just needed somebody to actually do it. So in October 2025 he started ProGround.
-          </p>
-          <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--pg-slate-700)' }}>
-            Andrew lives in Denham Springs and works here. He looks at the property, writes the estimate, plans the job and checks the finished work himself. When you call ProGround, you get the owner.
-          </p>
-          <div style={{ marginTop: 24 }}><PB variant="primary" size="lg" onClick={() => onNav('estimate')}>Work with us</PB></div>
-        </div>
-      </PC></section>
-
-      {/* how we run it */}
+      {/* how we run it — moved above the "why choose" section */}
       <section style={{ background: 'var(--pg-bone-deep)' }}><PC style={{ padding: 'clamp(56px,8vw,110px) 0' }}>
         <PSH center eyebrow="How ProGround runs" title="Five things you can count on." sub="Customers know what is being done, what it costs and what happens next." />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(190px,1fr))', gap: 18 }}>
@@ -331,28 +267,16 @@ function AboutPage({ onNav }) {
         </div>
       </PC></section>
 
-      {/* one company instead of three */}
-      <section><PC style={{ padding: 'clamp(56px,8vw,110px) 0' }}>
-        <PSH eyebrow="What ProGround handles" title="One company instead of three." sub="Over 100 homes served across Baton Rouge, Denham Springs, Prairieville, Walker, Central and the surrounding parishes — with commercial grounds maintenance growing alongside it." />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: 24 }}>
-          {ABOUT_HANDLES.map(([h, d]) => (
-            <div key={h} style={{ background: '#fff', border: '1px solid var(--pg-line-strong)', borderRadius: 'var(--radius-sm)', padding: 28 }}>
-              <h3 style={{ margin: 0, fontSize: 19 }}>{h}</h3>
-              <p style={{ fontSize: 15.5, lineHeight: 1.6, color: 'var(--pg-slate-600)', margin: '8px 0 0' }}>{d}</p>
-            </div>
-          ))}
-        </div>
-        <div style={{ marginTop: 28 }}><PB variant="secondary" size="lg" onClick={() => onNav('services')}>See all services</PB></div>
-      </PC></section>
-
-      {/* on price */}
-      <section style={{ background: 'var(--pg-bone-deep)' }}><PC style={{ padding: 'clamp(56px,8vw,110px) 0', maxWidth: 820 }}>
-        <PEb>On price</PEb>
-        <h2 style={{ marginTop: 14, fontSize: 'clamp(1.7rem,3vw,2.3rem)' }}>Not the cheapest — and not trying to be.</h2>
+      {/* why choose ProGround — full-width text, no images */}
+      <section><PC style={{ padding: 'clamp(56px,8vw,110px) 0', maxWidth: 900 }}>
+        <h2 style={{ marginTop: 0, fontSize: 'clamp(1.8rem,3.2vw,2.5rem)' }}>Why choose ProGround</h2>
         <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--pg-slate-700)' }}>
-          Someone will always do it for less. What ProGround sells instead is a job planned properly, built with good material, finished with attention to detail, and still looking right in a few years.
+          Hiring a landscaping company is mostly a leap of faith. A lot of homeowners hesitate simply because they do not know who to choose — will the crew actually show up, will the price on the estimate be the price they pay, and will anyone answer when there is a question?
         </p>
-        <div style={{ marginTop: 22 }}><PB variant="ghost" onClick={() => onNav('pricing')}>See starting prices →</PB></div>
+        <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--pg-slate-700)' }}>
+          ProGround was built to take those worries off the table. You get clear communication from the first call, a written scope and price before any work starts, a scheduled date we keep, and the owner involved from start to finish — so choosing us is not a gamble.
+        </p>
+        <div style={{ marginTop: 24 }}><PB variant="primary" size="lg" onClick={() => onNav('estimate')}>Work with us</PB></div>
       </PC></section>
 
       {/* owner quote */}
@@ -534,6 +458,6 @@ function TermsPage({ onNav }) {
 
 Object.assign(window, {
   PGServicesIndex: ServicesIndex, PGAreasIndex: AreasIndex, PGAreaPage: AreaPage, PGWhoWeServe: WhoWeServe,
-  PGPricingPage: PricingPage, PGGalleryPage: GalleryPage, PGAboutPage: AboutPage, PGProcessPage: ProcessPage,
+  PGGalleryPage: GalleryPage, PGAboutPage: AboutPage, PGProcessPage: ProcessPage,
   PGReviewsPage: ReviewsPage, PGFaqPage: FaqPage, PGPrivacyPage: PrivacyPage, PGTermsPage: TermsPage,
 });

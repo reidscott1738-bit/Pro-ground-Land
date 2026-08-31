@@ -1,4 +1,4 @@
-<#  gen2.ps1 - Who We Serve (audience) pages + niche x city money pages.
+﻿<#  gen2.ps1 - Who We Serve (audience) pages + niche x city money pages.
     Dot-sourced after gen.ps1, so it has $SVC_URL, $SVC_PRICE, $SERVICES, Build-Faq, Write-Page, $BASE, $TEL, $PHONE. ASCII-only. #>
 
 # ============================ WHO WE SERVE ============================
@@ -7,7 +7,7 @@ function Render-AudiencePage($p){
   $paras = ''; foreach($x in $p.body){ $paras += '<p style="font-size:17px;line-height:1.65;color:var(--pg-slate-700)">' + $x + '</p>' }
   $pts = ''; foreach($x in $p.points){ $pts += '<li><span class="tick">&check;</span>' + $x + '</li>' }
   $rel = ''
-  foreach($rk in $p.related){ $rn = if($rk -eq 'drainage'){'Drainage Solutions'} else { ($SERVICES | Where-Object { $_.slug -eq $rk }).name }; $rel += '<a class="card card-link" href="' + $SVC_URL[$rk] + '"><div class="body"><span class="badge">' + $SVC_PRICE[$rk] + '</span><h3 style="margin-top:10px">' + $rn + '</h3><span class="more">Learn more &rarr;</span></div></a>' }
+  foreach($rk in $p.related){ $rn = if($rk -eq 'drainage'){'Drainage Solutions'} else { ($SERVICES | Where-Object { $_.slug -eq $rk }).name }; $rel += '<a class="card card-link" href="' + $SVC_URL[$rk] + '"><div class="body"><h3>' + $rn + '</h3><span class="more">Learn more &rarr;</span></div></a>' }
   $svcNode = @{ '@context'='https://schema.org'; '@graph'=@(
     (@{ '@type'='Service'; name=$p.h1; serviceType=$p.h1; provider=@{ '@id'=$BASE + '/#business' }; areaServed=@{ '@type'='City'; name='Baton Rouge' }; url=($BASE + $p.path); description=$p.desc }),
     $faq.node ) }
@@ -50,15 +50,15 @@ $ld
 
 $AUDIENCES = @(
   @{ path='/who-we-serve/residential/'; short='Residential'; h1='Residential landscaping and maintenance'; title='Residential Landscaping in Baton Rouge | ProGround';
-     desc='For homeowners across Greater Baton Rouge: renovations, drainage, grading and year-round maintenance from one crew that shows up. Free estimates, same-day response.';
-     sub='Established homes and new builds across Greater Baton Rouge. From a bed refresh to a full renovation, drainage fix or year-round maintenance, one crew that shows up.'; img='/img/house-curb.jpg';
+     desc='For homeowners across Greater Baton Rouge and surrounding areas: renovations, drainage, grading and year-round maintenance from one crew that shows up. Free estimates, same-day response.';
+     sub='Established homes and new builds across Greater Baton Rouge and surrounding areas. From a bed refresh to a full renovation, drainage fix or year-round maintenance, one crew that shows up.'; img='/img/house-curb.jpg';
      eyebrow='For homeowners'; lead='One crew for everything your yard needs';
      body=@('Most homeowners are tired of juggling a mowing service, a landscaper and whoever they can find for drainage. ProGround does all of it, so the same crew that keeps your beds clean is the one that rebuilds them when it is time, and the one that fixes the low spot that floods every summer.','You get a written estimate with a defined scope before anything starts, a scheduled date, and a follow-up when it is done. No callbacks that never come, no crew that disappears for three weeks.');
      points=@('Curb-appeal renovations and bed refreshes','Drainage and grading fixes for standing water','Recurring mowing, edging and bed care','New-build and full-yard landscaping','Mulch, pine straw and decorative rock','Written scopes and digital approvals');
      faqs=@(@{q='Do you handle small jobs and big projects?';a='Both. A single bed refresh, a full renovation, a drainage fix or ongoing maintenance, it is all one crew and one point of contact.'},@{q='Do I have to sign up for recurring service?';a='No. Plenty of homeowners bring us in for a one-time renovation or drainage fix. Recurring maintenance is there if you want the yard handled year-round.'});
      related=@('renovations','drainage','maintenance') },
   @{ path='/who-we-serve/commercial/'; short='Commercial'; h1='Commercial grounds maintenance'; title='Commercial Grounds Maintenance | ProGround Baton Rouge';
-     desc='Dependable grounds care for offices, retail and business properties across Greater Baton Rouge: scheduled service, one point of contact and clean invoicing.';
+     desc='Dependable grounds care for offices, retail and business properties across Greater Baton Rouge and surrounding areas: scheduled service, one point of contact and clean invoicing.';
      sub='Offices, retail and business properties that need dependable grounds care on a predictable schedule with a single point of contact and clean invoicing.'; img='/img/yard-aerial.jpg';
      eyebrow='For businesses'; lead='Grounds that stay open-for-business';
      body=@('Your property is the first thing customers judge. Overgrown entrances and tired islands cost first impressions, and a rotating cast of subcontractors makes it worse. Commercial grounds need a reliable crew on a set schedule with one number to call.','We build a scope and schedule around your property, keep the grounds sharp year-round, and invoice cleanly. When something beyond mowing comes up, a drainage problem or an entrance that needs a refresh, it is the same crew, not another vendor to manage.');
@@ -66,7 +66,7 @@ $AUDIENCES = @(
      faqs=@(@{q='Do you work on a contract?';a='Yes. Commercial grounds are handled on a scheduled agreement with a defined scope, so the property stays consistent and the invoicing is predictable.'},@{q='Can you improve the property, not just maintain it?';a='Absolutely. Renovations, drainage and grading are all in scope alongside routine maintenance, from the same crew.'});
      related=@('commercial','maintenance','drainage') },
   @{ path='/who-we-serve/hoa-neighborhoods/'; short='HOA & Neighborhoods'; h1='HOA and neighborhood grounds care'; title='HOA Landscaping & Grounds Care | ProGround Baton Rouge';
-     desc='Common areas, entrances and amenity grounds for HOAs and neighborhoods across Greater Baton Rouge: one agreement, one schedule, one point of contact.';
+     desc='Common areas, entrances and amenity grounds for HOAs and neighborhoods across Greater Baton Rouge and surrounding areas: one agreement, one schedule, one point of contact.';
      sub='Common areas, entrances, islands and amenity grounds kept consistent for HOAs and neighborhoods: one agreement, one schedule, one point of contact.'; img='/img/lawn-golden.jpg';
      eyebrow='For HOAs and neighborhoods'; lead='A neighborhood that looks cared-for at the entrance and everywhere else';
      body=@('The entrance sets the tone for a whole neighborhood, and the common areas are what residents notice and boards field complaints about. HOAs need a crew that shows up on schedule, keeps the standard consistent, and does not need to be chased.','ProGround handles the whole property under one agreement: entrances, islands, common turf and beds, seasonal color, with a single point of contact and clean invoicing the board can hand to the management company.');
@@ -74,7 +74,7 @@ $AUDIENCES = @(
      faqs=@(@{q='Do you work with HOA boards and management companies?';a='Yes. We set up one agreement with a defined scope and schedule, one point of contact, and consolidated invoicing that is easy to hand off to a management company.'},@{q='Can you handle several common areas at once?';a='Yes. Entrances, islands, amenity grounds and common turf are all covered under a single schedule.'});
      related=@('maintenance','commercial','mulch') },
   @{ path='/who-we-serve/property-managers/'; short='Property Managers'; h1='For property managers and realtors'; title='Landscaping for Property Managers | ProGround Baton Rouge';
-     desc='Reliable landscaping and grounds care for property managers and realtors across Greater Baton Rouge: turnovers, curb appeal for listings and multi-property schedules.';
+     desc='Reliable landscaping and grounds care for property managers and realtors across Greater Baton Rouge and surrounding areas: turnovers, curb appeal for listings and multi-property schedules.';
      sub='Turnover cleanups, listing curb appeal and dependable grounds care across a portfolio, one crew that answers same-day and invoices cleanly.'; img='/img/crew-trimming.jpg';
      eyebrow='For managers and realtors'; lead='Curb appeal on your timeline, across every property';
      body=@('A listing sells faster when the yard looks handled, and a managed property keeps tenants happier when the grounds stay consistent. Property managers and realtors need a crew that responds fast, gets a property show-ready, and can cover more than one address without the coordination headache.','We handle turnover cleanups, bed refreshes and curb-appeal work on short notice, plus recurring maintenance across a portfolio under one point of contact and clean invoicing.');
@@ -82,7 +82,7 @@ $AUDIENCES = @(
      faqs=@(@{q='Can you get a listing show-ready quickly?';a='That is common work for us: bed cleanups, fresh mulch, edging and a mow that makes a property photograph and show well, on a fast turnaround.'},@{q='Do you cover multiple properties?';a='Yes. A portfolio runs under one agreement, one schedule and one point of contact, with consolidated invoicing.'});
      related=@('maintenance','mulch','renovations') },
   @{ path='/who-we-serve/new-construction/'; short='New Construction'; h1='New construction and builder landscaping'; title='New Construction Landscaping | ProGround Baton Rouge';
-     desc='First landscapes for new builds across Greater Baton Rouge: grading and drainage first, then beds, sod and edging done in the right order so nothing gets redone.';
+     desc='First landscapes for new builds across Greater Baton Rouge and surrounding areas: grading and drainage first, then beds, sod and edging done in the right order so nothing gets redone.';
      sub='A finished first landscape for new builds and cleared lots: grading and drainage first, then beds, sod and edging, done in the right order.'; img='/img/sod-install.jpg';
      eyebrow='For new builds and builders'; lead='Get the first landscape right, in the right order';
      body=@('A new build starts with nothing: bare dirt, rough grade and no plan for where water goes. The order of operations matters. Grading and drainage first, then beds, then sod, so nothing has to be torn out and redone later. We plan the whole yard up front so the pieces fit.','On the clay soil common across the region, builder-grade sod that sits in a low spot dies and a downspout dumping against the slab undermines it. We handle the drainage tie-ins new construction usually skips, then install a finished landscape that establishes and lasts.');
@@ -92,16 +92,35 @@ $AUDIENCES = @(
 )
 foreach($p in $AUDIENCES){ Render-AudiencePage $p }
 
-$audCards = ''
-foreach($p in $AUDIENCES){ $audCards += '<a class="card card-link" href="' + $p.path + '"><div class="thumb"><img src="' + $p.img + '" alt="' + $p.h1 + '" width="400" height="180" loading="lazy"></div><div class="body"><h3>' + $p.short + '</h3><p>' + $p.sub + '</p><span class="more">Learn more &rarr;</span></div></a>' }
 $audHub = @"
 <section class="page-hero">
   <div class="hero-bg" style="background-image:url(/img/crew-trimming.jpg)"></div>
-  <div class="pg-container"><!--breadcrumb--><span class="eyebrow on-dark">Who we serve</span><h1>Residential, commercial and everything between</h1><p class="hero-sub">Same crew, same standards, scoped to the property in front of us.</p></div>
+  <div class="pg-container"><!--breadcrumb--><span class="eyebrow on-dark">Who we serve</span><h1>Residential and commercial</h1><p class="hero-sub">Scope of work tailored to your property</p></div>
 </section>
-<section class="section bg-bone"><div class="pg-container"><div class="cards-grid">$audCards</div></div></section>
+<section class="section bg-bone"><div class="pg-container"><div class="grid-2">
+  <div class="card" style="overflow:hidden;display:flex;flex-direction:column">
+    <img src="/img/house-curb.jpg" alt="Residential landscaping and maintenance" width="760" height="240" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block">
+    <div style="padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;flex:1">
+      <div class="mono" style="font-size:13px;color:var(--pg-turf)">Homeowners</div>
+      <h2 style="margin:8px 0 10px;font-size:clamp(1.6rem,2.6vw,2.1rem)">Residential</h2>
+      <p style="font-size:16.5px;line-height:1.6;color:var(--pg-slate-700);margin:0">Established homes and new builds across Greater Baton Rouge and surrounding areas. From a bed refresh to a full renovation, drainage fix or year-round maintenance, one crew that shows up.</p>
+      <ul class="check-list" style="margin:18px 0 24px"><li>Curb-appeal renovations</li><li>Drainage &amp; grading fixes</li><li>Recurring mowing &amp; bed care</li><li>New-build landscaping</li></ul>
+      <div class="btn-row" style="margin-top:auto"><a class="btn btn-primary" href="/estimate/">Request an estimate</a><a class="btn btn-ghost" href="/who-we-serve/residential/">Learn more</a></div>
+    </div>
+  </div>
+  <div class="card" style="overflow:hidden;display:flex;flex-direction:column">
+    <img src="/img/commercial-grounds.jpg" alt="Commercial grounds maintenance" width="760" height="240" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block">
+    <div style="padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;flex:1">
+      <div class="mono" style="font-size:13px;color:var(--pg-turf)">Businesses &amp; HOAs</div>
+      <h2 style="margin:8px 0 10px;font-size:clamp(1.6rem,2.6vw,2.1rem)">Commercial</h2>
+      <p style="font-size:16.5px;line-height:1.6;color:var(--pg-slate-700);margin:0">Offices, retail, HOAs and multi-property portfolios that need dependable grounds care on a predictable schedule with a single point of contact and clean invoicing.</p>
+      <ul class="check-list" style="margin:18px 0 24px"><li>Scheduled grounds maintenance</li><li>Entrance &amp; island improvements</li><li>Portfolio &amp; HOA agreements</li><li>One point of contact</li></ul>
+      <div class="btn-row" style="margin-top:auto"><a class="btn btn-primary" href="/estimate/">Request an estimate</a><a class="btn btn-ghost" href="/who-we-serve/commercial/">Learn more</a></div>
+    </div>
+  </div>
+</div></div></section>
 "@
-Write-Page @{ path='/who-we-serve/'; title='Who We Serve | ProGround Landscaping Baton Rouge'; description='ProGround serves homeowners, businesses, HOAs, property managers and builders across Greater Baton Rouge with landscaping, drainage and maintenance from one crew.'; image='/img/crew-trimming.jpg'; priority='0.8'; section='whoweserve'; crumbs='Home>/ | Who We Serve' } $audHub
+Write-Page @{ path='/who-we-serve/'; title='Who We Serve | ProGround Landscaping Baton Rouge'; description='ProGround serves homeowners, businesses, HOAs, property managers and builders across Greater Baton Rouge and surrounding areas with landscaping, drainage and maintenance from one crew.'; image='/img/crew-trimming.jpg'; priority='0.8'; section='whoweserve'; crumbs='Home>/ | Who We Serve' } $audHub
 
 # ============================ MONEY PAGES (niche x city) ============================
 function Render-MoneyPage($m){
@@ -147,40 +166,40 @@ $ld
 $MONEY = @(
   @{ path='/drainage-baton-rouge/'; city='Baton Rouge'; water=$true; short='Baton Rouge drainage'; serviceType='Yard drainage and grading';
      h1='Yard drainage in Baton Rouge'; title='Yard Drainage in Baton Rouge | ProGround';
-     desc='Fix standing water in Baton Rouge clay soil for good. Catch basins, drainage pipe and regrading for flat lots. Projects from $1,000, free site visit.';
+     desc='Fix standing water in Baton Rouge clay soil for good. Catch basins, drainage pipe and regrading for flat lots, with a free site visit.';
      sub='Standing water after every rain is a grading problem, not a grass problem. Catch basins, buried pipe and regrading built for Baton Rouge clay.'; img='/img/drainage-after.jpg';
      eyebrow='Drainage in Baton Rouge'; lead='Why Baton Rouge yards hold water'; cta='Fix my drainage';
-     pricenote='Drainage projects start at $1,000. Pricing varies with linear feet of pipe, number of catch basins and access, and is confirmed on a free site visit.';
+     pricenote='Every drainage project is scoped to the property. It depends on linear feet of pipe, number of catch basins and access, and is confirmed on a free site visit.';
      crumbs='Home>/ | Services>/services/ | Drainage in Baton Rouge';
      body=@('Baton Rouge sits on flat, clay-heavy ground. When the summer storms roll through, that water does not soak in, it ponds, along the slab, in the low corners and across the yard. Adding topsoil to a low spot never lasts because the problem is where the water goes, not what is on top.','We read how the water actually behaves on your lot, then fix the cause: regrading to re-establish fall, catch basins and buried pipe to carry surface water to a real outlet, and downspout tie-ins so roof water stops concentrating against the foundation. It is the same approach whether you are in Bocage, Goodwood, Southdowns or a newer build off Highland Road.');
      points=@('Catch basins and inlets at the low points','Buried solid pipe to a suitable outlet','Regrading to re-establish fall across the yard','Downspout tie-ins to move roof water','Surface restored, most lawns recover in weeks','NDS and ADS drainage products installed');
-     faqs=@(@{q='How much does drainage cost in Baton Rouge?';a='Projects start at $1,000. The number is driven by linear feet of pipe, how many catch basins, and access for equipment, confirmed on a free site visit.'},@{q='Why does my Baton Rouge yard flood after every rain?';a='Flat lots and heavy clay soil hold water on the surface instead of letting it soak in. The fix is grading and drainage to carry it off, not more topsoil.'},@{q='Do I need a French drain or regrading?';a='It depends on how the water behaves. Water sitting in one spot points to a catch basin; water sheeting across the yard points to grading. We assess and recommend on a free visit.'},@{q='Will you tear up my lawn?';a='We work carefully and restore disturbed turf. Most Baton Rouge lawns recover within a few weeks.'}) },
+     faqs=@(@{q='How much does drainage cost in Baton Rouge?';a='Every project is scoped to the lot. The number is driven by linear feet of pipe, how many catch basins, and access for equipment, confirmed on a free site visit.'},@{q='Why does my Baton Rouge yard flood after every rain?';a='Flat lots and heavy clay soil hold water on the surface instead of letting it soak in. The fix is grading and drainage to carry it off, not more topsoil.'},@{q='Do I need a French drain or regrading?';a='It depends on how the water behaves. Water sitting in one spot points to a catch basin; water sheeting across the yard points to grading. We assess and recommend on a free visit.'},@{q='Will you tear up my lawn?';a='We work carefully and restore disturbed turf. Most Baton Rouge lawns recover within a few weeks.'}) },
   @{ path='/drainage-denham-springs/'; city='Denham Springs'; water=$true; short='Denham Springs drainage'; serviceType='Yard drainage and grading';
      h1='Yard drainage in Denham Springs'; title='Yard Drainage in Denham Springs, LA | ProGround';
-     desc='Standing water on flat Livingston Parish ground? We are locally based in Denham Springs for the fastest drainage and grading response, from $1,000.';
+     desc='Standing water on flat Livingston Parish ground? We are locally based in Denham Springs for the fastest drainage and grading response.';
      sub='Low, flat Livingston Parish ground holds water. We are based right here in Denham Springs, so drainage and grading get our fastest response.'; img='/img/lawn-backyard.jpg';
      eyebrow='Drainage in Denham Springs'; lead='Denham Springs knows water'; cta='Fix my drainage';
-     pricenote='Drainage projects start at $1,000. Pricing varies with pipe length, catch basins and access, confirmed on a free site visit.';
+     pricenote='Every drainage project is scoped to the property. It depends on pipe length, catch basins and access, confirmed on a free site visit.';
      crumbs='Home>/ | Services>/services/ | Drainage in Denham Springs';
      body=@('Denham Springs learned about water the hard way, and even an ordinary storm reminds homeowners how flat and slow-draining this ground is. Yards hold water for days, mulch washes out, and low corners stay soggy long after the rain stops.','Because ProGround is locally owned right here, drainage and grading are bread-and-butter work for us, and we can usually get out same-day. We regrade to re-establish fall, run catch basins and buried pipe to a real outlet, and tie in downspouts so roof water stops pooling against the slab.');
      points=@('Fast, local response, often same-day','Regrading low and settled areas','Catch basins and buried pipe to an outlet','Downspout tie-ins','Surface restored when we finish','Built for flat, slow-draining Livingston Parish ground');
-     faqs=@(@{q='Are you local to Denham Springs for drainage work?';a='Yes, ProGround is locally owned here, so Denham Springs gets our fastest drainage and grading response, often same-day.'},@{q='Can you fix a yard that holds water for days?';a='That is a grading and drainage problem, which we do most here. We re-establish fall and run water to a suitable outlet so it leaves the yard. It starts with a free site visit.'},@{q='How much does drainage cost here?';a='Projects start at $1,000, driven by pipe length, catch basins and access, and confirmed on a free visit.'}) },
+     faqs=@(@{q='Are you local to Denham Springs for drainage work?';a='Yes, ProGround is locally owned here, so Denham Springs gets our fastest drainage and grading response, often same-day.'},@{q='Can you fix a yard that holds water for days?';a='That is a grading and drainage problem, which we do most here. We re-establish fall and run water to a suitable outlet so it leaves the yard. It starts with a free site visit.'},@{q='How much does drainage cost here?';a='Every project is scoped to the lot, driven by pipe length, catch basins and access, and confirmed on a free visit.'}) },
   @{ path='/drainage-prairieville/'; city='Prairieville'; water=$true; short='Prairieville drainage'; serviceType='Yard drainage and grading';
      h1='Yard drainage in Prairieville'; title='Yard Drainage in Prairieville, LA | ProGround';
-     desc='New Prairieville subdivisions sit close on clay with little drainage plan. We fix standing water between lots with catch basins and regrading, from $1,000.';
+     desc='New Prairieville subdivisions sit close on clay with little drainage plan. We fix standing water between lots with catch basins and regrading.';
      sub='New Ascension Parish subdivisions set homes close together on clay, often with no real drainage plan. We fix the standing water that follows.'; img='/img/sod-install.jpg';
      eyebrow='Drainage in Prairieville'; lead='New builds, tight lots, standing water'; cta='Fix my drainage';
-     pricenote='Drainage projects start at $1,000. Pricing varies with pipe length, catch basins and access, confirmed on a free site visit.';
+     pricenote='Every drainage project is scoped to the property. It depends on pipe length, catch basins and access, confirmed on a free site visit.';
      crumbs='Home>/ | Services>/services/ | Drainage in Prairieville';
      body=@('Prairieville has grown fast, and a lot of that growth is new subdivisions along Highway 42 and Airline where homes sit close together on flat, clay ground. Builders rarely leave a real drainage plan, so water collects between houses, along the slab, and in the low spots the grade never accounted for.','We fix it the right way: regrading to move water off tight lots, catch basins and buried pipe to carry it to a suitable outlet, and downspout tie-ins so roof water is not dumping against a foundation two feet from the property line. If your new build is still bare, we handle drainage before the sod and beds go in.');
      points=@('Regrading tight new-build lots','Catch basins and buried pipe','Downspout tie-ins between close-set homes','Drainage before new sod and beds','Surface restored when we finish','Built for Ascension Parish clay soil');
-     faqs=@(@{q='Our new Prairieville build has standing water. Can you fix it?';a='Yes. New subdivisions on clay often lack a drainage plan. We regrade and run catch basins and pipe to a suitable outlet so water leaves the lot. It starts with a free site visit.'},@{q='Should drainage be done before sod on a new build?';a='Almost always. We handle grading and water first so new sod and beds are not sitting in a low spot that kills them.'},@{q='How much does drainage cost in Prairieville?';a='Projects start at $1,000, driven by pipe length, catch basins and access, and confirmed on a free visit.'}) },
+     faqs=@(@{q='Our new Prairieville build has standing water. Can you fix it?';a='Yes. New subdivisions on clay often lack a drainage plan. We regrade and run catch basins and pipe to a suitable outlet so water leaves the lot. It starts with a free site visit.'},@{q='Should drainage be done before sod on a new build?';a='Almost always. We handle grading and water first so new sod and beds are not sitting in a low spot that kills them.'},@{q='How much does drainage cost in Prairieville?';a='Every project is scoped to the lot, driven by pipe length, catch basins and access, and confirmed on a free visit.'}) },
   @{ path='/commercial-landscaping-baton-rouge/'; city='Baton Rouge'; water=$false; short='Baton Rouge commercial'; serviceType='Commercial grounds maintenance';
      h1='Commercial landscaping in Baton Rouge'; title='Commercial Landscaping in Baton Rouge | ProGround';
      desc='Dependable commercial grounds care for Baton Rouge offices, retail and business properties. Scheduled service, one point of contact, clean invoicing.';
      sub='Offices, retail and business properties across Baton Rouge kept open-for-business, on a predictable schedule with one point of contact.'; img='/img/yard-aerial.jpg';
      eyebrow='Commercial in Baton Rouge'; lead='Your property is the first thing customers judge'; cta='Request a walk-through';
-     pricenote='Commercial grounds are quoted per property. Pricing varies with acreage, frequency, number of sites and scope, set in a written agreement after a free walk-through.';
+     pricenote='Commercial grounds are scoped per property. It depends on acreage, frequency, number of sites and scope, set in a written agreement after a free walk-through.';
      crumbs='Home>/ | Services>/services/ | Commercial in Baton Rouge';
      body=@('Along the busy corridors of Baton Rouge, an overgrown entrance or a tired island costs a business first impressions. Commercial grounds need a reliable crew on a set schedule with one number to call, not a rotating cast of subcontractors who each blame the last.','ProGround builds a scope and schedule around your property, keeps the grounds sharp year-round, and invoices cleanly. When something beyond mowing comes up, a drainage problem in the parking lot island, an entrance that needs a refresh, it is the same crew, not another vendor to manage.');
      points=@('Scheduled mowing, edging and cleanup','Entrance and island maintenance','Seasonal color and mulch refreshes','Drainage and grading improvements','Single point of contact','Clean, consolidated invoicing');
@@ -190,7 +209,7 @@ $MONEY = @(
      desc='Grounds maintenance for Gonzales retail, offices and Airline Highway business frontage. Scheduled service, one point of contact, clean invoicing. Free walk-through.';
      sub='Retail and offices along the Airline Highway corridor kept sharp on a predictable schedule, with one point of contact and clean invoicing.'; img='/img/lawn-golden.jpg';
      eyebrow='Commercial in Gonzales'; lead='Business frontage that stays presentable'; cta='Request a walk-through';
-     pricenote='Commercial grounds are quoted per property. Pricing varies with acreage, frequency, number of sites and scope, set in a written agreement after a free walk-through.';
+     pricenote='Commercial grounds are scoped per property. It depends on acreage, frequency, number of sites and scope, set in a written agreement after a free walk-through.';
      crumbs='Home>/ | Services>/services/ | Commercial in Gonzales';
      body=@('Gonzales is one of the busiest commercial corridors between Baton Rouge and New Orleans, and the businesses along Airline Highway live and die on first impressions. Overgrown frontage and tired islands send the wrong message; consistent, sharp grounds send the right one.','ProGround handles the whole property on a schedule, with one point of contact and clean invoicing. Scheduled mowing and cleanup, entrance and island care, seasonal refreshes, and the drainage or grading work that keeps a parking lot island or frontage from washing out, all from one crew.');
      points=@('Scheduled mowing, edging and cleanup','Entrance and island maintenance','Seasonal color and mulch refreshes','Drainage and grading improvements','Single point of contact','Clean, consolidated invoicing');
@@ -200,7 +219,7 @@ $MONEY = @(
      desc='HOA and neighborhood common-area grounds care across Baton Rouge: entrances, islands and amenity areas kept consistent under one agreement and one point of contact.';
      sub='Entrances, islands, common turf and amenity grounds kept consistent for Baton Rouge HOAs, under one agreement with one point of contact.'; img='/img/house-curb.jpg';
      eyebrow='HOA in Baton Rouge'; lead='The entrance sets the tone for the whole neighborhood'; cta='Request a walk-through';
-     pricenote='HOA grounds are quoted per community. Pricing varies with common-area acreage, frequency and scope, set in a written agreement after a free walk-through.';
+     pricenote='HOA grounds are scoped per community. It depends on common-area acreage, frequency and scope, set in a written agreement after a free walk-through.';
      crumbs='Home>/ | Services>/services/ | HOA in Baton Rouge';
      body=@('In a Baton Rouge neighborhood, the entrance is the first thing residents and visitors see, and the common areas are what boards field complaints about. HOAs need a crew that shows up on schedule, holds the standard consistent, and does not need to be chased between visits.','ProGround handles the whole community under one agreement: entrances, islands, common turf and beds, seasonal color, plus drainage and grading on common ground when it is needed. One point of contact, and invoicing the board can hand straight to the management company.');
      points=@('Entrance and island maintenance','Common-area mowing and bed care','Seasonal color and mulch refreshes','Drainage and grading on common ground','One agreement across the community','One point of contact for the board');

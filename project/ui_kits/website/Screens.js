@@ -5,7 +5,7 @@ const CC = window.PGContainer;
 const SH = window.PGSectionHead;
 
 const FOOTNOTE = 'Pricing varies based on property size, materials, accessibility, service frequency, and project scope. Free consultations and customized estimates are available.';
-const SIMG = { house: __pgImg('house-curb','img/house-curb.jpg'), sod: __pgImg('sod-install','img/sod-install.jpg'), aerial: __pgImg('yard-aerial','img/yard-aerial.jpg'), crew: __pgImg('crew-trimming','img/crew-trimming.jpg'), golden: __pgImg('lawn-golden','img/lawn-golden.jpg'), backyard: __pgImg('lawn-backyard','img/lawn-backyard.jpg') };
+const SIMG = { house: __pgImg('house-curb','img/house-curb.jpg'), sod: __pgImg('sod-install','img/sod-install.jpg'), aerial: __pgImg('yard-aerial','img/yard-aerial.jpg'), crew: __pgImg('crew-trimming','img/crew-trimming.jpg'), golden: __pgImg('lawn-golden','img/lawn-golden.jpg'), backyard: __pgImg('lawn-backyard','img/lawn-backyard.jpg'), commercial: __pgImg('commercial-grounds','img/commercial-grounds.jpg'), grading: __pgImg('grading-leveling','img/grading-leveling.jpg') };
 const BA = {
   renoB: __pgImg('ba-reno-before','img/ba-reno-before.jpg'), renoA: __pgImg('ba-reno-after','img/ba-reno-after.jpg'),
   installB: __pgImg('ba-install-before','img/ba-install-before.jpg'), installA: __pgImg('ba-install-after','img/ba-install-after.jpg'),
@@ -57,7 +57,7 @@ const SERVICE_DETAILS = {
     name: 'Grading & Yard Leveling', crumb: 'Grading & Yard Leveling', eyebrow: 'Reshape the ground · from $750',
     headline: 'Grading and yard leveling in Baton Rouge',
     sub: 'Reshape the low, soggy or uneven parts of your yard so water runs off and the space is usable again.',
-    price: 'From $750', img: SIMG.sod,
+    price: 'From $750', img: SIMG.grading,
     problemH: 'A yard that will not drain is usually a grading problem.',
     problemP: ['Low corners, ruts and settled spots collect water and stay muddy for days. Adding topsoil on top rarely fixes it — the ground has to be reshaped so water has somewhere to go.', 'We re-establish fall across the yard, tie it into drainage where needed, and finish so the surface is smooth and mowable.'],
     included: ['Assessment of fall and low points', 'Reshaping and re-grading the surface', 'Fill and compaction where needed', 'Tie-in to drainage or an outlet', 'Final grade for sod or seed', 'Cleanup and restoration'],
@@ -106,7 +106,7 @@ const SERVICE_DETAILS = {
     name: 'Commercial Grounds', crumb: 'Commercial Grounds', eyebrow: 'For businesses · custom quote',
     headline: 'Commercial grounds maintenance and improvements',
     sub: 'Dependable grounds care and landscape improvements for offices, retail, HOAs and multi-property portfolios across Greater Baton Rouge.',
-    price: 'Custom quote', img: SIMG.backyard,
+    price: 'Custom quote', img: SIMG.commercial,
     problemH: 'Your property is the first thing customers judge.',
     problemP: ['Overgrown entrances and tired islands cost businesses first impressions. Commercial grounds need a reliable crew on a predictable schedule with a single point of contact — not a rotating cast of subcontractors.', 'We build a scope and schedule around your property, invoice cleanly, and keep the grounds looking open-for-business year-round.'],
     included: ['Scheduled mowing, edging and cleanup', 'Bed, island and entrance maintenance', 'Seasonal color and mulch refreshes', 'Drainage and grading improvements', 'Single point of contact', 'Clean, consolidated invoicing'],

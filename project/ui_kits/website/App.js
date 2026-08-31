@@ -12,7 +12,6 @@ function App() {
     areas: window.PGAreasIndex,
     area: window.PGAreaPage,
     whoweserve: window.PGWhoWeServe,
-    pricing: window.PGPricingPage,
     gallery: window.PGGalleryPage,
     about: window.PGAboutPage,
     process: window.PGProcessPage,

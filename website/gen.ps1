@@ -1,4 +1,4 @@
-<#  gen.ps1 - data-driven pages (dot-sourced by build.ps1).
+﻿<#  gen.ps1 - data-driven pages (dot-sourced by build.ps1).
     ASCII-only source (PowerShell 5.1 reads no-BOM scripts as ANSI); use HTML
     entities in output where a special glyph is wanted. Has access to build.ps1
     scope: $BASE, $script:built, Write-Page, plus all Render-* helpers. #>
@@ -33,16 +33,16 @@ $SVC_PRICE = @{ renovations='From $750'; installation='From $750'; grading='From
 
 $SERVICES = @(
   @{ slug='renovations'; name='Landscape Renovations'; title='Landscape Renovations in Baton Rouge | ProGround';
-     desc='Overgrown or dated beds rebuilt with new plants, mulch, edging and a better layout. Written scope, same-day response, from $750. Serving Greater Baton Rouge.';
-     eyebrow='Flagship service &middot; from $750'; headline='Landscape renovations in Greater Baton Rouge';
+     desc='Overgrown or dated beds rebuilt with new plants, mulch, edging and a better layout. Written scope, same-day response. Serving Greater Baton Rouge and surrounding areas.';
+     eyebrow='Flagship service'; headline='Landscape renovations in Greater Baton Rouge and surrounding areas';
      sub='Overgrown or dated beds rebuilt with new plants, mulch, edging and a better layout &mdash; with a written scope and same-day response.';
-     price='From $750'; img='/img/house-curb.jpg'; baB='/img/ba-reno-before.jpg'; baA='/img/ba-reno-after.jpg'; baCap='Front-bed renovation &middot; Greater Baton Rouge';
+     price='From $750'; img='/img/house-curb.jpg'; baB='/img/ba-reno-before.jpg'; baA='/img/ba-reno-after.jpg'; baCap='Front-bed renovation &middot; Greater Baton Rouge and surrounding areas';
      problemH='Overgrown beds make a home look dated.';
-     problemP=@('On established properties, foundation shrubs outgrow their beds, bed lines soften, and the whole house reads older than it is. A renovation resets the bones - not just the plants. Bed lines matter more than plant count for how a house looks from the street.','What makes a renovation cost $1,500 versus $6,000: bed square footage, plant size at install, removal volume, and access for equipment.');
+     problemP=@('On established properties, foundation shrubs outgrow their beds, bed lines soften, and the whole house reads older than it is. A renovation resets the bones - not just the plants. Bed lines matter more than plant count for how a house looks from the street.','What changes the size of a renovation: bed square footage, plant size at install, removal volume, and access for equipment.');
      included=@('Demolition and removal of tired plant material','Soil and bed preparation','Edging and bed-line reshaping','Plant selection for South Louisiana heat and clay','Mulch or pine straw finish','After-care instructions');
      drivers=@('Bed square footage','Plant size at install','Removal volume','Equipment access','Irrigation present or not');
      faqs=@(
-       @{q='How much does a landscape renovation cost?';a='Renovations start at $750. Most full front-bed renovations in Baton Rouge land between $2,500 and $6,000 depending on bed size, plant material and access.'},
+       @{q='How much does a landscape renovation cost?';a='Every renovation is scoped to the property. What it takes depends on bed size, plant material and access - we put a clear written estimate in your hands before any work starts.'},
        @{q='Do you remove the old plants?';a='Yes - demolition and removal of tired plant material is part of the written scope.'},
        @{q='How long does a renovation take?';a='Most residential front-bed renovations are completed in one to three days once scheduled.'},
        @{q='What plants hold up in Baton Rouge summers?';a='We select plant material for South Louisiana heat and clay, and give you after-care instructions so it establishes well.'},
@@ -50,10 +50,10 @@ $SERVICES = @(
      related=@('mulch','maintenance','drainage') },
 
   @{ slug='installation'; name='Landscape Installation'; title='Landscape Installation in Baton Rouge | ProGround';
-     desc='A finished landscape from scratch - plants, shrubs, sod, mulch and edging installed and ready the day we leave. From $750 across Greater Baton Rouge.';
-     eyebrow='New landscaping &middot; from $750'; headline='Landscape installation for new and bare yards';
+     desc='A finished landscape from scratch - plants, shrubs, sod, mulch and edging installed and ready the day we leave. Serving Greater Baton Rouge and surrounding areas.';
+     eyebrow='New landscaping'; headline='Landscape installation for new and bare yards';
      sub='A finished landscape from scratch &mdash; plants, shrubs, sod, mulch and edging installed and ready the day we leave.';
-     price='From $750'; img='/img/sod-install.jpg'; baB='/img/ba-install-before.jpg'; baA='/img/ba-install-after.jpg'; baCap='New landscape installation &middot; Greater Baton Rouge';
+     price='From $750'; img='/img/sod-install.jpg'; baB='/img/ba-install-before.jpg'; baA='/img/ba-install-after.jpg'; baCap='New landscape installation &middot; Greater Baton Rouge and surrounding areas';
      problemH='A bare yard is a blank slate - and a big decision.';
      problemP=@('New builds and cleared lots start with nothing: no beds, no sod, no plan. The order of operations matters - grading and drainage first, then beds, then sod - so nothing has to be torn out and redone later.','We plan the whole yard up front so the pieces fit together, then install it in the right sequence.');
      included=@('Layout and plant plan for the space','Bed shaping, edging and soil prep','Plants and shrubs selected for clay and heat','Sod installation and grading tie-in','Mulch, pine straw or rock finish','After-care instructions');
@@ -65,10 +65,10 @@ $SERVICES = @(
      related=@('grading','drainage','maintenance') },
 
   @{ slug='grading'; name='Grading & Yard Leveling'; title='Grading & Yard Leveling in Baton Rouge | ProGround';
-     desc='Reshape low, soggy or uneven yard areas so water runs off and the space is usable again. Grading and yard leveling from $750 in Greater Baton Rouge.';
-     eyebrow='Reshape the ground &middot; from $750'; headline='Grading and yard leveling in Baton Rouge';
+     desc='Reshape low, soggy or uneven yard areas so water runs off and the space is usable again. Grading and yard leveling across Greater Baton Rouge and surrounding areas.';
+     eyebrow='Reshape the ground'; headline='Grading and yard leveling in Baton Rouge';
      sub='Reshape the low, soggy or uneven parts of your yard so water runs off and the space is usable again.';
-     price='From $750'; img='/img/lawn-backyard.jpg'; baB='/img/ba-grading-before.jpg'; baA='/img/ba-grading-after.jpg'; baCap='Reshaped yard &amp; clean grade &middot; Greater Baton Rouge';
+     price='From $750'; img='/img/grading-leveling.jpg'; baB='/img/ba-grading-before.jpg'; baA='/img/ba-grading-after.jpg'; baCap='Reshaped yard &amp; clean grade &middot; Greater Baton Rouge and surrounding areas';
      problemH='A yard that will not drain is usually a grading problem.';
      problemP=@('Low corners, ruts and settled spots collect water and stay muddy for days. Adding topsoil on top rarely fixes it - the ground has to be reshaped so water has somewhere to go.','We re-establish fall across the yard, tie it into drainage where needed, and finish so the surface is smooth and mowable.');
      included=@('Assessment of fall and low points','Reshaping and re-grading the surface','Fill and compaction where needed','Tie-in to drainage or an outlet','Final grade for sod or seed','Cleanup and restoration');
@@ -79,10 +79,10 @@ $SERVICES = @(
      related=@('drainage','installation','maintenance') },
 
   @{ slug='maintenance'; name='Property Maintenance'; title='Property Maintenance in Baton Rouge | ProGround';
-     desc='Mowing, bed care and seasonal work on a set schedule, billed automatically each month. One crew, one agreement, from $145/mo in Greater Baton Rouge.';
-     eyebrow='Recurring care &middot; from $145/mo'; headline='Annual property maintenance you never have to chase';
+     desc='Mowing, bed care and seasonal work on a set schedule, billed automatically each month. One crew, one agreement, serving Greater Baton Rouge and surrounding areas.';
+     eyebrow='Recurring care'; headline='Annual property maintenance you never have to chase';
      sub='Mowing, bed care and seasonal work on a set schedule, billed automatically each month. One crew, one agreement, done.';
-     price='From $145/mo'; img='/img/crew-trimming.jpg'; baB='/img/ba-maint-before.jpg'; baA='/img/crew-trimming.jpg'; baCap='Overgrown hedge, trimmed &amp; cleaned &middot; Greater Baton Rouge';
+     price='From $145/mo'; img='/img/crew-trimming.jpg'; baB='/img/ba-maint-before.jpg'; baA='/img/crew-trimming.jpg'; baCap='Overgrown hedge, trimmed &amp; cleaned &middot; Greater Baton Rouge and surrounding areas';
      problemH='Chasing a lawn crew every few weeks gets old.';
      problemP=@('Most homeowners are tired of calling around every time the grass gets tall. A recurring agreement means set service days, a defined scope and automatic billing - the work just happens.','Because we also renovate and install, the same crew that maintains your property is the one that can rebuild it when it is time.');
      included=@('Mowing, edging and blowing on a set schedule','Bed weeding and seasonal cleanups','Shrub and hedge trimming','Mulch and pine straw refreshes','Priority scheduling for extra work','Automatic monthly billing');
@@ -94,10 +94,10 @@ $SERVICES = @(
      related=@('renovations','mulch','commercial') },
 
   @{ slug='mulch'; name='Mulch, Pine Straw & Rock'; title='Mulch, Pine Straw & Rock in Baton Rouge | ProGround';
-     desc='Fresh mulch, pine straw or decorative rock over properly prepped and edged beds. Sharp, finished beds in an afternoon, from $350 in Greater Baton Rouge.';
-     eyebrow='Bed finish &middot; from $350'; headline='Mulch, pine straw and decorative rock';
+     desc='Fresh mulch, pine straw or decorative rock over properly prepped and edged beds. Sharp, finished beds in an afternoon, across Greater Baton Rouge and surrounding areas.';
+     eyebrow='Bed finish'; headline='Mulch, pine straw and decorative rock';
      sub='Sharp, finished beds in an afternoon &mdash; fresh mulch, pine straw or rock installed over properly prepped and edged ground.';
-     price='From $350'; img='/img/lawn-golden.jpg'; baB='/img/ba-mulch-before.jpg'; baA='/img/lawn-golden.jpg'; baCap='Fresh mulch &amp; edging &middot; Greater Baton Rouge';
+     price='From $350'; img='/img/mulch.jpg'; baB='/img/ba-mulch-before.jpg'; baA='/img/mulch.jpg'; baCap='Fresh mulch &amp; edging &middot; Greater Baton Rouge and surrounding areas';
      problemH='Faded mulch makes the whole yard look neglected.';
      problemP=@('Mulch breaks down and washes out; beds fade and lose their edge. A fresh install of mulch, pine straw or rock instantly resets curb appeal - especially with clean, reshaped edges.','We prep and edge first so the finish looks intentional and holds up, rather than just piling new material on top.');
      included=@('Bed cleanup and light weeding','Edging and bed-line reshaping','Fresh mulch, pine straw or decorative rock','Even, consistent depth','Cleanup of hard surfaces','Optional weed-barrier under rock');
@@ -108,10 +108,10 @@ $SERVICES = @(
      related=@('renovations','maintenance','installation') },
 
   @{ slug='commercial'; name='Commercial Grounds'; title='Commercial Grounds Maintenance | ProGround Baton Rouge';
-     desc='Dependable grounds care and landscape improvements for offices, retail, HOAs and multi-property portfolios across Greater Baton Rouge. One point of contact.';
-     eyebrow='For businesses &middot; custom quote'; headline='Commercial grounds maintenance and improvements';
-     sub='Dependable grounds care and landscape improvements for offices, retail, HOAs and multi-property portfolios across Greater Baton Rouge.';
-     price='Custom quote'; img='/img/yard-aerial.jpg'; baB='/img/ba-comm-before.jpg'; baA='/img/lawn-backyard.jpg'; baCap='Frontage bed renovation &middot; Greater Baton Rouge';
+     desc='Dependable grounds care and landscape improvements for offices, retail, HOAs and multi-property portfolios across Greater Baton Rouge and surrounding areas. One point of contact.';
+     eyebrow='For businesses'; headline='Commercial grounds maintenance and improvements';
+     sub='Dependable grounds care and landscape improvements for offices, retail, HOAs and multi-property portfolios across Greater Baton Rouge and surrounding areas.';
+     price='Custom quote'; img='/img/commercial-grounds.jpg'; baB='/img/ba-comm-before.jpg'; baA='/img/lawn-backyard.jpg'; baCap='Frontage bed renovation &middot; Greater Baton Rouge and surrounding areas';
      problemH='Your property is the first thing customers judge.';
      problemP=@('Overgrown entrances and tired islands cost businesses first impressions. Commercial grounds need a reliable crew on a predictable schedule with a single point of contact - not a rotating cast of subcontractors.','We build a scope and schedule around your property, invoice cleanly, and keep the grounds looking open-for-business year-round.');
      included=@('Scheduled mowing, edging and cleanup','Bed, island and entrance maintenance','Seasonal color and mulch refreshes','Drainage and grading improvements','Single point of contact','Clean, consolidated invoicing');
@@ -134,15 +134,13 @@ function Render-ServicePage($s){
   foreach($rk in $s.related){
     $rn = if($rk -eq 'drainage'){'Drainage Solutions'} else { ($SERVICES | Where-Object { $_.slug -eq $rk }).name }
     $rp = $SVC_PRICE[$rk]
-    $rel += '<a class="card card-link" href="' + $SVC_URL[$rk] + '"><div class="body"><span class="badge">' + $rp + '</span><h3 style="margin-top:10px">' + (E $rn) + '</h3><p>Often paired with ' + (E $s.name).ToLower() + '.</p><span class="more">Learn more &rarr;</span></div></a>'
+    $rel += '<a class="card card-link" href="' + $SVC_URL[$rk] + '"><div class="body"><h3>' + (E $rn) + '</h3><p>Often paired with ' + (E $s.name).ToLower() + '.</p><span class="more">Learn more &rarr;</span></div></a>'
   }
   # schema: Service + FAQPage
   $svcNode = [ordered]@{ '@context'='https://schema.org'; '@graph'=@(
     (@{ '@type'='Service'; name=$s.name; serviceType=$s.name; description=($s.sub -replace '&mdash;','-' -replace '&middot;','-');
         provider=@{ '@id'=$BASE + '/#business' }; areaServed=@{ '@type'='City'; name='Baton Rouge' }; url=($BASE + $SVC_URL[$s.slug]) }),
     $faq.node ) }
-  $floor = Price-Floor $s.price
-  if ($floor){ $svcNode['@graph'][0]['offers'] = @{ '@type'='Offer'; priceCurrency='USD'; price=$floor; priceSpecification=@{ '@type'='PriceSpecification'; minPrice=$floor; priceCurrency='USD' } } }
   $ld = $svcNode | ConvertTo-Json -Depth 20
 
   $body = @"
@@ -182,9 +180,8 @@ function Render-ServicePage($s){
   <div class="pg-container grid-2 grid-2-top">
     <div class="price-block">
       <div class="svc">$(E $s.name)</div>
-      <div class="fig">$($s.price)</div>
-      <p class="footnote">Pricing varies based on property size, materials, accessibility, service frequency, and project scope. Free consultations and customized estimates are available.</p>
-      <div style="margin-top:6px"><span class="eyebrow">What drives the price</span></div>
+      <p class="footnote">Every property is different. Your scope depends on size, materials, accessibility, service frequency, and project scope. Free consultations and customized written estimates are always available.</p>
+      <div style="margin-top:6px"><span class="eyebrow">What affects your estimate</span></div>
       <ul class="drivers">$drv</ul>
     </div>
     <div>
@@ -231,8 +228,8 @@ foreach($s in $SERVICES){ Render-ServicePage $s }
 $SVC_INDEX_ORDER = @(
   @{k='renovations';img='/img/house-curb.jpg'}, @{k='installation';img='/img/sod-install.jpg'},
   @{k='drainage';img='/img/drainage-after.jpg';name='Drainage Solutions';desc='Catch basins, pipe and grading built for our heavy clay soil.'},
-  @{k='grading';img='/img/lawn-backyard.jpg'}, @{k='maintenance';img='/img/crew-trimming.jpg'},
-  @{k='mulch';img='/img/lawn-golden.jpg'}, @{k='commercial';img='/img/yard-aerial.jpg'}
+  @{k='grading';img='/img/grading-leveling.jpg'}, @{k='maintenance';img='/img/crew-trimming.jpg'},
+  @{k='mulch';img='/img/mulch.jpg'}, @{k='commercial';img='/img/commercial-grounds.jpg'}
 )
 $MORE_SVCS = @('Residential Lawn Mowing','Large Property Mowing','Hedge & Shrub Trimming','Landscape Bed Maintenance','Hard-Surface Weed Control','Landscape Bed Cleanup','Decorative Rock Installation','Christmas Light Installation')
 
@@ -243,7 +240,7 @@ foreach($o in $SVC_INDEX_ORDER){
   $name = if($o.name){$o.name}elseif($svc){$svc.name}else{$k}
   $desc = if($o.desc){$o.desc}elseif($svc){$svc.sub}else{''}
   $price = $SVC_PRICE[$k]
-  $cards += '<a class="card card-link" href="' + $SVC_URL[$k] + '"><div class="thumb"><img src="' + $o.img + '" alt="' + (E $name) + '" width="400" height="180" loading="lazy"><span class="price-pill">' + $price + '</span></div><div class="body"><h3>' + (E $name) + '</h3><p>' + $desc + '</p><span class="more">Learn more &rarr;</span></div></a>'
+  $cards += '<a class="card card-link" href="' + $SVC_URL[$k] + '"><div class="thumb"><img src="' + $o.img + '" alt="' + (E $name) + '" width="400" height="180" loading="lazy"></div><div class="body"><h3>' + (E $name) + '</h3><p>' + $desc + '</p><span class="more">Learn more &rarr;</span></div></a>'
 }
 $moreHtml = ''
 foreach($m in $MORE_SVCS){ $moreHtml += '<div style="display:flex;gap:10px;align-items:center;font-size:15.5px;color:var(--pg-ink);padding:10px 0;border-bottom:1px solid var(--pg-line)"><span style="color:var(--pg-turf)">&check;</span>' + (E $m) + '</div>' }
@@ -254,8 +251,7 @@ $svcIndexBody = @"
   <div class="pg-container">
     <!--breadcrumb-->
     <span class="eyebrow on-dark">What we do</span>
-    <h1>One crew for the whole property</h1>
-    <p class="hero-sub">Renovation, installation, drainage, grading and year-round care &mdash; each with a starting price and a written scope.</p>
+    <h1>Pro Ground handles everything big and small</h1>
   </div>
 </section>
 <section class="section bg-bone">
@@ -270,7 +266,7 @@ $svcIndexBody = @"
   </div>
 </section>
 "@
-Write-Page @{ path='/services/'; title='Landscaping Services in Baton Rouge | ProGround'; description='Landscape renovation, installation, drainage, grading, mulch and year-round property maintenance across Greater Baton Rouge. Starting prices and written scopes.'; image='/img/yard-aerial.jpg'; priority='0.9'; section='services'; crumbs='Home>/ | Services' } $svcIndexBody
+Write-Page @{ path='/services/'; title='Landscaping Services in Baton Rouge | ProGround'; description='Landscape renovation, installation, drainage, grading, mulch and year-round property maintenance across Greater Baton Rouge and surrounding areas. Starting prices and written scopes.'; image='/img/yard-aerial.jpg'; priority='0.9'; section='services'; crumbs='Home>/ | Services' } $svcIndexBody
 
 # ============================ SERVICE AREAS ============================
 $AREA_URL = '/service-areas/'
@@ -281,7 +277,7 @@ $AREAS_DATA = @(
      problems=@(@{h='Standing water in clay';d='Flat lots and heavy clay mean rain ponds instead of draining. We regrade and add catch basins so it moves off.'},@{h='Overgrown foundation beds';d='Decades-old shrubs outgrow their beds. We reset the bed lines, plant material and edging.'},@{h='Tired curb appeal';d='Fresh mulch, clean edges and the right plants make an established home look cared-for again.'});
      hoods=@('Bocage','Old Goodwood','Goodwood','Highland Road','University Club Plantation','Oak Hills','Santa Maria','Country Club of Louisiana','Southdowns','Kenilworth','Bluebonnet Highlands','Jefferson Terrace','Westminster','Shenandoah');
      faqs=@(
-       @{q='How much does landscaping cost in Baton Rouge?';a='It depends on the work: renovations and installations start at $750, drainage projects at $1,000, and recurring maintenance at $145/mo. Every job gets a free written estimate with a defined scope - no trip fee.'},
+       @{q='How much does landscaping cost in Baton Rouge?';a='It depends on the work. Renovations, installations, drainage and recurring maintenance are each scoped to the property, and every job gets a free written estimate with a defined scope - no trip fee.'},
        @{q='Why does water stand in my Baton Rouge yard?';a='Heavy clay soil holds water on the surface instead of letting it soak in. On the flat lots common here, that means ponding along the slab and in low spots. Grading and catch basins fix it; topsoil does not.'},
        @{q='Do you serve older neighborhoods like Bocage and Goodwood?';a='Yes. Established Baton Rouge neighborhoods are where we do the most renovation work - resetting overgrown foundation beds and edging so the house looks its age or younger, not older.'},
        @{q='Can you handle both mowing and bigger projects?';a='That is the point of ProGround. The same crew mows on a set schedule and handles renovations, drainage and grading when you need them - one company instead of three.'});
@@ -295,7 +291,7 @@ $AREAS_DATA = @(
      faqs=@(
        @{q='Are you actually based in Denham Springs?';a='Yes - ProGround is locally owned and operated here. That is why Denham Springs and the rest of Livingston Parish get our fastest response, often same-day.'},
        @{q='Can you fix a yard that flooded or holds water?';a='Drainage and grading are among the things we do most here. We regrade low spots, tie in downspouts and run catch basins to a suitable outlet so water leaves the yard. It starts with a free site visit.'},
-       @{q='Do you do recurring maintenance in Denham Springs?';a='Yes. Set service days, a defined scope and automatic monthly billing from $145/mo - and because we are local, rescheduling around weather is easy.'},
+       @{q='Do you do recurring maintenance in Denham Springs?';a='Yes. Set service days, a defined scope and automatic monthly billing - and because we are local, rescheduling around weather is easy.'},
        @{q='How fast can you get out here?';a='Inquiries are answered 24/7 with same-day response. For Denham Springs specifically, being based in town usually means we can look sooner than crews coming from out of the area.'});
      nearby=@('walker','watson','livingston','baton-rouge') },
 
@@ -350,7 +346,7 @@ $AREAS_DATA = @(
      hoods=@('Main Street','Americana','Copper Mill','Plank Road (Highway 19)','Highway 64','Old Scenic Highway');
      faqs=@(
        @{q='Do you landscape new homes in Zachary?';a='Yes - the newer subdivisions like Americana and out toward Copper Mill are full of homes that need a first landscape. We grade and handle drainage first, then install beds, plants, sod and edging.'},
-       @{q='Can you keep our yard maintained year-round?';a='Yes. Set service days, a clear scope and automatic monthly billing from $145/mo keep a Zachary property sharp without you chasing a crew.'},
+       @{q='Can you keep our yard maintained year-round?';a='Yes. Set service days, a clear scope and automatic monthly billing keep a Zachary property sharp without you chasing a crew.'},
        @{q='Do you serve established Zachary neighborhoods too?';a='Absolutely - renovations and bed refreshes on older homes near Main Street are steady work for us here.'});
      nearby=@('central','baton-rouge','watson') },
 
@@ -396,7 +392,7 @@ function Render-AreaPage($a){
   $commonFaqs = @(
     @{ q=('What grass grows best in ' + $a.name + ' yards?'); a=('Most ' + $a.name + '-area lawns are St. Augustine or centipede, with zoysia on sunnier lots. We match turf and plant material to your light, your soil and how the space is used, and leave after-care instructions so it establishes.') },
     @{ q=('Do you charge for an estimate in ' + $a.name + '?'); a='No. Estimates are free with no trip fee and no diagnostic fee. Send a few photos or have us out, and you get a written price with a clearly defined scope, usually the same day.' },
-    @{ q=('What other areas near ' + $a.name + ' do you serve?'); a=('Plenty. Along with ' + $a.name + ' we regularly work ' + $nearStr + ' and much of Greater Baton Rouge. If you are not sure we reach you, send your address and we will confirm coverage.') }
+    @{ q=('What other areas near ' + $a.name + ' do you serve?'); a=('Plenty. Along with ' + $a.name + ' we regularly work ' + $nearStr + ' and much of Greater Baton Rouge and surrounding areas. If you are not sure we reach you, send your address and we will confirm coverage.') }
   )
   $allFaqs = @(); $allFaqs += $a.faqs; $allFaqs += $commonFaqs
   $faq = Build-Faq $allFaqs
@@ -494,15 +490,15 @@ $areaHubBody = @"
   <div class="pg-container">
     <!--breadcrumb-->
     <span class="eyebrow on-dark">Where we work</span>
-    <h1>Serving Greater Baton Rouge</h1>
+    <h1>Serving Greater Baton Rouge and surrounding areas</h1>
     <p class="hero-sub">Locally owned in Denham Springs, working across East Baton Rouge, Livingston and Ascension parishes with same-day response.</p>
   </div>
 </section>
 <section class="section bg-bone">
   <div class="pg-container">
     <div class="cards-grid">$areaCards</div>
-    <p class="mono" style="margin-top:40px;font-size:14px;color:var(--pg-slate-600)">Not listed? We cover much of Greater Baton Rouge &mdash; <a href="/estimate/">tell us your address</a> and we will confirm coverage.</p>
+    <p class="mono" style="margin-top:40px;font-size:14px;color:var(--pg-slate-600)">Not listed? We cover much of Greater Baton Rouge and surrounding areas &mdash; <a href="/estimate/">tell us your address</a> and we will confirm coverage.</p>
   </div>
 </section>
 "@
-Write-Page @{ path='/service-areas/'; title='Service Areas | Landscaping Across Greater Baton Rouge'; description='ProGround serves Baton Rouge, Denham Springs, Prairieville, Gonzales, Walker, Central, Zachary and more across East Baton Rouge, Livingston and Ascension parishes.'; image='/img/yard-aerial.jpg'; priority='0.9'; section='areas'; crumbs='Home>/ | Service Areas' } $areaHubBody
+Write-Page @{ path='/service-areas/'; title='Service Areas | Landscaping Across Greater Baton Rouge and surrounding areas'; description='ProGround serves Baton Rouge, Denham Springs, Prairieville, Gonzales, Walker, Central, Zachary and more across East Baton Rouge, Livingston and Ascension parishes.'; image='/img/yard-aerial.jpg'; priority='0.9'; section='areas'; crumbs='Home>/ | Service Areas' } $areaHubBody

@@ -4,7 +4,7 @@ const { Button, Logo, TrustBar, ContourDivider, Eyebrow, Input, Select, Textarea
 const LOGO_SRC = (typeof __pgImg === 'function') ? __pgImg('logo-wordmark', '../../assets/logo-wordmark.png') : '../../assets/logo-wordmark.png';
 
 const PHONE = '(225) 324-8252';
-const NAV = [['Services', 'services'], ['Service Areas', 'areas'], ['Who We Serve', 'whoweserve'], ['Pricing', 'pricing'], ['Gallery', 'gallery'], ['About', 'about']];
+const NAV = [['Services', 'services'], ['Service Areas', 'areas'], ['Who We Serve', 'whoweserve'], ['Gallery', 'gallery'], ['About', 'about']];
 
 const Container = ({ children, style }) => (
   <div style={{ width: '100%', maxWidth: 1280, margin: '0 auto', padding: '0 clamp(24px,5vw,72px)', ...style }}>{children}</div>
@@ -78,7 +78,7 @@ function Footer({ onNav }) {
   const cols = [
     { h: 'Services', items: [['Landscape Renovations', 'service', 'renovations'], ['Landscape Installation', 'service', 'installation'], ['Drainage Solutions', 'drainage', null], ['Grading & Yard Leveling', 'service', 'grading'], ['Property Maintenance', 'service', 'maintenance'], ['Mulch, Pine Straw & Rock', 'service', 'mulch'], ['Commercial Grounds', 'service', 'commercial']] },
     { h: 'Service Areas', items: [['Baton Rouge', 'area', 'Baton Rouge'], ['Denham Springs', 'area', 'Denham Springs'], ['Prairieville', 'area', 'Prairieville'], ['Walker', 'area', 'Walker'], ['Central', 'area', 'Central'], ['Shenandoah', 'area', 'Shenandoah']] },
-    { h: 'Company', items: [['About Andrew', 'about', null], ['How We Work', 'process', null], ['Pricing', 'pricing', null], ['Gallery', 'gallery', null], ['Reviews', 'reviews', null], ['FAQ', 'faq', null]] },
+    { h: 'Company', items: [['About Andrew', 'about', null], ['How We Work', 'process', null], ['Gallery', 'gallery', null], ['Reviews', 'reviews', null], ['FAQ', 'faq', null]] },
   ];
   return (
     <footer style={{ background: 'var(--pg-deep-field)', color: 'var(--pg-slate-300)', borderTop: '1px solid var(--pg-line-dark)' }}>

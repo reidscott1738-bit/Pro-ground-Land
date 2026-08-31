@@ -21,7 +21,10 @@
     });
   }
 
-  /* ---- Before / after sliders ---- */
+  /* ---- Before / after sliders ----
+     The BEFORE layer sits at full width and is revealed with clip-path (never
+     squished). Position is driven by the hidden range (keyboard/AT) AND by
+     direct pointer/touch dragging anywhere on the slider. */
   document.querySelectorAll('.ba-slider').forEach(function (el) {
     var wrap = el.querySelector('.ba-before-wrap');
     var handle = el.querySelector('.ba-handle');
@@ -29,11 +32,30 @@
     if (!wrap || !handle || !range) return;
     var set = function (v) {
       v = Math.max(0, Math.min(100, v));
-      wrap.style.width = v + '%';
+      wrap.style.clipPath = 'inset(0 ' + (100 - v) + '% 0 0)';
       handle.style.left = v + '%';
       range.value = v;
     };
     range.addEventListener('input', function () { set(parseFloat(range.value)); });
+
+    var dragging = false;
+    var fromClientX = function (clientX) {
+      var r = el.getBoundingClientRect();
+      if (r.width <= 0) return;
+      set(((clientX - r.left) / r.width) * 100);
+    };
+    el.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      if (el.setPointerCapture) { try { el.setPointerCapture(e.pointerId); } catch (err) {} }
+      fromClientX(e.clientX);
+      e.preventDefault();
+    });
+    el.addEventListener('pointermove', function (e) { if (dragging) { fromClientX(e.clientX); e.preventDefault(); } });
+    var stop = function () { dragging = false; };
+    el.addEventListener('pointerup', stop);
+    el.addEventListener('pointercancel', stop);
+    el.addEventListener('lostpointercapture', stop);
+
     set(parseFloat(range.value || 50));
   });
 

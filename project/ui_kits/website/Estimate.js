@@ -94,7 +94,6 @@ function EstimatePage({ onNav }) {
                 <div style={{ border: '1px dashed var(--pg-line-strong)', borderRadius: 'var(--radius-sm)', padding: '20px', textAlign: 'center', background: '#fff', color: 'var(--pg-slate-500)', fontFamily: 'var(--font-mono)', fontSize: 13 }}>
                   ⬆ Upload photos (camera roll on mobile) — optional but the fastest path to a same-day quote
                 </div>
-                <ES label="How soon?" id="e-when" options={['As soon as possible', 'Within 2–4 weeks', 'Within 1–3 months', 'Just planning ahead']} placeholder="Choose one" />
                 <EI label="Preferred day / time for a visit" id="e-time" help="A request, not a locked slot — we'll confirm." />
                 {isProject && <ES label="Approximate investment range (optional)" id="e-budget" options={['Under $1,000', '$1,000–$2,500', '$2,500–$5,000', '$5,000–$10,000', '$10,000+', 'Not sure yet']} placeholder="Optional" />}
               </>}
