@@ -1,7 +1,7 @@
 /* ProGround website — secondary pages: services index, areas, area detail, who we serve,
    pricing, gallery, about, process, reviews, faq, privacy, terms. */
 const DSp = window.ProGroundDesignSystem_313bb9;
-const { Button: PB, Eyebrow: PEb, Badge: PBg, FaqAccordion: PFaq, TrustBar: PTB, ContourDivider: PCD, BeforeAfterSlider: PBA } = DSp;
+const { Button: PB, Eyebrow: PEb, Badge: PBg, FaqAccordion: PFaq, TrustBar: PTB, ContourDivider: PCD } = DSp;
 const PC = window.PGContainer;
 const PSH = window.PGSectionHead;
 const SD = window.PG_SERVICE_DETAILS;
@@ -220,16 +220,35 @@ const GALLERY = [
 ];
 
 function GalleryPage({ onNav }) {
+  const figStyle = { position: 'relative', margin: 0, borderRadius: 'var(--radius-sm)', overflow: 'hidden', aspectRatio: '4/3', background: 'var(--pg-bone-deep)' };
+  const imgStyle = { width: '100%', height: '100%', objectFit: 'cover', display: 'block' };
+  const tagStyle = { position: 'absolute', top: 10, fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff', background: 'rgba(9,11,21,0.7)', padding: '4px 8px', borderRadius: 2 };
   return (
     <div style={{ background: 'var(--pg-bone)' }}>
       <PageHero onNav={onNav} crumbs={[{ label: 'Home', route: 'home' }, { label: 'Gallery' }]} eyebrow="Our work"
-        title="Before and after, by service" sub="Drag each slider to see the change — one project for every service we offer across Greater Baton Rouge and surrounding areas." img={PIMG.house} />
+        title="Before and after, by service" sub="Before and after for every service we offer across Greater Baton Rouge and surrounding areas." img={PIMG.house} />
       <section><PC style={{ padding: 'clamp(56px,8vw,110px) 0' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(360px,1fr))', gap: 32 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(420px,1fr))', gap: 32 }}>
           {GALLERY.map((g) => (
             <div key={g.svc}>
               <h3 style={{ margin: '0 0 12px', fontSize: 20, color: 'var(--pg-ink)' }}>{g.svc}</h3>
-              <PBA height={300} initial={45} beforeImage={g.before} afterImage={g.after || undefined} caption={g.cap} />
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                <figure style={figStyle}>
+                  <img src={g.before} alt={g.svc + ' before'} style={imgStyle} />
+                  <figcaption style={{ ...tagStyle, left: 10 }}>Before</figcaption>
+                </figure>
+                {g.after ? (
+                  <figure style={figStyle}>
+                    <img src={g.after} alt={g.svc + ' after'} style={imgStyle} />
+                    <figcaption style={{ ...tagStyle, right: 10 }}>After</figcaption>
+                  </figure>
+                ) : (
+                  <figure style={{ ...figStyle, display: 'grid', placeItems: 'center' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.08em', color: 'var(--pg-slate-500)', textAlign: 'center', padding: 16 }}>After photo coming soon</span>
+                    <figcaption style={{ ...tagStyle, right: 10 }}>After</figcaption>
+                  </figure>
+                )}
+              </div>
             </div>
           ))}
         </div>
