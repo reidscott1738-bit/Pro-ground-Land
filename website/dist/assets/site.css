@@ -310,9 +310,11 @@ ul.trustbar { padding: 0; margin: 0; }
      instead of feeling crowded. Content sets the height, not a tall min-height. */
   .hero-inner { align-items: center; text-align: center; min-height: 0; padding: 42px 0 46px; }
   .hero-eyebrow-chip { align-self: center; margin-bottom: 20px; }
-  /* Bold, prominent headline. Sized to the largest word ("PROPERTY") so the
-     centered lines still fit the phone width without overflowing. */
-  .hero h1 { max-width: 100%; font-size: clamp(2.35rem, 9.8vw, 3.3rem); }
+  /* Pull the hero gutters in so the oversized headline can run near the edges. */
+  .hero .pg-container { padding-left: 14px; padding-right: 14px; }
+  /* Big, screen-filling headline. Sized to the longest word ("PROPERTY") so it
+     reaches the edges without overflowing. */
+  .hero h1 { max-width: 100%; font-size: clamp(2.8rem, 15.8vw, 4.7rem); }
   /* Description: slightly smaller and white, sitting under the headline. */
   .hero p.hero-sub { max-width: 34ch; margin: 16px auto 0; font-size: 16px; color: #fff; }
   /* Full-width stacked CTAs: cleaner alignment and bigger tap targets. */
