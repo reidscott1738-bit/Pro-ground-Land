@@ -304,33 +304,30 @@ ul.trustbar { padding: 0; margin: 0; }
      header button here and keep just the logo and the menu toggle. */
   .header-cta .btn { display: none; }
 }
-/* Center the home hero content on mobile only; desktop layout is unchanged. */
-@media (max-width: 640px) {
-  .hero-inner { align-items: center; text-align: center; }
-  .hero-eyebrow-chip { align-self: center; }
-  .hero h1 { max-width: 100%; }
-  .hero p.hero-sub { max-width: 100%; margin-left: auto; margin-right: auto; }
-  .hero .btn-row { justify-content: center; }
-  .hero-trust { justify-content: center; }
-}
-
 /* ---------- Mobile: centered hero + compact service list ---------- */
 @media (max-width: 640px) {
   /* Center the home hero and tighten its vertical rhythm so it breathes
      instead of feeling crowded. Content sets the height, not a tall min-height. */
   .hero-inner { align-items: center; text-align: center; min-height: 0; padding: 42px 0 46px; }
   .hero-eyebrow-chip { align-self: center; margin-bottom: 20px; }
-  /* Smaller headline so the centered lines fit the phone width without
-     overflowing the viewport. */
-  .hero h1 { max-width: 100%; font-size: clamp(2rem, 8.5vw, 3rem); }
-  .hero p.hero-sub { max-width: 34ch; margin: 16px auto 0; font-size: 18px; }
+  /* Bold, prominent headline. Sized to the largest word ("PROPERTY") so the
+     centered lines still fit the phone width without overflowing. */
+  .hero h1 { max-width: 100%; font-size: clamp(2.35rem, 9.8vw, 3.3rem); }
+  /* Description: slightly smaller and white, sitting under the headline. */
+  .hero p.hero-sub { max-width: 34ch; margin: 16px auto 0; font-size: 16px; color: #fff; }
   /* Full-width stacked CTAs: cleaner alignment and bigger tap targets. */
   .hero .btn-row { margin-top: 26px; flex-direction: column; align-items: stretch; gap: 12px; }
   .hero .btn-row .btn { width: 100%; }
-  /* Lighter, tighter trust row so it supports the CTAs instead of competing. */
-  .hero-trust { justify-content: center; margin-top: 30px; gap: 22px 30px; }
-  .hero-trust svg { width: 19px; height: 19px; }
-  .hero-trust span { font-size: 11.5px; letter-spacing: 0.08em; }
+  /* Trust row: all four in a single compact horizontal strip. */
+  .hero-trust { grid-template-columns: repeat(4, 1fr); justify-items: center; margin-top: 28px; gap: 12px 6px; }
+  .hero-trust .item { gap: 6px; }
+  .hero-trust svg { width: 16px; height: 16px; }
+  .hero-trust span { font-size: 9.5px; letter-spacing: 0.05em; max-width: none; line-height: 1.2; }
+
+  /* Remove the fixed bottom Call / Request estimate bar on phones (the hero
+     already carries both CTAs full-width) and reclaim the space it reserved. */
+  .mobile-bar { display: none; }
+  body { padding-bottom: 0; }
 
   /* Services: drop the tall image cards for a compact, tappable list so the
      home page does not require a long scroll. Full detail lives behind the
