@@ -304,6 +304,15 @@ ul.trustbar { padding: 0; margin: 0; }
      header button here and keep just the logo and the menu toggle. */
   .header-cta .btn { display: none; }
 }
+/* Center the home hero content on mobile only; desktop layout is unchanged. */
+@media (max-width: 640px) {
+  .hero-inner { align-items: center; text-align: center; }
+  .hero-eyebrow-chip { align-self: center; }
+  .hero h1 { max-width: 100%; }
+  .hero p.hero-sub { max-width: 100%; margin-left: auto; margin-right: auto; }
+  .hero .btn-row { justify-content: center; }
+  .hero-trust { justify-content: center; }
+}
 
 /* ---------- Drainage diagnostic ---------- */
 .diag { background: var(--pg-deep-field-2); border: 1px solid var(--pg-line-dark); border-radius: var(--radius-sm); padding: 30px; color: #F4F1E9; }
