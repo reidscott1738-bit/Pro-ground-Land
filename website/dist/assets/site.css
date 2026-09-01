@@ -82,6 +82,9 @@
 .hero h1 .accent { color: var(--pg-growth); }
 .hero p.hero-sub { font-size: 20px; line-height: 1.55; color: var(--pg-slate-300); max-width: 48ch; margin: 26px 0 0; }
 .hero .btn-row { margin-top: 32px; }
+/* The headline line-spans flow inline on desktop (natural wrap); mobile turns
+   them into three fixed, individually-sized lines. */
+.hero h1 .hl { display: inline; }
 
 /* photo page hero (inner pages) */
 .page-hero { position: relative; background: var(--pg-deep-field); overflow: hidden; color: #fff; }
@@ -310,11 +313,14 @@ ul.trustbar { padding: 0; margin: 0; }
      instead of feeling crowded. Content sets the height, not a tall min-height. */
   .hero-inner { align-items: center; text-align: center; min-height: 0; padding: 38px 0 42px; }
   .hero-eyebrow-chip { align-self: center; margin-bottom: 18px; }
-  /* Headline sits in the mobile H1 sweet spot (~34px), not filling the screen.
-     text-wrap:balance evens the line lengths so no single word (e.g. "or") is
-     stranded alone on a line. Uppercase has no descenders, so the tight
-     line-height stays clean. */
-  .hero h1 { max-width: 100%; font-size: clamp(1.7rem, 7.5vw, 2.4rem); line-height: 1.06; text-wrap: balance; }
+  /* Pull the hero gutters in tight so the headline can run almost edge to edge. */
+  .hero .pg-container { padding-left: 12px; padding-right: 12px; }
+  /* Three fixed lines, all one uniform size: "Your property" / "handled without
+     the" / "mess or stress". The middle line is the longest, so it sets the cap
+     and runs nearly to the edges; the shorter lines center beneath it. Sized to
+     ~94% of the width so nothing clips across phone widths (360/375/414). */
+  .hero h1 { max-width: 100%; font-size: clamp(1.6rem, 7vw, 2.55rem); line-height: 1.08; }
+  .hero h1 .hl { display: block; }
   /* Description: 16px (mobile body minimum), white, evenly wrapped. */
   .hero p.hero-sub { max-width: 30ch; margin: 15px auto 0; font-size: 16px; line-height: 1.5; color: #fff; text-wrap: balance; }
   /* Full-width stacked CTAs: cleaner alignment and bigger tap targets. */
