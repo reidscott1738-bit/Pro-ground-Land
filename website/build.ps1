@@ -22,6 +22,20 @@ $OG     = $BASE + '/img/hero-home.jpg'     # TODO replace with branded 1200x630 
 $IG     = 'https://www.instagram.com/proground_land_mgmt/'
 $FB     = 'https://www.facebook.com/profile.php?id=61590852360292'
 
+# ---------------- ASSET CACHE-BUSTING ----------------
+# .htaccess caches CSS/JS for 1 year, so a plain /assets/site.css URL is frozen
+# in browsers across deploys. Stamp a short content hash on each asset URL: when
+# a file changes its hash changes, the URL changes, and browsers re-fetch it —
+# so edits go live the moment the deploy lands. Unchanged files keep their hash
+# (and stay cached). This is what makes "edit -> deploy -> it's live" just work.
+function Asset-Ver($path){
+  if(-not (Test-Path $path)){ return '0' }
+  return (Get-FileHash -Path $path -Algorithm MD5).Hash.Substring(0,8).ToLower()
+}
+$VER_STYLES  = Asset-Ver (Join-Path $proj 'styles.css')
+$VER_SITECSS = Asset-Ver (Join-Path $root 'assets\site.css')
+$VER_SITEJS  = Asset-Ver (Join-Path $root 'assets\site.js')
+
 $NAV = @(
   @{label='Services';    href='/services/';       section='services'},
   @{label='Service Areas';href='/service-areas/';  section='areas'},
@@ -199,8 +213,8 @@ function Render-Head($meta,$canonical,$crumbNode){
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="$(if($meta['image']){$meta['image']}else{'/img/hero-home.jpg'})" fetchpriority="high">
-<link rel="stylesheet" href="/styles.css">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/styles.css?v=$VER_STYLES">
+<link rel="stylesheet" href="/assets/site.css?v=$VER_SITECSS">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script type="application/ld+json">
 $ld
@@ -300,7 +314,7 @@ function Render-Footer(){
   <a class="call" href="tel:$TEL">Call</a>
   <a class="est" href="/estimate/">Request estimate</a>
 </div>
-<script src="/assets/site.js" defer></script>
+<script src="/assets/site.js?v=$VER_SITEJS" defer></script>
 "@
 }
 
