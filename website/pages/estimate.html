@@ -8,9 +8,10 @@ image: /img/sod-install.jpg
 crumbs: Home>/ | Request an estimate
 -->
 
-<!-- FORM HANDLER: wired for Netlify Forms (works automatically if hosted on Netlify).
-     On any other host, replace the form's action/attributes with a Formspree endpoint
-     or your own handler. Leads also come in by phone/text as a fallback. -->
+<!-- FORM HANDLER: Web3Forms (https://web3forms.com). The form POSTs to their API and every
+     submission is emailed to info@progroundland.com. The access key + destination live on the
+     form below; on success Web3Forms 302-redirects to /thank-you/. Honeypot field "botcheck"
+     blocks bots. Leads also come in by phone/text (225) 324-8252 as a fallback. -->
 
 <section class="section-sm bg-bone">
   <div class="pg-container">
@@ -21,9 +22,13 @@ crumbs: Home>/ | Request an estimate
         <h1 style="margin-top:12px;font-size:clamp(2rem,3.6vw,2.8rem)">Tell us about the property.</h1>
         <ul class="trustbar" style="margin:20px 0 28px;color:var(--pg-slate-600)"><li>Free estimates</li><li>Same-day response</li><li>No trip fee</li><li>100+ homes served</li></ul>
 
-        <form id="pg-estimate-form" name="estimate" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-          <input type="hidden" name="form-name" value="estimate">
-          <p hidden><label>Do not fill this out: <input name="bot-field"></label></p>
+        <form id="pg-estimate-form" name="estimate" method="POST" action="https://api.web3forms.com/submit" novalidate>
+          <input type="hidden" name="access_key" value="b6524baf-9d49-45f7-b191-f05171cff65c">
+          <input type="hidden" name="subject" value="New estimate request — ProGround website">
+          <input type="hidden" name="from_name" value="ProGround Website">
+          <input type="hidden" name="redirect" value="https://progroundland.com/thank-you/">
+          <!-- Honeypot: hidden from people; bots that tick it are rejected by Web3Forms. -->
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
 
           <div class="est-progress"><span class="est-bar on"></span><span class="est-bar"></span><span class="est-bar"></span><span class="est-bar"></span></div>
           <div class="est-counter">STEP 1 OF 4</div>
