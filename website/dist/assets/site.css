@@ -308,23 +308,23 @@ ul.trustbar { padding: 0; margin: 0; }
 @media (max-width: 640px) {
   /* Center the home hero and tighten its vertical rhythm so it breathes
      instead of feeling crowded. Content sets the height, not a tall min-height. */
-  .hero-inner { align-items: center; text-align: center; min-height: 0; padding: 42px 0 46px; }
-  .hero-eyebrow-chip { align-self: center; margin-bottom: 20px; }
-  /* Pull the hero gutters in so the oversized headline can run near the edges. */
-  .hero .pg-container { padding-left: 14px; padding-right: 14px; }
-  /* Big, screen-filling headline. Sized to the longest word ("PROPERTY") so it
-     reaches the edges without overflowing. */
-  .hero h1 { max-width: 100%; font-size: clamp(2.8rem, 15.8vw, 4.7rem); }
-  /* Description: slightly smaller and white, sitting under the headline. */
-  .hero p.hero-sub { max-width: 34ch; margin: 16px auto 0; font-size: 16px; color: #fff; }
+  .hero-inner { align-items: center; text-align: center; min-height: 0; padding: 38px 0 42px; }
+  .hero-eyebrow-chip { align-self: center; margin-bottom: 18px; }
+  /* Headline sits in the mobile H1 sweet spot (~34px), not filling the screen.
+     text-wrap:balance evens the line lengths so no single word (e.g. "or") is
+     stranded alone on a line. Uppercase has no descenders, so the tight
+     line-height stays clean. */
+  .hero h1 { max-width: 100%; font-size: clamp(1.7rem, 7.5vw, 2.4rem); line-height: 1.06; text-wrap: balance; }
+  /* Description: 16px (mobile body minimum), white, evenly wrapped. */
+  .hero p.hero-sub { max-width: 30ch; margin: 15px auto 0; font-size: 16px; line-height: 1.5; color: #fff; text-wrap: balance; }
   /* Full-width stacked CTAs: cleaner alignment and bigger tap targets. */
-  .hero .btn-row { margin-top: 26px; flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero .btn-row { margin-top: 24px; flex-direction: column; align-items: stretch; gap: 12px; }
   .hero .btn-row .btn { width: 100%; }
-  /* Trust row: all four in a single compact horizontal strip. */
-  .hero-trust { grid-template-columns: repeat(4, 1fr); justify-items: center; margin-top: 28px; gap: 12px 6px; }
-  .hero-trust .item { gap: 6px; }
-  .hero-trust svg { width: 16px; height: 16px; }
-  .hero-trust span { font-size: 9.5px; letter-spacing: 0.05em; max-width: none; line-height: 1.2; }
+  /* Trust row: four items in one horizontal strip with room to breathe. */
+  .hero-trust { grid-template-columns: repeat(4, 1fr); justify-items: center; margin-top: 30px; gap: 14px 6px; }
+  .hero-trust .item { gap: 7px; }
+  .hero-trust svg { width: 18px; height: 18px; }
+  .hero-trust span { font-size: 10.5px; letter-spacing: 0.04em; max-width: none; line-height: 1.25; }
 
   /* Remove the fixed bottom Call / Request estimate bar on phones (the hero
      already carries both CTAs full-width) and reclaim the space it reserved. */
