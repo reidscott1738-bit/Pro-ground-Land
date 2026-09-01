@@ -314,6 +314,48 @@ ul.trustbar { padding: 0; margin: 0; }
   .hero-trust { justify-content: center; }
 }
 
+/* ---------- Mobile: centered hero + compact service list ---------- */
+@media (max-width: 640px) {
+  /* Center the home hero and tighten its vertical rhythm so it breathes
+     instead of feeling crowded. Content sets the height, not a tall min-height. */
+  .hero-inner { align-items: center; text-align: center; min-height: 0; padding: 42px 0 46px; }
+  .hero-eyebrow-chip { align-self: center; margin-bottom: 20px; }
+  /* Smaller headline so the centered lines fit the phone width without
+     overflowing the viewport. */
+  .hero h1 { max-width: 100%; font-size: clamp(2rem, 8.5vw, 3rem); }
+  .hero p.hero-sub { max-width: 34ch; margin: 16px auto 0; font-size: 18px; }
+  /* Full-width stacked CTAs: cleaner alignment and bigger tap targets. */
+  .hero .btn-row { margin-top: 26px; flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero .btn-row .btn { width: 100%; }
+  /* Lighter, tighter trust row so it supports the CTAs instead of competing. */
+  .hero-trust { justify-content: center; margin-top: 30px; gap: 22px 30px; }
+  .hero-trust svg { width: 19px; height: 19px; }
+  .hero-trust span { font-size: 11.5px; letter-spacing: 0.08em; }
+
+  /* Services: drop the tall image cards for a compact, tappable list so the
+     home page does not require a long scroll. Full detail lives behind the
+     "See all services" button that follows the grid. */
+  .cards-grid { grid-template-columns: 1fr; gap: 10px; }
+  .cards-grid .card-link .thumb { display: none; }
+  .cards-grid .card-link .body { padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .cards-grid .card-link .body h3 { margin: 0; font-size: 17px; }
+  .cards-grid .card-link .body p,
+  .cards-grid .card-link .body .more { display: none; }
+  /* Chevron affordance in place of the hidden "Learn more" link. */
+  .cards-grid .card-link .body::after { content: "\2192"; font-family: var(--font-mono); font-size: 16px; color: var(--pg-turf); flex-shrink: 0; }
+
+  /* Stats: keep the four figures on one line each (stops "Same-day" from
+     breaking) and tighten the grid. */
+  .stats { gap: 18px 20px; padding: 24px 0; }
+  .stat .n { font-size: 1.7rem; white-space: nowrap; }
+
+  /* Gallery: two columns instead of six full-width photos, so the "Our work"
+     section reads as a tidy grid rather than a long scroll. */
+  .gallery { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .gallery figcaption { padding: 22px 10px 10px; }
+  .gallery figcaption .t { font-size: 13px; line-height: 1.25; }
+}
+
 /* ---------- Drainage diagnostic ---------- */
 .diag { background: var(--pg-deep-field-2); border: 1px solid var(--pg-line-dark); border-radius: var(--radius-sm); padding: 30px; color: #F4F1E9; }
 .diag h3 { color: #fff; font-size: 21px; margin: 10px 0 20px; }
