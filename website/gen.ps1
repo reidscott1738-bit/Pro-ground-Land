@@ -31,6 +31,46 @@ $SVC_URL = @{
 }
 $SVC_PRICE = @{ renovations='From $750'; installation='From $750'; grading='From $750'; maintenance='From $145/mo'; mulch='From $350'; commercial='Custom quote'; drainage='From $1,000' }
 
+# ---- niche x city money pages, mapped for hub-and-spoke internal linking ----
+# Service page -> its city money pages ("<service> near you"); the money pages
+# themselves are generated in gen2.ps1. Keep these URLs in sync with $MONEY there.
+$SVC_MONEY = @{
+  renovations=@(
+    @{t='Landscape renovation in Baton Rouge';u='/landscape-renovation-baton-rouge/'},
+    @{t='Landscape renovation in Denham Springs';u='/landscape-renovation-denham-springs/'},
+    @{t='Landscape renovation in Prairieville';u='/landscape-renovation-prairieville/'},
+    @{t='Landscape renovation in Central';u='/landscape-renovation-central/'},
+    @{t='Landscape renovation in Walker';u='/landscape-renovation-walker/'})
+  drainage=@(
+    @{t='Yard drainage in Baton Rouge';u='/drainage-baton-rouge/'},
+    @{t='Yard drainage in Denham Springs';u='/drainage-denham-springs/'},
+    @{t='Yard drainage in Prairieville';u='/drainage-prairieville/'})
+  commercial=@(
+    @{t='Commercial landscaping in Baton Rouge';u='/commercial-landscaping-baton-rouge/'},
+    @{t='Commercial landscaping in Gonzales';u='/commercial-landscaping-gonzales/'})
+  maintenance=@(
+    @{t='Lawn care in Baton Rouge';u='/lawn-care-baton-rouge/'},
+    @{t='HOA landscaping in Baton Rouge';u='/hoa-landscaping-baton-rouge/'})
+}
+# City area page -> that city's money pages ("popular in <city>").
+$CITY_MONEY = @{
+  'baton-rouge'=@(
+    @{t='Landscape renovation in Baton Rouge';u='/landscape-renovation-baton-rouge/'},
+    @{t='Yard drainage in Baton Rouge';u='/drainage-baton-rouge/'},
+    @{t='Lawn care in Baton Rouge';u='/lawn-care-baton-rouge/'},
+    @{t='Commercial landscaping in Baton Rouge';u='/commercial-landscaping-baton-rouge/'},
+    @{t='HOA landscaping in Baton Rouge';u='/hoa-landscaping-baton-rouge/'})
+  'denham-springs'=@(
+    @{t='Landscape renovation in Denham Springs';u='/landscape-renovation-denham-springs/'},
+    @{t='Yard drainage in Denham Springs';u='/drainage-denham-springs/'})
+  'prairieville'=@(
+    @{t='Landscape renovation in Prairieville';u='/landscape-renovation-prairieville/'},
+    @{t='Yard drainage in Prairieville';u='/drainage-prairieville/'})
+  'central'=@(@{t='Landscape renovation in Central';u='/landscape-renovation-central/'})
+  'walker'=@(@{t='Landscape renovation in Walker';u='/landscape-renovation-walker/'})
+  'gonzales'=@(@{t='Commercial landscaping in Gonzales';u='/commercial-landscaping-gonzales/'})
+}
+
 $SERVICES = @(
   @{ slug='renovations'; name='Landscape Renovations'; title='Landscape Renovations in Baton Rouge | ProGround';
      desc='Overgrown or dated beds rebuilt with new plants, mulch, edging and a better layout. Written scope, same-day response. Serving Greater Baton Rouge and surrounding areas.';
@@ -136,6 +176,13 @@ function Render-ServicePage($s){
     $rp = $SVC_PRICE[$rk]
     $rel += '<a class="card card-link" href="' + $SVC_URL[$rk] + '"><div class="body"><h3>' + (E $rn) + '</h3><p>Often paired with ' + (E $s.name).ToLower() + '.</p><span class="more">Learn more &rarr;</span></div></a>'
   }
+  # "<service> near you" -> city money pages (hub-and-spoke internal links)
+  $svcAreaBlock = ''
+  if($SVC_MONEY.ContainsKey($s.slug)){
+    $mlinks = ''
+    foreach($lk in $SVC_MONEY[$s.slug]){ $mlinks += '<a class="card card-link" href="' + $lk.u + '"><div class="body"><h3>' + (E $lk.t) + '</h3><span class="more">View &rarr;</span></div></a>' }
+    $svcAreaBlock = '<section class="section bg-bone-deep"><div class="pg-container"><div class="section-head"><span class="eyebrow">By area</span><h2>' + (E $s.name) + ' near you</h2></div><div class="cards-grid">' + $mlinks + '</div></div></section>'
+  }
   # schema: Service + FAQPage
   $svcNode = [ordered]@{ '@context'='https://schema.org'; '@graph'=@(
     (@{ '@type'='Service'; name=$s.name; serviceType=$s.name; description=($s.sub -replace '&mdash;','-' -replace '&middot;','-');
@@ -212,7 +259,7 @@ function Render-ServicePage($s){
     <div class="cards-grid">$rel</div>
   </div>
 </section>
-
+$svcAreaBlock
 <script type="application/ld+json">
 $ld
 </script>
@@ -237,13 +284,20 @@ $cards = ''
 foreach($o in $SVC_INDEX_ORDER){
   $k = $o.k
   $svc = $SERVICES | Where-Object { $_.slug -eq $k }
-  $name = if($o.name){$o.name}elseif($svc){$svc.name}else{$k}
-  $desc = if($o.desc){$o.desc}elseif($svc){$svc.sub}else{''}
-  $price = $SVC_PRICE[$k]
-  $cards += '<a class="card card-link" href="' + $SVC_URL[$k] + '"><div class="thumb"><img src="' + $o.img + '" alt="' + (E $name) + '" width="400" height="180" loading="lazy"></div><div class="body"><h3>' + (E $name) + '</h3><p>' + $desc + '</p><span class="more">Learn more &rarr;</span></div></a>'
+  # NOTE: do NOT name this $name - PowerShell vars are case-insensitive, so $name
+  # aliases the global $NAME ('ProGround Land Management') and clobbers og:site_name,
+  # the footer copyright and logo alt on every page built after this loop.
+  $cardName = if($o.name){$o.name}elseif($svc){$svc.name}else{$k}
+  $cardDesc = if($o.desc){$o.desc}elseif($svc){$svc.sub}else{''}
+  $cards += '<a class="card card-link" href="' + $SVC_URL[$k] + '"><div class="thumb"><img src="' + $o.img + '" alt="' + (E $cardName) + '" width="400" height="180" loading="lazy"></div><div class="body"><h3>' + (E $cardName) + '</h3><p>' + $cardDesc + '</p><span class="more">Learn more &rarr;</span></div></a>'
 }
+$MORE_SVC_URL = @{ 'Residential Lawn Mowing'='/lawn-care-baton-rouge/'; 'Large Property Mowing'='/lawn-care-baton-rouge/'; 'Landscape Bed Cleanup'='/services/landscape-renovations/'; 'Decorative Rock Installation'='/services/mulch-pine-straw-rock/'; 'Christmas Light Installation'='/christmas-light-installation/' }
 $moreHtml = ''
-foreach($m in $MORE_SVCS){ $moreHtml += '<div style="display:flex;gap:10px;align-items:center;font-size:15.5px;color:var(--pg-ink);padding:10px 0;border-bottom:1px solid var(--pg-line)"><span style="color:var(--pg-turf)">&check;</span>' + (E $m) + '</div>' }
+foreach($m in $MORE_SVCS){
+  $mu = $MORE_SVC_URL[$m]
+  if($mu){ $moreHtml += '<a href="' + $mu + '" style="display:flex;gap:10px;align-items:center;font-size:15.5px;color:var(--pg-ink);padding:10px 0;border-bottom:1px solid var(--pg-line)"><span style="color:var(--pg-turf)">&check;</span>' + (E $m) + '</a>' }
+  else { $moreHtml += '<div style="display:flex;gap:10px;align-items:center;font-size:15.5px;color:var(--pg-ink);padding:10px 0;border-bottom:1px solid var(--pg-line)"><span style="color:var(--pg-turf)">&check;</span>' + (E $m) + '</div>' }
+}
 
 $svcIndexBody = @"
 <section class="page-hero" style="--x:0">
@@ -409,6 +463,14 @@ function Render-AreaPage($a){
   $nearHtml = ''
   foreach($ns in $a.nearby){ $nd = $AREAS_DATA | Where-Object { $_.slug -eq $ns }; if($nd){ $nearHtml += '<li><a href="' + $AREA_URL + $ns + '/" style="color:var(--pg-ink);border-bottom:none;display:flex;justify-content:space-between"><span>' + $nd.name + '</span><span style="color:var(--pg-turf)">&rarr;</span></a></li>' } }
 
+  # "Popular in <city>" -> that city's money pages (hub-and-spoke internal links)
+  $moneyBlock = ''
+  if($CITY_MONEY.ContainsKey($a.slug)){
+    $mlinks = ''
+    foreach($lk in $CITY_MONEY[$a.slug]){ $mlinks += '<a class="card card-link" href="' + $lk.u + '"><div class="body"><h3>' + $lk.t + '</h3><span class="more">View &rarr;</span></div></a>' }
+    $moneyBlock = '<section class="section bg-bone-deep"><div class="pg-container"><div class="section-head"><span class="eyebrow">Popular in ' + $a.name + '</span><h2>Top requests in ' + $a.name + '</h2></div><div class="cards-grid">' + $mlinks + '</div></div></section>'
+  }
+
   $svcNode = @{ '@context'='https://schema.org'; '@graph'=@(
     (@{ '@type'='Service'; name=('Landscaping & Drainage in ' + $a.name); serviceType='Landscaping, drainage and property maintenance';
         provider=@{ '@id'=$BASE + '/#business' }; areaServed=@{ '@type'='City'; name=$a.name };
@@ -467,7 +529,7 @@ function Render-AreaPage($a){
     $($faq.html)
   </div>
 </section>
-
+$moneyBlock
 <script type="application/ld+json">
 $ld
 </script>
@@ -501,4 +563,4 @@ $areaHubBody = @"
   </div>
 </section>
 "@
-Write-Page @{ path='/service-areas/'; title='Service Areas | Landscaping Across Greater Baton Rouge and surrounding areas'; description='ProGround serves Baton Rouge, Denham Springs, Prairieville, Gonzales, Walker, Central, Zachary and more across East Baton Rouge, Livingston and Ascension parishes.'; image='/img/yard-aerial.jpg'; priority='0.9'; section='areas'; crumbs='Home>/ | Service Areas' } $areaHubBody
+Write-Page @{ path='/service-areas/'; title='Service Areas | Greater Baton Rouge | ProGround'; description='ProGround serves Baton Rouge, Denham Springs, Prairieville, Gonzales, Walker, Central, Zachary and more across East Baton Rouge, Livingston and Ascension parishes.'; image='/img/yard-aerial.jpg'; priority='0.9'; section='areas'; crumbs='Home>/ | Service Areas' } $areaHubBody

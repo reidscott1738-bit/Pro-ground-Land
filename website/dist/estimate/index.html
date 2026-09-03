@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/styles.css?v=32c442ef">
 <link rel="stylesheet" href="/assets/site.css?v=e9eae870">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
 <script type="application/ld+json">
 {
     "@context":  "https://schema.org",
@@ -107,7 +108,7 @@
                                   ],
                        "aggregateRating":  {
                                                "bestRating":  "5",
-                                               "reviewCount":  8,
+                                               "reviewCount":  10,
                                                "ratingValue":  "5.0",
                                                "@type":  "AggregateRating"
                                            },
@@ -212,6 +213,32 @@
                                                            },
                                           "author":  {
                                                          "name":  "Carter Stevens",
+                                                         "@type":  "Person"
+                                                     },
+                                          "@type":  "Review"
+                                      },
+                                      {
+                                          "reviewBody":  "Andrew Lee is professional, thorough and does an excellent job. I highly recommend ProGround for lawn care.",
+                                          "reviewRating":  {
+                                                               "bestRating":  "5",
+                                                               "ratingValue":  "5",
+                                                               "@type":  "Rating"
+                                                           },
+                                          "author":  {
+                                                         "name":  "Vilma Lally",
+                                                         "@type":  "Person"
+                                                     },
+                                          "@type":  "Review"
+                                      },
+                                      {
+                                          "reviewBody":  "Does a great job, and very dependable and courteous.",
+                                          "reviewRating":  {
+                                                               "bestRating":  "5",
+                                                               "ratingValue":  "5",
+                                                               "@type":  "Rating"
+                                                           },
+                                          "author":  {
+                                                         "name":  "Claire Babin",
                                                          "@type":  "Person"
                                                      },
                                           "@type":  "Review"
@@ -410,6 +437,10 @@
           <div data-step class="form-stack" hidden>
             <h3 style="font-size:20px;margin:0">Scope, timing &amp; access</h3>
             <div class="field"><label for="e-desc">What would you like done, or what problem are you solving?</label><textarea id="e-desc" name="details" rows="4" required></textarea></div>
+            <div class="form-grid-2">
+              <div class="field"><label for="e-when">How soon do you need it done?</label><select id="e-when" name="timeframe" required><option value="" disabled selected>Choose one</option><option>As soon as possible</option><option>Within 2–4 weeks</option><option>Within 1–3 months</option><option>Just gathering estimates / planning ahead</option></select></div>
+              <div class="field"><label for="e-budget">Approximate budget <span style="color:var(--pg-slate-500);font-weight:400">(optional)</span></label><select id="e-budget" name="budget"><option value="" selected>Prefer not to say</option><option>Under $1,000</option><option>$1,000 – $2,500</option><option>$2,500 – $5,000</option><option>$5,000 – $10,000</option><option>$10,000+</option><option>Not sure yet</option></select></div>
+            </div>
             <div class="upload-note">Prefer to send photos? Text them to (225) 324-8252 — the fastest path to a same-day quote.</div>
             <div class="field"><label for="e-time">Preferred day / time for a visit</label><input id="e-time" name="preferred_time" type="text"><span class="help">A request, not a locked slot — we will confirm.</span></div>
           </div>
@@ -464,6 +495,6 @@
   <a class="call" href="tel:+12253248252">Call</a>
   <a class="est" href="/estimate/">Request estimate</a>
 </div>
-<script src="/assets/site.js?v=48dd9721" defer></script>
+<script src="/assets/site.js?v=0137ea89" defer></script>
 </body>
 </html>

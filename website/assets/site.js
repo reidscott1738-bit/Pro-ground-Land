@@ -165,4 +165,33 @@
     if (backBtn) backBtn.addEventListener('click', function () { if (cur > 0) { cur--; update(); } });
     update();
   }
+
+  /* ---- Conversion event tracking ----
+     No-op until an analytics tag is present. Pushes standard events to dataLayer
+     and to gtag()/plausible() if they exist, so calls, texts and form submits are
+     measurable the moment a GA4/Plausible tag is added via the $ANALYTICS slot in
+     build.ps1 (Render-Head). Nothing here loads a third-party script on its own. */
+  var track = function (name, params) {
+    params = params || {};
+    try { window.dataLayer = window.dataLayer || []; var p = {}; for (var k in params) p[k] = params[k]; p.event = name; window.dataLayer.push(p); } catch (e) {}
+    try { if (typeof window.gtag === 'function') window.gtag('event', name, params); } catch (e) {}
+    try { if (typeof window.plausible === 'function') window.plausible(name, { props: params }); } catch (e) {}
+  };
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('tel:') === 0) track('call_click', { method: 'phone' });
+    else if (href.indexOf('sms:') === 0) track('text_click', { method: 'sms' });
+    else if (href.indexOf('mailto:') === 0) track('email_click', { method: 'email' });
+    else if (href.indexOf('/estimate') === 0) track('estimate_cta_click', {});
+  }, true);
+  var estForm = document.getElementById('pg-estimate-form');
+  if (estForm) {
+    estForm.addEventListener('submit', function () {
+      var svc = estForm.querySelector('[name="service"]');
+      var tf = estForm.querySelector('[name="timeframe"]');
+      track('generate_lead', { form: 'estimate', service: svc ? svc.value : '', timeframe: tf ? tf.value : '' });
+    });
+  }
 })();

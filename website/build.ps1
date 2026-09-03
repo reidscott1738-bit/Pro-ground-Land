@@ -21,6 +21,11 @@ $REGION = 'LA'
 $OG     = $BASE + '/img/hero-home.jpg'     # TODO replace with branded 1200x630 share image
 $IG     = 'https://www.instagram.com/proground_land_mgmt/'
 $FB     = 'https://www.facebook.com/profile.php?id=61590852360292'
+# Analytics slot: paste a GA4 gtag.js OR Plausible/Cloudflare snippet here once Andrew
+# provides a Measurement ID / site token. It is injected into <head> on every page.
+# Leave '' to ship no analytics tag. site.js already fires standard conversion events
+# (call_click, text_click, email_click, generate_lead) into dataLayer/gtag/plausible.
+$ANALYTICS = ''
 
 # ---------------- ASSET CACHE-BUSTING ----------------
 # .htaccess caches CSS/JS for 1 year, so a plain /assets/site.css URL is frozen
@@ -79,7 +84,9 @@ $REVIEWS = @(
   @{n='Bennett Roman';  q='ProGround Land Management is the best company I have ever used for my landscaping needs. The value and quality of work is unmatched. Highly recommend.'},
   @{n='Matthew Lee';    q='A customer oriented company, they worry about my lawn and yard so I do not have to. A lot of times it is hit or miss to get someone reliable and really good. These guys are both.'},
   @{n='Shana';          q='Andrew and his crew did an excellent job transforming a difficult space to my specifications. They are professional, polite, and delivered the results I was expecting.'},
-  @{n='Carter Stevens'; q='Best company by far, they bring the heat. Will continue to use them. Great pricing, great work, great people.'}
+  @{n='Carter Stevens'; q='Best company by far, they bring the heat. Will continue to use them. Great pricing, great work, great people.'},
+  @{n='Vilma Lally';    q='Andrew Lee is professional, thorough and does an excellent job. I highly recommend ProGround for lawn care.'},
+  @{n='Claire Babin';   q='Does a great job, and very dependable and courteous.'}
 )
 
 $SERVICES_OFFER = @(
@@ -216,6 +223,7 @@ function Render-Head($meta,$canonical,$crumbNode){
 <link rel="stylesheet" href="/styles.css?v=$VER_STYLES">
 <link rel="stylesheet" href="/assets/site.css?v=$VER_SITECSS">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+$ANALYTICS
 <script type="application/ld+json">
 $ld
 </script>
@@ -433,6 +441,14 @@ Contact: $PHONE (call or text) / $EMAIL. Service-area business based in Denham S
 - Property Maintenance: $BASE/services/property-maintenance/
 - Mulch, Pine Straw & Rock: $BASE/services/mulch-pine-straw-rock/
 - Commercial Grounds: $BASE/services/commercial-grounds/
+- Christmas Light Installation (seasonal): $BASE/christmas-light-installation/
+
+## Popular by city
+- Landscape renovation in Baton Rouge: $BASE/landscape-renovation-baton-rouge/
+- Landscape renovation in Denham Springs: $BASE/landscape-renovation-denham-springs/
+- Yard drainage in Baton Rouge: $BASE/drainage-baton-rouge/
+- Lawn care and mowing in Baton Rouge: $BASE/lawn-care-baton-rouge/
+- Commercial landscaping in Baton Rouge: $BASE/commercial-landscaping-baton-rouge/
 
 ## Key pages
 - All services: $BASE/services/
