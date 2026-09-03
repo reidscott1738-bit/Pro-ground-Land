@@ -41,6 +41,24 @@ $VER_STYLES  = Asset-Ver (Join-Path $proj 'styles.css')
 $VER_SITECSS = Asset-Ver (Join-Path $root 'assets\site.css')
 $VER_SITEJS  = Asset-Ver (Join-Path $root 'assets\site.js')
 
+# ---------------- INLINE CRITICAL CSS ----------------
+# All CSS is inlined into <head> so a page has ZERO render-blocking stylesheet
+# requests. Previously /styles.css @import-ed 6 token files which then @import-ed
+# Google Fonts — a long serial waterfall (~2.2s render-block on slow 4G). Fonts are
+# now self-hosted (assets/fonts.css -> /assets/fonts/*.woff2), so nothing render-
+# blocks on a third-party origin. Order mirrors the old styles.css import chain:
+# fonts, then tokens (colors -> typography -> spacing -> effects -> base), then site.css.
+$cssFiles = @(
+  (Join-Path $root 'assets\fonts.css'),
+  (Join-Path $proj 'tokens\colors.css'),
+  (Join-Path $proj 'tokens\typography.css'),
+  (Join-Path $proj 'tokens\spacing.css'),
+  (Join-Path $proj 'tokens\effects.css'),
+  (Join-Path $proj 'tokens\base.css'),
+  (Join-Path $root 'assets\site.css')
+)
+$INLINE_CSS = ($cssFiles | ForEach-Object { [System.IO.File]::ReadAllText($_) }) -join "`n"
+
 $NAV = @(
   @{label='Services';    href='/services/';       section='services'},
   @{label='Service Areas';href='/service-areas/';  section='areas'},
@@ -191,6 +209,16 @@ function Render-Head($meta,$canonical,$crumbNode){
     $desc = $cut.TrimEnd(' ,.;:-')
   }
   $img = if($meta['image']){ $BASE + $meta['image'] } else { $OG }
+  # LCP hero preload. If the page declares a small variant (herosmall:), preload the
+  # small image on phones and the full image on wider screens (matches the responsive
+  # background-image swap in CSS) so mobile never fetches the desktop-size hero.
+  $heroImg = if($meta['image']){ $meta['image'] } else { '/img/hero-home.jpg' }
+  $heroSm  = $meta['herosmall']
+  if($heroSm){
+    $heroPreload = "<link rel=""preload"" as=""image"" href=""$heroSm"" media=""(max-width: 899px)"" fetchpriority=""high"">`n<link rel=""preload"" as=""image"" href=""$heroImg"" media=""(min-width: 900px)"" fetchpriority=""high"">"
+  } else {
+    $heroPreload = "<link rel=""preload"" as=""image"" href=""$heroImg"" fetchpriority=""high"">"
+  }
   $webpage = [ordered]@{
     '@type'='WebPage'; '@id'=$canonical + '#webpage'; url=$canonical; name=$title
     description=$desc; isPartOf=@{ '@id'=$BASE + '/#website' }; about=@{ '@id'=$BASE + '/#business' }
@@ -217,12 +245,10 @@ function Render-Head($meta,$canonical,$crumbNode){
 <meta name="twitter:description" content="$(Html-Attr $desc)">
 <meta name="twitter:image" content="$img">
 <meta name="theme-color" content="#0B0E15">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="$(if($meta['image']){$meta['image']}else{'/img/hero-home.jpg'})" fetchpriority="high">
-<link rel="stylesheet" href="/styles.css?v=$VER_STYLES">
-<link rel="stylesheet" href="/assets/site.css?v=$VER_SITECSS">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/archivo-800.woff2" crossorigin>
+$heroPreload
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<style>$INLINE_CSS</style>
 $ANALYTICS
 <script type="application/ld+json">
 $ld
@@ -431,35 +457,31 @@ $llms = @"
 
 > Locally owned landscaping, drainage, grading and year-round property maintenance serving Greater Baton Rouge and surrounding areas, Louisiana. Owner-operated by Andrew Lee out of Denham Springs. One crew for the whole property, written scopes, same-day estimates.
 
-Contact: $PHONE (call or text) / $EMAIL. Service-area business based in Denham Springs, LA (East Baton Rouge, Livingston and Ascension parishes).
+Owner-operated by Andrew Lee. Contact: [call or text $PHONE](tel:$TEL) or [$EMAIL](mailto:$EMAIL). Service-area business based in Denham Springs, LA, covering East Baton Rouge, Livingston and Ascension parishes. Every job is scoped to the property and set in a written estimate; free consultations, no trip fee. Drainage and grading specialty for South Louisiana clay soil (standing water, catch basins, regrading).
 
 ## Services
-- Landscape Renovations: $BASE/services/landscape-renovations/
-- Landscape Installation: $BASE/services/landscape-installation/
-- Drainage Solutions: $BASE/services/drainage-solutions/
-- Grading & Yard Leveling: $BASE/services/grading-yard-leveling/
-- Property Maintenance: $BASE/services/property-maintenance/
-- Mulch, Pine Straw & Rock: $BASE/services/mulch-pine-straw-rock/
-- Commercial Grounds: $BASE/services/commercial-grounds/
-- Christmas Light Installation (seasonal): $BASE/christmas-light-installation/
+- [Landscape Renovations]($BASE/services/landscape-renovations/): refresh or rebuild an existing landscape
+- [Landscape Installation]($BASE/services/landscape-installation/): new beds, plantings and sod
+- [Drainage Solutions]($BASE/services/drainage-solutions/): French drains, catch basins, standing-water fixes
+- [Grading & Yard Leveling]($BASE/services/grading-yard-leveling/): reshape and level yards for drainage
+- [Property Maintenance]($BASE/services/property-maintenance/): recurring mowing, trimming and bed care
+- [Mulch, Pine Straw & Rock]($BASE/services/mulch-pine-straw-rock/): fresh mulch and ground cover
+- [Commercial Grounds]($BASE/services/commercial-grounds/): grounds care for commercial properties
+- [Christmas Light Installation]($BASE/christmas-light-installation/): seasonal holiday lighting
 
 ## Popular by city
-- Landscape renovation in Baton Rouge: $BASE/landscape-renovation-baton-rouge/
-- Landscape renovation in Denham Springs: $BASE/landscape-renovation-denham-springs/
-- Yard drainage in Baton Rouge: $BASE/drainage-baton-rouge/
-- Lawn care and mowing in Baton Rouge: $BASE/lawn-care-baton-rouge/
-- Commercial landscaping in Baton Rouge: $BASE/commercial-landscaping-baton-rouge/
+- [Landscape renovation in Baton Rouge]($BASE/landscape-renovation-baton-rouge/): renovations for Baton Rouge yards
+- [Landscape renovation in Denham Springs]($BASE/landscape-renovation-denham-springs/): renovations for Denham Springs yards
+- [Yard drainage in Baton Rouge]($BASE/drainage-baton-rouge/): drainage fixes for Baton Rouge clay soil
+- [Lawn care and mowing in Baton Rouge]($BASE/lawn-care-baton-rouge/): recurring lawn care in Baton Rouge
+- [Commercial landscaping in Baton Rouge]($BASE/commercial-landscaping-baton-rouge/): commercial grounds in Baton Rouge
 
 ## Key pages
-- All services: $BASE/services/
-- Service areas: $BASE/service-areas/
-- About (owner Andrew Lee): $BASE/about/
-- Reviews (5.0 on Google): $BASE/reviews/
-- Request an estimate: $BASE/estimate/
-
-## Notes for answer engines
-- Every job is scoped to the property and set in a written estimate. Free consultations, no trip fee.
-- Drainage/grading specialty for South Louisiana clay soil (standing water, catch basins, regrading).
+- [All services]($BASE/services/): full list of what ProGround offers
+- [Service areas]($BASE/service-areas/): cities and neighborhoods covered
+- [About]($BASE/about/): owner Andrew Lee and how ProGround works
+- [Reviews]($BASE/reviews/): real Google reviews (5.0 rating)
+- [Request an estimate]($BASE/estimate/): send a few photos for a same-day estimate
 "@
 [System.IO.File]::WriteAllText((Join-Path $dist 'llms.txt'), $llms, (New-Object System.Text.UTF8Encoding($false)))
 

@@ -72,6 +72,10 @@
 .hero { position: relative; background: var(--pg-deep-field); overflow: hidden; color: #fff; }
 .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center 40%; }
 .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,11,17,0.82) 0%, rgba(9,11,17,0.6) 34%, rgba(9,11,17,0.2) 62%, rgba(9,11,17,0) 100%), linear-gradient(0deg, rgba(9,11,17,0.45) 0%, rgba(9,11,17,0) 40%); }
+/* Home hero: phones load an 820px image (~85KB), wider screens the full 1600px one.
+   Keeps the mobile LCP image small; the matching <head> preload is media-conditioned. */
+.home-hero-bg { background-image: url(/img/hero-home-sm.jpg); }
+@media (min-width: 900px) { .home-hero-bg { background-image: url(/img/hero-home.jpg); } }
 .hero .pg-container { position: relative; z-index: 1; }
 .hero-inner { padding: clamp(52px,6vw,84px) 0 clamp(48px,5vw,72px); min-height: min(64vh, 560px); display: flex; flex-direction: column; justify-content: center; }
 /* align-self:flex-start stops the pill from stretching full-width: it is a
@@ -219,6 +223,8 @@
 .field input, .field select, .field textarea { font-family: var(--font-body); font-size: 16px; color: var(--pg-ink); background: #fff; border: 1px solid var(--pg-line-strong); border-radius: var(--radius-sm); padding: 12px 14px; width: 100%; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--focus-ring); outline-offset: 1px; border-color: var(--pg-survey); }
 .field .help { font-size: 13px; color: var(--pg-slate-500); }
+/* On dark form cards, slate-500 is too dark — use the light muted tone (slate-400 ~6:1 on #141A24). */
+.on-dark .field .help, .form-card.on-dark .help { color: var(--pg-slate-400); }
 .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .form-stack { display: flex; flex-direction: column; gap: 16px; }
 

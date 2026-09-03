@@ -32,7 +32,7 @@
   --pg-slate-800: #23282F;
   --pg-slate-700: #333941;
   --pg-slate-600: #4B525A;
-  --pg-slate-500: #6A7178;     /* secondary text on light (AA on bone) */
+  --pg-slate-500: #5C636B;     /* secondary text on light — AA (>=4.5:1) on bone, bone-deep and white */
   --pg-slate-400: #949AA0;
   --pg-slate-300: #C1BEB4;     /* muted text on dark / disabled */
   --pg-line: #DBD7CC;          /* hairline borders on bone */
