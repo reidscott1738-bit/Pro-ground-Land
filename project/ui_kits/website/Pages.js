@@ -8,16 +8,11 @@ const SD = window.PG_SERVICE_DETAILS;
 
 const PIMG = { house: __pgImg('house-curb','img/house-curb.jpg'), sod: __pgImg('sod-install','img/sod-install.jpg'), aerial: __pgImg('yard-aerial','img/yard-aerial.jpg'), crew: __pgImg('crew-trimming','img/crew-trimming.jpg'), golden: __pgImg('lawn-golden','img/lawn-golden.jpg'), backyard: __pgImg('lawn-backyard','img/lawn-backyard.jpg'), drainA: __pgImg('drainage-after','img/drainage-after.jpg'), commercial: __pgImg('commercial-grounds','img/commercial-grounds.jpg'), grading: __pgImg('grading-leveling','img/grading-leveling.jpg') };
 
-/* Before/after pairs for the gallery — one per service. Missing "after" files render as a labeled placeholder. */
-const PBA_IMG = {
-  renoB: __pgImg('ba-reno-before','img/ba-reno-before.jpg'), renoA: __pgImg('ba-reno-after','img/ba-reno-after.jpg'),
-  installB: __pgImg('ba-install-before','img/ba-install-before.jpg'), installA: __pgImg('ba-install-after','img/ba-install-after.jpg'),
-  gradingB: __pgImg('ba-grading-before','img/ba-grading-before.jpg'), gradingA: __pgImg('ba-grading-after','img/ba-grading-after.jpg'),
-  drainB: __pgImg('drainage-before','img/drainage-before.jpg'), drainA: __pgImg('drainage-after','img/drainage-after.jpg'),
-  maintB: __pgImg('ba-maint-before','img/ba-maint-before.jpg'),
-  mulchB: __pgImg('ba-mulch-before','img/ba-mulch-before.jpg'),
-  commB: __pgImg('ba-comm-before','img/ba-comm-before.jpg'),
-};
+/* Before/after pairs for the gallery — every verified before/after pair from the ProGround photo library. */
+const PBA_IMG = Array.from({ length: 11 }, (_, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return { before: __pgImg('ba-' + n + '-before', 'img/ba-' + n + '-before.jpg'), after: __pgImg('ba-' + n + '-after', 'img/ba-' + n + '-after.jpg') };
+});
 
 /* Shared photo-backed page hero with breadcrumb. */
 function PageHero({ onNav, crumbs, eyebrow, title, sub, img, badge }) {
@@ -207,17 +202,8 @@ function WhoWeServe({ onNav }) {
 }
 
 /* ===================== GALLERY ===================== */
-/* One before/after slider per service. Where a real "after" photo is not yet in the
-   library, afterImage is omitted so the slider renders a labeled placeholder panel. */
-const GALLERY = [
-  { svc: 'Landscape Renovations', before: PBA_IMG.renoB, after: PBA_IMG.renoA, cap: 'Front-bed renovation · Greater Baton Rouge' },
-  { svc: 'Landscape Installation', before: PBA_IMG.installB, after: PBA_IMG.installA, cap: 'New landscape installation · Greater Baton Rouge' },
-  { svc: 'Drainage Solutions', before: PBA_IMG.drainB, after: PBA_IMG.drainA, cap: 'Backyard drainage restored to clean turf' },
-  { svc: 'Grading & Yard Leveling', before: PBA_IMG.gradingB, after: PBA_IMG.gradingA, cap: 'Reshaped yard & clean final grade' },
-  { svc: 'Property Maintenance', before: PBA_IMG.maintB, after: null, cap: 'Property maintenance · Greater Baton Rouge' },
-  { svc: 'Mulch, Pine Straw & Rock', before: PBA_IMG.mulchB, after: null, cap: 'Fresh mulch & clean beds' },
-  { svc: 'Commercial Grounds', before: PBA_IMG.commB, after: null, cap: 'Commercial grounds & frontage' },
-];
+/* Every verified before/after pair from the ProGround photo library. */
+const GALLERY = PBA_IMG;
 
 function GalleryPage({ onNav }) {
   const figStyle = { position: 'relative', margin: 0, borderRadius: 'var(--radius-sm)', overflow: 'hidden', aspectRatio: '4/3', background: 'var(--pg-bone-deep)' };
@@ -226,33 +212,25 @@ function GalleryPage({ onNav }) {
   return (
     <div style={{ background: 'var(--pg-bone)' }}>
       <PageHero onNav={onNav} crumbs={[{ label: 'Home', route: 'home' }, { label: 'Gallery' }]} eyebrow="Our work"
-        title="Before and after, by service" sub="Before and after for every service we offer across Greater Baton Rouge and surrounding areas." img={PIMG.house} />
+        title="Before and after" sub="Real ProGround projects across Greater Baton Rouge and surrounding areas — the before on the left, the finished work on the right." img={PIMG.house} />
       <section><PC style={{ padding: 'clamp(56px,8vw,110px) 0' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(420px,1fr))', gap: 32 }}>
-          {GALLERY.map((g) => (
-            <div key={g.svc}>
-              <h3 style={{ margin: '0 0 12px', fontSize: 20, color: 'var(--pg-ink)' }}>{g.svc}</h3>
+          {GALLERY.map((g, i) => (
+            <div key={i}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                 <figure style={figStyle}>
-                  <img src={g.before} alt={g.svc + ' before'} style={imgStyle} />
+                  <img src={g.before} alt="ProGround landscaping project before" style={imgStyle} />
                   <figcaption style={{ ...tagStyle, left: 10 }}>Before</figcaption>
                 </figure>
-                {g.after ? (
-                  <figure style={figStyle}>
-                    <img src={g.after} alt={g.svc + ' after'} style={imgStyle} />
-                    <figcaption style={{ ...tagStyle, right: 10 }}>After</figcaption>
-                  </figure>
-                ) : (
-                  <figure style={{ ...figStyle, display: 'grid', placeItems: 'center' }}>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.08em', color: 'var(--pg-slate-500)', textAlign: 'center', padding: 16 }}>After photo coming soon</span>
-                    <figcaption style={{ ...tagStyle, right: 10 }}>After</figcaption>
-                  </figure>
-                )}
+                <figure style={figStyle}>
+                  <img src={g.after} alt="ProGround landscaping project after" style={imgStyle} />
+                  <figcaption style={{ ...tagStyle, right: 10 }}>After</figcaption>
+                </figure>
               </div>
             </div>
           ))}
         </div>
-        <p style={{ marginTop: 32, fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--pg-slate-500)' }}>Photos are representative of ProGround’s work. Want to see a project like yours? <a href="#" onClick={(e) => { e.preventDefault(); onNav('estimate'); }} style={{ color: 'var(--pg-turf)' }}>Ask for examples with your estimate.</a></p>
+        <p style={{ marginTop: 32, fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--pg-slate-500)' }}>Photos are of real ProGround work. Want to see a project like yours? <a href="#" onClick={(e) => { e.preventDefault(); onNav('estimate'); }} style={{ color: 'var(--pg-turf)' }}>Ask for examples with your estimate.</a></p>
       </PC></section>
     </div>
   );
