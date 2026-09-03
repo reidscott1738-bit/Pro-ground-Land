@@ -50,6 +50,7 @@ $SVC_MONEY = @{
     @{t='Commercial landscaping in Gonzales';u='/commercial-landscaping-gonzales/'})
   maintenance=@(
     @{t='Lawn care in Baton Rouge';u='/lawn-care-baton-rouge/'},
+    @{t='Landscaping in University Club Plantation';u='/landscaping-university-club-plantation/'},
     @{t='HOA landscaping in Baton Rouge';u='/hoa-landscaping-baton-rouge/'})
 }
 # City area page -> that city's money pages ("popular in <city>").
@@ -58,6 +59,7 @@ $CITY_MONEY = @{
     @{t='Landscape renovation in Baton Rouge';u='/landscape-renovation-baton-rouge/'},
     @{t='Yard drainage in Baton Rouge';u='/drainage-baton-rouge/'},
     @{t='Lawn care in Baton Rouge';u='/lawn-care-baton-rouge/'},
+    @{t='Landscaping in University Club Plantation';u='/landscaping-university-club-plantation/'},
     @{t='Commercial landscaping in Baton Rouge';u='/commercial-landscaping-baton-rouge/'},
     @{t='HOA landscaping in Baton Rouge';u='/hoa-landscaping-baton-rouge/'})
   'denham-springs'=@(
