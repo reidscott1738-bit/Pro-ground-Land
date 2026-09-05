@@ -375,10 +375,12 @@ a:hover { color: var(--pg-turf-strong); border-bottom-color: var(--pg-turf-stron
 .hero { position: relative; background: var(--pg-deep-field); overflow: hidden; color: #fff; }
 .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center 40%; }
 .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,11,17,0.82) 0%, rgba(9,11,17,0.6) 34%, rgba(9,11,17,0.2) 62%, rgba(9,11,17,0) 100%), linear-gradient(0deg, rgba(9,11,17,0.45) 0%, rgba(9,11,17,0) 40%); }
-/* Home hero: phones load an 820px image (~85KB), wider screens the full 1600px one.
-   Keeps the mobile LCP image small; the matching <head> preload is media-conditioned. */
-.home-hero-bg { background-image: url(/img/hero-home-sm.jpg); }
-@media (min-width: 900px) { .home-hero-bg { background-image: url(/img/hero-home.jpg); } }
+/* Home hero: backyard-lawn estate photo. Phones load an 820px image, wider screens
+   the full 1600px one. Keeps the mobile LCP image small; the matching <head> preload
+   is media-conditioned. New filenames (hero-lawn*) deliberately differ from the old
+   hero-home* so the 1-year image cache in .htaccess can't keep serving the old photo. */
+.home-hero-bg { background-image: url(/img/hero-lawn-sm.jpg); }
+@media (min-width: 900px) { .home-hero-bg { background-image: url(/img/hero-lawn.jpg); } }
 .hero .pg-container { position: relative; z-index: 1; }
 .hero-inner { padding: clamp(52px,6vw,84px) 0 clamp(48px,5vw,72px); min-height: min(64vh, 560px); display: flex; flex-direction: column; justify-content: center; }
 /* align-self:flex-start stops the pill from stretching full-width: it is a
@@ -735,7 +737,7 @@ ul.trustbar { padding: 0; margin: 0; }
                        "telephone":  "+12253248252",
                        "email":  "info@progroundland.com",
                        "priceRange":  "$$",
-                       "image":  "https://progroundland.com/img/hero-home.jpg",
+                       "image":  "https://progroundland.com/img/hero-lawn.jpg",
                        "logo":  "https://progroundland.com/assets/logo-wordmark.png",
                        "slogan":  "Your whole property, handled by one crew.",
                        "description":  "Locally owned landscaping, drainage, grading and year-round property maintenance serving Greater Baton Rouge and surrounding areas from Denham Springs, Louisiana.",
@@ -1094,7 +1096,7 @@ ul.trustbar { padding: 0; margin: 0; }
                        "datePublished":  "2026-08-01",
                        "description":  "What does a landscape renovation take in Baton Rouge? Here is what drives the scope of a front-bed renovation and where the value goes.",
                        "@type":  "Article",
-                       "dateModified":  "2026-09-03",
+                       "dateModified":  "2026-09-04",
                        "headline":  "What does a landscape renovation cost in Baton Rouge?",
                        "author":  {
                                       "name":  "Andrew Lee",

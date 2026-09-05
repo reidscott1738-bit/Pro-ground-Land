@@ -72,10 +72,12 @@
 .hero { position: relative; background: var(--pg-deep-field); overflow: hidden; color: #fff; }
 .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center 40%; }
 .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,11,17,0.82) 0%, rgba(9,11,17,0.6) 34%, rgba(9,11,17,0.2) 62%, rgba(9,11,17,0) 100%), linear-gradient(0deg, rgba(9,11,17,0.45) 0%, rgba(9,11,17,0) 40%); }
-/* Home hero: phones load an 820px image (~85KB), wider screens the full 1600px one.
-   Keeps the mobile LCP image small; the matching <head> preload is media-conditioned. */
-.home-hero-bg { background-image: url(/img/hero-home-sm.jpg); }
-@media (min-width: 900px) { .home-hero-bg { background-image: url(/img/hero-home.jpg); } }
+/* Home hero: backyard-lawn estate photo. Phones load an 820px image, wider screens
+   the full 1600px one. Keeps the mobile LCP image small; the matching <head> preload
+   is media-conditioned. New filenames (hero-lawn*) deliberately differ from the old
+   hero-home* so the 1-year image cache in .htaccess can't keep serving the old photo. */
+.home-hero-bg { background-image: url(/img/hero-lawn-sm.jpg); }
+@media (min-width: 900px) { .home-hero-bg { background-image: url(/img/hero-lawn.jpg); } }
 .hero .pg-container { position: relative; z-index: 1; }
 .hero-inner { padding: clamp(52px,6vw,84px) 0 clamp(48px,5vw,72px); min-height: min(64vh, 560px); display: flex; flex-direction: column; justify-content: center; }
 /* align-self:flex-start stops the pill from stretching full-width: it is a

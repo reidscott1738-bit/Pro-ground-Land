@@ -18,7 +18,7 @@ $TEL    = '+12253248252'
 $EMAIL  = 'info@progroundland.com'
 $CITY   = 'Denham Springs'
 $REGION = 'LA'
-$OG     = $BASE + '/img/hero-home.jpg'     # TODO replace with branded 1200x630 share image
+$OG     = $BASE + '/img/hero-lawn.jpg'     # backyard-lawn hero; TODO replace with branded 1200x630 share image
 $IG     = 'https://www.instagram.com/proground_land_mgmt/'
 $FB     = 'https://www.facebook.com/profile.php?id=61590852360292'
 # Analytics slot: paste a GA4 gtag.js OR Plausible/Cloudflare snippet here once Andrew
@@ -212,12 +212,17 @@ function Render-Head($meta,$canonical,$crumbNode){
   # LCP hero preload. If the page declares a small variant (herosmall:), preload the
   # small image on phones and the full image on wider screens (matches the responsive
   # background-image swap in CSS) so mobile never fetches the desktop-size hero.
-  $heroImg = if($meta['image']){ $meta['image'] } else { '/img/hero-home.jpg' }
   $heroSm  = $meta['herosmall']
-  if($heroSm){
-    $heroPreload = "<link rel=""preload"" as=""image"" href=""$heroSm"" media=""(max-width: 899px)"" fetchpriority=""high"">`n<link rel=""preload"" as=""image"" href=""$heroImg"" media=""(min-width: 900px)"" fetchpriority=""high"">"
+  if($meta['image']){
+    $heroImg = $meta['image']
+    if($heroSm){
+      $heroPreload = "<link rel=""preload"" as=""image"" href=""$heroSm"" media=""(max-width: 899px)"" fetchpriority=""high"">`n<link rel=""preload"" as=""image"" href=""$heroImg"" media=""(min-width: 900px)"" fetchpriority=""high"">"
+    } else {
+      $heroPreload = "<link rel=""preload"" as=""image"" href=""$heroImg"" fetchpriority=""high"">"
+    }
   } else {
-    $heroPreload = "<link rel=""preload"" as=""image"" href=""$heroImg"" fetchpriority=""high"">"
+    # No hero image on this page (e.g. 404) — emit no preload so we never hint an unused image.
+    $heroPreload = ''
   }
   $webpage = [ordered]@{
     '@type'='WebPage'; '@id'=$canonical + '#webpage'; url=$canonical; name=$title
