@@ -124,7 +124,7 @@ $SERVICES = @(
      desc='Mowing, bed care and seasonal work on a set schedule, billed automatically each month. One crew, one agreement, serving Greater Baton Rouge and surrounding areas.';
      eyebrow='Recurring care'; headline='Annual property maintenance you never have to chase';
      sub='Mowing, bed care and seasonal work on a set schedule, billed automatically each month. One crew, one agreement, done.';
-     price='From $145/mo'; img='/img/crew-trimming.jpg'; baB='/img/ba-maint-before.jpg'; baA='/img/crew-trimming.jpg'; baCap='Overgrown hedge, trimmed &amp; cleaned &middot; Greater Baton Rouge and surrounding areas';
+     price='From $145/mo'; img='/img/property-maintenance.jpg'; baB='/img/ba-maint-before.jpg'; baA='/img/crew-trimming.jpg'; baCap='Overgrown hedge, trimmed &amp; cleaned &middot; Greater Baton Rouge and surrounding areas';
      problemH='Chasing a lawn crew every few weeks gets old.';
      problemP=@('Most homeowners are tired of calling around every time the grass gets tall. A recurring agreement means set service days, a defined scope and automatic billing - the work just happens.','Because we also renovate and install, the same crew that maintains your property is the one that can rebuild it when it is time.');
      included=@('Mowing, edging and blowing on a set schedule','Bed weeding and seasonal cleanups','Shrub and hedge trimming','Mulch and pine straw refreshes','Priority scheduling for extra work','Automatic monthly billing');
@@ -277,7 +277,7 @@ foreach($s in $SERVICES){ Render-ServicePage $s }
 $SVC_INDEX_ORDER = @(
   @{k='renovations';img='/img/landscape-renovation.jpg'}, @{k='installation';img='/img/sod-install.jpg'},
   @{k='drainage';img='/img/drainage-solutions.jpg';name='Drainage Solutions';desc='Catch basins, pipe and grading built for our heavy clay soil.'},
-  @{k='grading';img='/img/grading-leveling.jpg'}, @{k='maintenance';img='/img/crew-trimming.jpg'},
+  @{k='grading';img='/img/grading-leveling.jpg'}, @{k='maintenance';img='/img/property-maintenance.jpg'},
   @{k='mulch';img='/img/mulch-pine-straw-rock.jpg'}, @{k='commercial';img='/img/commercial-grounds.jpg'}
 )
 $MORE_SVCS = @('Residential Lawn Mowing','Large Property Mowing','Hedge & Shrub Trimming','Landscape Bed Maintenance','Hard-Surface Weed Control','Landscape Bed Cleanup','Decorative Rock Installation','Christmas Light Installation')
