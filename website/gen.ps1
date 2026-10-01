@@ -276,7 +276,7 @@ foreach($s in $SERVICES){ Render-ServicePage $s }
 # ---- Services index ----
 $SVC_INDEX_ORDER = @(
   @{k='renovations';img='/img/landscape-renovation.jpg'}, @{k='installation';img='/img/sod-install.jpg'},
-  @{k='drainage';img='/img/drainage-after.jpg';name='Drainage Solutions';desc='Catch basins, pipe and grading built for our heavy clay soil.'},
+  @{k='drainage';img='/img/drainage-solutions.jpg';name='Drainage Solutions';desc='Catch basins, pipe and grading built for our heavy clay soil.'},
   @{k='grading';img='/img/grading-leveling.jpg'}, @{k='maintenance';img='/img/crew-trimming.jpg'},
   @{k='mulch';img='/img/mulch.jpg'}, @{k='commercial';img='/img/commercial-grounds.jpg'}
 )
