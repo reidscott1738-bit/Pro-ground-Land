@@ -546,7 +546,7 @@ foreach($a in $AREAS_DATA){ Render-AreaPage $a }
 # ---- Service Areas hub ----
 $areaCards = ''
 foreach($a in $AREAS_DATA){
-  $areaCards += '<a class="card card-link" href="' + $AREA_URL + $a.slug + '/"><div class="thumb"><img src="' + $a.img + '" alt="Landscaping in ' + $a.name + '" width="400" height="180" loading="lazy"></div><div class="body"><h3>' + $a.name + '</h3><p>' + $a.parish + ' &middot; landscaping, drainage, grading and maintenance.</p><span class="more">ProGround in ' + $a.name + ' &rarr;</span></div></a>'
+  $areaCards += '<a class="card card-link" href="' + $AREA_URL + $a.slug + '/"><div class="body"><h3>' + $a.name + '</h3><p>' + $a.parish + ' &middot; landscaping, drainage, grading and maintenance.</p><span class="more">ProGround in ' + $a.name + ' &rarr;</span></div></a>'
 }
 $areaHubBody = @"
 <section class="page-hero">
