@@ -139,7 +139,7 @@ $SERVICES = @(
      desc='Fresh mulch, pine straw or decorative rock over properly prepped and edged beds. Sharp, finished beds in an afternoon, across Greater Baton Rouge and surrounding areas.';
      eyebrow='Bed finish'; headline='Mulch, pine straw and decorative rock';
      sub='Sharp, finished beds in an afternoon &mdash; fresh mulch, pine straw or rock installed over properly prepped and edged ground.';
-     price='From $350'; img='/img/mulch.jpg'; baB='/img/ba-mulch-before.jpg'; baA='/img/mulch.jpg'; baCap='Fresh mulch &amp; edging &middot; Greater Baton Rouge and surrounding areas';
+     price='From $350'; img='/img/mulch-pine-straw-rock.jpg'; baB='/img/ba-mulch-before.jpg'; baA='/img/mulch.jpg'; baCap='Fresh mulch &amp; edging &middot; Greater Baton Rouge and surrounding areas';
      problemH='Faded mulch makes the whole yard look neglected.';
      problemP=@('Mulch breaks down and washes out; beds fade and lose their edge. A fresh install of mulch, pine straw or rock instantly resets curb appeal - especially with clean, reshaped edges.','We prep and edge first so the finish looks intentional and holds up, rather than just piling new material on top.');
      included=@('Bed cleanup and light weeding','Edging and bed-line reshaping','Fresh mulch, pine straw or decorative rock','Even, consistent depth','Cleanup of hard surfaces','Optional weed-barrier under rock');
@@ -278,7 +278,7 @@ $SVC_INDEX_ORDER = @(
   @{k='renovations';img='/img/landscape-renovation.jpg'}, @{k='installation';img='/img/sod-install.jpg'},
   @{k='drainage';img='/img/drainage-solutions.jpg';name='Drainage Solutions';desc='Catch basins, pipe and grading built for our heavy clay soil.'},
   @{k='grading';img='/img/grading-leveling.jpg'}, @{k='maintenance';img='/img/crew-trimming.jpg'},
-  @{k='mulch';img='/img/mulch.jpg'}, @{k='commercial';img='/img/commercial-grounds.jpg'}
+  @{k='mulch';img='/img/mulch-pine-straw-rock.jpg'}, @{k='commercial';img='/img/commercial-grounds.jpg'}
 )
 $MORE_SVCS = @('Residential Lawn Mowing','Large Property Mowing','Hedge & Shrub Trimming','Landscape Bed Maintenance','Hard-Surface Weed Control','Landscape Bed Cleanup','Decorative Rock Installation','Christmas Light Installation')
 
