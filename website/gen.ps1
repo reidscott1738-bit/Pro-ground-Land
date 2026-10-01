@@ -78,7 +78,7 @@ $SERVICES = @(
      desc='Overgrown or dated beds rebuilt with new plants, mulch, edging and a better layout. Written scope, same-day response. Serving Greater Baton Rouge and surrounding areas.';
      eyebrow='Flagship service'; headline='Landscape renovations in Greater Baton Rouge and surrounding areas';
      sub='Overgrown or dated beds rebuilt with new plants, mulch, edging and a better layout &mdash; with a written scope and same-day response.';
-     price='From $750'; img='/img/house-curb.jpg'; baB='/img/ba-reno-before.jpg'; baA='/img/ba-reno-after.jpg'; baCap='Front-bed renovation &middot; Greater Baton Rouge and surrounding areas';
+     price='From $750'; img='/img/landscape-renovation.jpg'; baB='/img/ba-reno-before.jpg'; baA='/img/ba-reno-after.jpg'; baCap='Front-bed renovation &middot; Greater Baton Rouge and surrounding areas';
      problemH='Overgrown beds make a home look dated.';
      problemP=@('On established properties, foundation shrubs outgrow their beds, bed lines soften, and the whole house reads older than it is. A renovation resets the bones - not just the plants. Bed lines matter more than plant count for how a house looks from the street.','What changes the size of a renovation: bed square footage, plant size at install, removal volume, and access for equipment.');
      included=@('Demolition and removal of tired plant material','Soil and bed preparation','Edging and bed-line reshaping','Plant selection for South Louisiana heat and clay','Mulch or pine straw finish','After-care instructions');
