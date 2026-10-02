@@ -710,6 +710,12 @@ ul.trustbar { padding: 0; margin: 0; }
 .upload-note { border: 1px dashed var(--pg-line-strong); border-radius: var(--radius-sm); padding: 20px; text-align: center; background: #fff; color: var(--pg-slate-500); font-family: var(--font-mono); font-size: 13px; }
 .est-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(32px,5vw,64px); align-items: start; }
 @media (max-width: 860px) { .est-grid { grid-template-columns: 1fr; } .diag-cols { grid-template-columns: 1fr; } }
+/* On phones, make the estimate form's Continue / Submit button a big, full-width
+   tap target instead of a small button floating at the bottom-right. */
+@media (max-width: 560px) {
+  .est-nav-next { flex: 1; }
+  .est-nav-next .btn { width: 100%; }
+}
 
 /* ---------- Pricing rows ---------- */
 .price-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; border-top: 1px solid var(--pg-line); border-bottom: none; text-decoration: none; font-family: var(--font-display); font-size: clamp(1.05rem,1.8vw,1.25rem); color: var(--pg-ink); font-weight: 600; }
@@ -1151,11 +1157,11 @@ ul.trustbar { padding: 0; margin: 0; }
             <div class="field"><label for="e-time">Preferred day / time for a visit</label><input id="e-time" name="preferred_time" type="text"><span class="help">A request, not a locked slot — we will confirm.</span></div>
           </div>
 
-          <div style="display:flex;justify-content:space-between;margin-top:28px;gap:12px">
-            <button class="btn btn-secondary btn-md" type="button" data-est-back style="visibility:hidden">Back</button>
-            <span style="display:flex;gap:12px">
-              <button class="btn btn-primary btn-md" type="button" data-est-next>Continue</button>
-              <button class="btn btn-primary btn-md" type="submit" data-est-submit hidden>Submit request</button>
+          <div class="est-nav" style="display:flex;justify-content:space-between;margin-top:28px;gap:12px">
+            <button class="btn btn-secondary btn-lg" type="button" data-est-back style="visibility:hidden">Back</button>
+            <span class="est-nav-next" style="display:flex;gap:12px">
+              <button class="btn btn-primary btn-lg" type="button" data-est-next>Continue</button>
+              <button class="btn btn-primary btn-lg" type="submit" data-est-submit hidden>Submit request</button>
             </span>
           </div>
         </form>
