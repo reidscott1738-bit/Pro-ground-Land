@@ -618,6 +618,16 @@ ul.trustbar { padding: 0; margin: 0; }
      header button here and keep just the logo and the menu toggle. */
   .header-cta .btn { display: none; }
 }
+/* About page: tighten the "Five things" cards and spacing on phones so the
+   section is compact instead of five tall, airy cards. */
+@media (max-width: 640px) {
+  .about-steps { padding-top: 46px; padding-bottom: 46px; }
+  .about-steps .section-head { margin-bottom: 24px; }
+  .about-steps .section-head h2 { font-size: 1.65rem; }
+  .about-steps .steps { grid-template-columns: 1fr; gap: 12px; }
+  .about-steps .step { padding: 18px !important; }
+  .about-steps .step h3 { font-size: 17px !important; }
+}
 /* ---------- Mobile: centered hero + compact service list ---------- */
 @media (max-width: 640px) {
   /* Center the home hero and tighten its vertical rhythm so it breathes

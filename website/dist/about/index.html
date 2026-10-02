@@ -618,6 +618,16 @@ ul.trustbar { padding: 0; margin: 0; }
      header button here and keep just the logo and the menu toggle. */
   .header-cta .btn { display: none; }
 }
+/* About page: tighten the "Five things" cards and spacing on phones so the
+   section is compact instead of five tall, airy cards. */
+@media (max-width: 640px) {
+  .about-steps { padding-top: 46px; padding-bottom: 46px; }
+  .about-steps .section-head { margin-bottom: 24px; }
+  .about-steps .section-head h2 { font-size: 1.65rem; }
+  .about-steps .steps { grid-template-columns: 1fr; gap: 12px; }
+  .about-steps .step { padding: 18px !important; }
+  .about-steps .step h3 { font-size: 17px !important; }
+}
 /* ---------- Mobile: centered hero + compact service list ---------- */
 @media (max-width: 640px) {
   /* Center the home hero and tighten its vertical rhythm so it breathes
@@ -1059,9 +1069,9 @@ ul.trustbar { padding: 0; margin: 0; }
 
 
 <section class="hero" style="background:var(--pg-deep-field)">
-  <div class="pg-container center" style="position:relative;z-index:1;padding:clamp(56px,7vw,96px) 0 clamp(36px,4vw,52px);max-width:900px;margin:0 auto">
-    <div style="font-family:var(--font-display);font-size:40px;color:var(--pg-growth);line-height:0.5">&ldquo;</div>
-    <blockquote style="margin:10px 0 24px;color:#fff;font-size:clamp(1.4rem,2.8vw,2rem);line-height:1.4;font-weight:500">Good business comes down to doing what you say you are going to do, communicating with people, and taking pride in your work. Our customers are not account numbers. They are homeowners, families, business owners and neighbors in the communities we all live in.</blockquote>
+  <div class="pg-container center" style="position:relative;z-index:1;padding:clamp(40px,7vw,96px) 0 clamp(28px,4vw,48px);max-width:860px;margin:0 auto">
+    <div style="font-family:var(--font-display);font-size:clamp(28px,6vw,40px);color:var(--pg-growth);line-height:0.5">&ldquo;</div>
+    <blockquote style="margin:10px 0 20px;color:#fff;font-size:clamp(1.1rem,3.4vw,2rem);line-height:1.45;font-weight:500">Good business comes down to doing what you say you are going to do, communicating with people, and taking pride in your work. Our customers are not account numbers. They are homeowners, families, business owners and neighbors in the communities we all live in.</blockquote>
     <div class="mono" style="font-size:14px;color:var(--pg-slate-300)">Andrew Lee &middot; Owner, ProGround Land Management</div>
   </div>
 </section>
@@ -1083,7 +1093,7 @@ ul.trustbar { padding: 0; margin: 0; }
   </div>
 </section>
 
-<section class="section bg-bone-deep">
+<section class="section bg-bone-deep about-steps">
   <div class="pg-container">
     <div class="section-head center"><span class="eyebrow">How ProGround runs</span><h2>Five things you can count on.</h2><p>Customers know what is being done, what it costs and what happens next.</p></div>
     <div class="steps">
